@@ -14,8 +14,8 @@
 }
 /* 다른 사람 채팅 */
 .chat.other {
-  border-color:  #76daff;
-  background-color:#76daff;
+  border-color:  #9bdcf3;
+  background-color: #9bdcf3;
   width: 96%;
   overflow: hidden;
   text-decoration: none;
