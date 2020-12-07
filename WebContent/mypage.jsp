@@ -18,7 +18,7 @@
 	<body>
 		<!-- 네비바 -->
 		<div class="topnav" id="myTopnav">
-			<a href="chatlist.html">채팅방</a>
+			<a href="chatlist.jsp">채팅방</a>
 			<a href="#contact" class="active">마이페이지</a>
 		</div>
 		
