@@ -4,7 +4,7 @@
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
-  width: 100%;
+  width: 97%;
   float: left;
   text-decoration: none;
   height: 70%;
@@ -12,11 +12,17 @@
   overflow-y : auto;
 
 }
+
+/* 채팅창 스크롤바 안보이게 함*/
+.chat::-webkit-scrollbar{ display:none; }
+
+
 /* 다른 사람 채팅 */
 .chat.other {
   border-color:  #9bdcf3;
   background-color: #9bdcf3;
-  width: 96%;
+  min-width:20%;
+  max-width:70%;
   overflow: hidden;
   text-decoration: none;
   margin-left: 2%;
@@ -26,9 +32,11 @@
 
 /* 내 채팅 */
 .chat.me {
+  float:right;
   border-color:  #0ebeff;
   background-color:#0ebeff;
-  width: 96%;
+  min-width:20%;
+  max-width:70%;
   overflow: hidden;
   text-decoration: none;
   text-align: right;
