@@ -1,9 +1,16 @@
-/* 채팅방영역 */
+/* 채팅목록 영역 */
 .left{
   background-color: rgb(181, 153, 194);
   height: 94%;
   background-color:#47cf73;
   overflow-y : auto;
+}
+
+/* 채팅목록 스크롤바 변경*/
+.left::-webkit-scrollbar{ width: 10px; }
+.left::-webkit-scrollbar-track { background-color: #f0f0f0; }
+.left::-webkit-scrollbar-thumb { 
+    background:#47cf73; 
 }
 
 .chatlist {

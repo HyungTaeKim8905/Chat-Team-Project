@@ -1,22 +1,30 @@
 /* 채팅영역 */
-.chat {
+
+.chat{
   border: 2px ;
   border-radius: 5px;
   padding: 10px;
   margin: 10px 0;
-  width: 100%;
+  width: 97%;
   float: left;
   text-decoration: none;
-  height: 70%;
-  max-height: 60%;
+  height: 90%;
   overflow-y : auto;
-
+	
 }
+
+/* 채팅창 스크롤바 변경*/
+.chat::-webkit-scrollbar{ width: 10px; }
+.chat::-webkit-scrollbar-track { background-color: #f0f0f0; }
+.chat::-webkit-scrollbar-thumb { background:#0ebeff; }
+
+
 /* 다른 사람 채팅 */
 .chat.other {
   border-color:  #9bdcf3;
   background-color: #9bdcf3;
-  width: 96%;
+  min-width:20%;
+  max-width:45%;
   overflow: hidden;
   text-decoration: none;
   margin-left: 2%;
@@ -26,9 +34,11 @@
 
 /* 내 채팅 */
 .chat.me {
+  float:right;
   border-color:  #0ebeff;
   background-color:#0ebeff;
-  width: 96%;
+  min-width:20%;
+  max-width:45%;
   overflow: hidden;
   text-decoration: none;
   text-align: right;
