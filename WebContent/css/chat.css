@@ -13,8 +13,12 @@
 
 }
 
-/* 채팅창 스크롤바 안보이게 함*/
-.chat::-webkit-scrollbar{ display:none; }
+/* 채팅창 스크롤바 변경*/
+.chat::-webkit-scrollbar{ width: 10px; }
+.chat::-webkit-scrollbar-track { background-color: #f0f0f0; }
+.chat::-webkit-scrollbar-thumb { 
+    background:#0ebeff; 
+}
 
 
 /* 다른 사람 채팅 */

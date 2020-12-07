@@ -6,8 +6,12 @@
   overflow-y : auto;
 }
 
-/* 채팅목록 스크롤바 안보이게 함*/
-.left::-webkit-scrollbar{ display:none; }
+/* 채팅목록 스크롤바 변경*/
+.left::-webkit-scrollbar{ width: 10px; }
+.left::-webkit-scrollbar-track { background-color: #f0f0f0; }
+.left::-webkit-scrollbar-thumb { 
+    background:#47cf73; 
+}
 
 .chatlist {
     border-radius: 5px;
