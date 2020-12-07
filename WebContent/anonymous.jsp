@@ -104,10 +104,10 @@
   <!-- 채팅창 -->
   <div class="center" style="width:66%; height: 100%; float: left; ">
   
-  <div class="chat">
+  <div class="anchat" style="width: 105%;height: 70%; z-index: auto;">
   <%= session.getId() %>
-    <iframe frameborder=0 class="anchat" style="width: 97%;height: 98%; z-index: auto;" 
-    src="an.jsp?no=1" >
+    <iframe src="an.jsp"
+    style="width: 97%;height: 98%; z-index: auto;" frameborder=0>
     
     </iframe>
   </div>

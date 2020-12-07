@@ -1,17 +1,6 @@
 /* 채팅영역 */
-.chat {
-  border: 2px ;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px 0;
-  width: 97%;
-  float: left;
-  text-decoration: none;
-  height: 70%;
-  max-height: 60%;
-}
 
-.anchat{
+.chat{
   border: 2px ;
   border-radius: 5px;
   padding: 10px;
@@ -19,8 +8,7 @@
   width: 97%;
   float: left;
   text-decoration: none;
-  height: 70%;
-  max-height: 60%;
+  height: 90%;
   overflow-y : auto;
 	
 }
@@ -28,9 +16,7 @@
 /* 채팅창 스크롤바 변경*/
 .chat::-webkit-scrollbar{ width: 10px; }
 .chat::-webkit-scrollbar-track { background-color: #f0f0f0; }
-.chat::-webkit-scrollbar-thumb { 
-    background:#0ebeff; 
-}
+.chat::-webkit-scrollbar-thumb { background:#0ebeff; }
 
 
 /* 다른 사람 채팅 */
