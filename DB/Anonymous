@@ -1,0 +1,5 @@
+create table anonymous(
+	chatlist int primary key,
+	chatcontent text,
+	chattime datetime
+);
