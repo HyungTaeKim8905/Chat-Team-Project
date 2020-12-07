@@ -15,7 +15,7 @@
   <!-- 우편번호 js -->
   <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
-  <script src="jquery-3.5.1.min.js"></script>
+  <script src="./js/jquery-3.5.1.min.js"></script>
   <!-- 회원가입페이지 js -->
   <script src="./js/register.js"></script>
   <title>회원가입</title>
@@ -83,7 +83,7 @@
   </div>
   <!-- 가입양식 -->
   <div class="centerre" style="width:50%; height: 100%; float: left; ">
-    <form action="#" name="form" id="form">
+    <form action="register" name="form" id="form" method="post">
       <div class="container">
         <h1>회원가입</h1>
         <hr>
@@ -92,7 +92,7 @@
         <input type="text" placeholder="아이디를 입력해주세요" name="id" id="id" required>
 		
 		<!-- 비밀번호 -->
-        <label for="psw"><b>비밀번호 *</b></label>
+        <label for="password"><b>비밀번호 *</b></label>
         <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" required>
 		
 		<!-- 비밀번호 확인 -->
@@ -105,14 +105,18 @@
 		
 		<!-- 이메일 -->
 		<label for="email"><b>이메일 *</b></label>
+        <input type="hidden" name="sender" value="gudxo1226@naver.com">
         <input type="email" placeholder="이메일을 입력해주세요" name="email" id="email" required style="float:left;">
 		<button type="button" class="registerbtn" onclick="EmailCheck()" style="width:200px;">이메일 인증</button><br/>
+		<div id="div1">
 		
+		</div>
 		<label for="address"><b>주소</b></label><br/>
 		<input type="text" id="sample6_postcode" placeholder="우편번호" style="width:200px;">
 		<input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기" class="registerbtn" style="width:200px;"><br/>
 		<input type="text" id="sample6_address" placeholder="주소" style="width:200px;">
 		<input type="text" id="sample6_detailAddress" placeholder="상세주소" style="width:200px;">
+		<input type="text" id="sample6_extraAddress" placeholder="참고항목" style="width:200px;">
 		<input type="hidden" id="address" name="address" value="">
 		<br/>
 		<label for="phone"><b>전화번호 *</b></label><br/>
