@@ -75,83 +75,23 @@
   <div class="left" style="width:25%; float: left; ">
   <div class="chatlist">
     <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
       <p>1번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
     <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
       <p>2번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
     <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>1번 채팅방</p>
+      <p>3번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
     <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>2번 채팅방</p>
+      <p>4번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
     <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>1번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>2번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>1번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>2번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>1번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>2번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>1번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>2번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>1번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>2번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>1번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>2번 채팅방</p>
+      <p>5번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
   </div>
@@ -161,101 +101,39 @@
   <div class="chat">
     <!-- 상대 채팅 -->
     <div class="chat other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
       <p>안녕안녕</p>
       <span class="time-right">11:00</span>
     </div>
     
     <!-- 내 채팅 -->
     <div class="chat me" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" class="right" alt="Avatar">
       <p>그래그래</p>
       <span class="time-left">11:00</span>
     </div>
     <!-- 상대 채팅 -->
     <div class="chat other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
       <p>안녕안녕</p>
       <span class="time-right">11:00</span>
     </div>
     
     <!-- 내 채팅 -->
     <div class="chat me" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" class="right" alt="Avatar">
       <p>그래그래</p>
       <span class="time-left">11:00</span>
     </div><!-- 상대 채팅 -->
     <div class="chat other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
       <p>안녕안녕</p>
       <span class="time-right">11:00</span>
     </div>
     
     <!-- 내 채팅 -->
     <div class="chat me" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" class="right" alt="Avatar">
       <p>그래그래</p>
       <span class="time-left">11:00</span>
     </div><!-- 상대 채팅 -->
     <div class="chat other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
       <p>안녕안녕</p>
       <span class="time-right">11:00</span>
-    </div>
-    
-    <!-- 내 채팅 -->
-    <div class="chat me" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" class="right" alt="Avatar">
-      <p>그래그래</p>
-      <span class="time-left">11:00</span>
-    </div><!-- 상대 채팅 -->
-    <div class="chat other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>안녕안녕</p>
-      <span class="time-right">11:00</span>
-    </div>
-    
-    <!-- 내 채팅 -->
-    <div class="chat me" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" class="right" alt="Avatar">
-      <p>그래그래</p>
-      <span class="time-left">11:00</span>
-    </div><!-- 상대 채팅 -->
-    <div class="chat other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>안녕안녕</p>
-      <span class="time-right">11:00</span>
-    </div>
-    
-    <!-- 내 채팅 -->
-    <div class="chat me" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" class="right" alt="Avatar">
-      <p>그래그래</p>
-      <span class="time-left">11:00</span>
-    </div><!-- 상대 채팅 -->
-    <div class="chat other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>안녕안녕</p>
-      <span class="time-right">11:00</span>
-    </div>
-    
-    <!-- 내 채팅 -->
-    <div class="chat me" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" class="right" alt="Avatar">
-      <p>그래그래</p>
-      <span class="time-left">11:00</span>
-    </div><!-- 상대 채팅 -->
-    <div class="chat other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>안녕안녕</p>
-      <span class="time-right">11:00</span>
-    </div>
-    
-    <!-- 내 채팅 -->
-    <div class="chat me" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" class="right" alt="Avatar">
-      <p>그래그래</p>
-      <span class="time-left">11:00</span>
     </div>
   </div>
   
