@@ -1,5 +1,6 @@
 create table anonymous(
 	chatlist int primary key,
 	chatcontent text,
+	sessionid varchar(100),
 	chattime datetime
 );
