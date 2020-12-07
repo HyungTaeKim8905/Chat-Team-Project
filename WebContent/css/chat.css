@@ -9,8 +9,20 @@
   text-decoration: none;
   height: 70%;
   max-height: 60%;
-  overflow-y : auto;
+}
 
+.anchat{
+  border: 2px ;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+  width: 97%;
+  float: left;
+  text-decoration: none;
+  height: 70%;
+  max-height: 60%;
+  overflow-y : auto;
+	
 }
 
 /* 채팅창 스크롤바 변경*/
