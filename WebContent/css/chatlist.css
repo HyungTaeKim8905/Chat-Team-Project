@@ -1,4 +1,4 @@
-/* ì±„íŒ…ë°©ì˜ì—­ */
+/* Ã¤ÆÃ¹æ¿µ¿ª */
 .left{
   background-color: rgb(181, 153, 194);
   height: 94%;
@@ -14,7 +14,7 @@
     float: left;
     text-decoration: none;
   }
-/* ì±„íŒ…ë°© */
+/* Ã¤ÆÃ¹æ */
 .chatlist.other {
     border-color:  white;
     background-color:white;
@@ -22,7 +22,7 @@
     overflow: hidden;
     text-decoration: none;
   }
-  /* ì±„íŒ…ë°©ì— ë§ˆìš°ìŠ¤ ì˜¬ë ¸ì„ ë•Œ*/
+  /* Ã¤ÆÃ¹æ¿¡ ¸¶¿ì½º ¿Ã·ÈÀ» ¶§*/
 .chatlist.other:hover {
   border-color: white;
   background-color:  white;
@@ -31,14 +31,14 @@
   text-decoration: none;
 }
   
-  /* ì±„íŒ…ì°½ ì‚¬ì´ì˜ ê³µë°± */
+  /* Ã¤ÆÃÃ¢ »çÀÌÀÇ °ø¹é */
   .container::after {
     content: "";
     clear: both;
     display: table;
   }
   
-  /* ì™¼ìª½ ì´ë¯¸ì§€ */
+  /* ¿ŞÂÊ ÀÌ¹ÌÁö */
   .container img {
     float: left;
     max-width: 60px;
@@ -47,20 +47,20 @@
     border-radius: 50%;
   }
   
-  /* ì˜¤ë¥¸ìª½ ì´ë¯¸ì§€ */
+  /* ¿À¸¥ÂÊ ÀÌ¹ÌÁö */
   .container img.right {
     float: right;
     margin-left: 20px;
     margin-right:0;
   }
   
-  /* ì˜¤ë¥¸ìª½ ì‹œê°„ */
+  /* ¿À¸¥ÂÊ ½Ã°£ */
   .time-right {
     float: right;
     color: rgb(24, 23, 23);
   }
   
-  /* ì™¼ìª½ ì‹œê°„ */
+  /* ¿ŞÂÊ ½Ã°£ */
   .time-left {
     float: left;
     color: #999;

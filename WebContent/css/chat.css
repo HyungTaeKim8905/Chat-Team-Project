@@ -1,4 +1,4 @@
-/* ì±„íŒ…ì˜ì—­ */
+/* Ã¤ÆÃ¿µ¿ª */
 .chat {
   border: 2px ;
   border-radius: 5px;
@@ -12,7 +12,7 @@
   overflow-y : auto;
 
 }
-/* ë‹¤ë¥¸ ì‚¬ëŒ ì±„íŒ… */
+/* ´Ù¸¥ »ç¶÷ Ã¤ÆÃ */
 .chat.other {
   border-color:  #76daff;
   background-color:#76daff;
@@ -24,7 +24,7 @@
   height: 77px;
 }
 
-/* ë‚´ ì±„íŒ… */
+/* ³» Ã¤ÆÃ */
 .chat.me {
   border-color:  #0ebeff;
   background-color:#0ebeff;
@@ -38,14 +38,14 @@
 }
 
 
-/* ì±„íŒ…ì°½ ì‚¬ì´ì˜ ê³µë°± */
+/* Ã¤ÆÃÃ¢ »çÀÌÀÇ °ø¹é */
 .container::after {
   content: "";
   clear: both;
   display: table;
 }
 
-/* ì™¼ìª½ ì´ë¯¸ì§€ */
+/* ¿ŞÂÊ ÀÌ¹ÌÁö */
 .container img {
   float: left;
   max-width: 60px;
@@ -54,26 +54,26 @@
   border-radius: 50%;
 }
 
-/* ì˜¤ë¥¸ìª½ ì´ë¯¸ì§€ */
+/* ¿À¸¥ÂÊ ÀÌ¹ÌÁö */
 .container img.right {
   float: right;
   margin-left: 20px;
   margin-right:0;
 }
 
-/* ì˜¤ë¥¸ìª½ ì‹œê°„ */
+/* ¿À¸¥ÂÊ ½Ã°£ */
 .time-right {
   float: right;
   color: rgb(24, 23, 23);
 }
 
-/* ì™¼ìª½ ì‹œê°„ */
+/* ¿ŞÂÊ ½Ã°£ */
 .time-left {
   float: left;
   color: rgb(24, 23, 23);
 }
 
-/* ì±„íŒ… ì…ë ¥ì°½ */
+/* Ã¤ÆÃ ÀÔ·ÂÃ¢ */
 .inputmessage{
   margin-left: 3%;
   margin-right: 1%;
@@ -81,7 +81,7 @@
   height: 90px;
   resize: none;
 }
-/* ì±„íŒ… ì…ë ¥ ë²„íŠ¼ */
+/* Ã¤ÆÃ ÀÔ·Â ¹öÆ° */
 .messagebutton{
   background-color: #ffd900;
   height: 100%;
