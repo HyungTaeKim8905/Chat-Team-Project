@@ -1,0 +1,68 @@
+/* 채팅방영역 */
+.left{
+  background-color: rgb(181, 153, 194);
+  height: 94%;
+  background-color:#47cf73;
+  overflow-y : auto;
+}
+
+.chatlist {
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 90%;
+    float: left;
+    text-decoration: none;
+  }
+/* 채팅방 */
+.chatlist.other {
+    border-color:  white;
+    background-color:white;
+    width: 94%;
+    overflow: hidden;
+    text-decoration: none;
+  }
+  /* 채팅방에 마우스 올렸을 때*/
+.chatlist.other:hover {
+  border-color: white;
+  background-color:  white;
+  width: 100%;
+  overflow: hidden;
+  text-decoration: none;
+}
+  
+  /* 채팅창 사이의 공백 */
+  .container::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  /* 왼쪽 이미지 */
+  .container img {
+    float: left;
+    max-width: 60px;
+    width: 100%;
+    margin-right: 20px;
+    border-radius: 50%;
+  }
+  
+  /* 오른쪽 이미지 */
+  .container img.right {
+    float: right;
+    margin-left: 20px;
+    margin-right:0;
+  }
+  
+  /* 오른쪽 시간 */
+  .time-right {
+    float: right;
+    color: rgb(24, 23, 23);
+  }
+  
+  /* 왼쪽 시간 */
+  .time-left {
+    float: left;
+    color: #999;
+  }
+

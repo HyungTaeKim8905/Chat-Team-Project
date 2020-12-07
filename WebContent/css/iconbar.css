@@ -1,0 +1,49 @@
+
+.icon-bar {
+  width: 6%;
+  float: right ;
+  background-color:#000;
+  margin-left: 3%;
+  height:100%;
+  
+}
+
+.icon-bar a {
+  display: block;
+  text-align: center;
+  padding: 16px;
+  color: white;
+  font-size: 50px;
+  position: relative;
+}
+
+.icon-bar a:hover, .icon-bar a:focus {
+  background-color: #555;
+  position: relative;
+}
+ 
+.searchfm {
+  display: none;
+  position: absolute;
+  min-width: 30vw;
+  min-height: 50vh;
+  overflow: auto;
+  background-color: #555;
+  z-index: 1;
+  right:100%;
+  top:0%;
+}
+
+.friendfm {
+  display: none;
+  position: absolute;
+  min-width: 30vw;
+  min-height: 50vh;
+  overflow: auto;
+  background-color: #555;
+  z-index: 1;
+  right:100%;
+  top:0%;
+}
+
+.show {display: block;}

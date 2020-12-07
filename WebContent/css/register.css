@@ -1,0 +1,66 @@
+    /* 가로 100%로 */
+input[type=text], input[type=password], input[type=email] {
+    width: 100%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+    font-size: large;
+  }
+  
+  input[type=text]:focus, input[type=password]:focus, input[type=email] {
+    background-color: #ddd;
+    outline: none;
+  }
+  
+  /* Overwrite default styles of hr */
+  hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+  }
+  
+  /* 가입 버튼 */
+  .registerbtn {
+    background-color: #47cf73;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-size: large;
+  }
+  
+  .registerbtn:hover {
+    opacity: 1;
+  }
+  
+  /* 하이퍼링크 색을 파란색으로 */
+  a {
+    color: dodgerblue;
+  }
+  
+  /* 로그인 영역 회색으로 */
+  .signin {
+    padding-top: 0.5px;
+    background-color: #f1f1f1;
+    text-align: center;
+    width: 100%;
+  }
+
+  b{
+    font-size: large;
+  }
+  
+  select {
+	 background-color: #ddd;
+	 width:130px;
+	 height:51px;
+	 font-size:17px;
+  }
+  
+  option {
+	  font-size:17px;
+  }
