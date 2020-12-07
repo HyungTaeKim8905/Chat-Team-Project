@@ -1,50 +1,50 @@
 ﻿	function sample6_execDaumPostcode() {
-		new daum.Postcode({
-			oncomplete: function(data) {
-				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-
-				// 각 주소의 노출 규칙에 따라 주소를 조합한다.
-				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-				var addr = ''; // 주소 변수
-				var extraAddr = ''; // 참고항목 변수
-
-				//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
-				if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
-					addr = data.roadAddress;
-				} else { // 사용자가 지번 주소를 선택했을 경우(J)
-					addr = data.jibunAddress;
-				}
-
-				// 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
-				if(data.userSelectedType === 'R'){
-					// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-					// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-					if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
-						extraAddr += data.bname;
-					}
-					// 건물명이 있고, 공동주택일 경우 추가한다.
-					if(data.buildingName !== '' && data.apartment === 'Y'){
-						extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-					}
-					// 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-					if(extraAddr !== ''){
-						extraAddr = ' (' + extraAddr + ')';
-					}
-					// 조합된 참고항목을 해당 필드에 넣는다.
-					document.getElementById("sample6_extraAddress").value = extraAddr;
-				
-				} else {
-					document.getElementById("sample6_extraAddress").value = '';
-				}
-
-				// 우편번호와 주소 정보를 해당 필드에 넣는다.
-				document.getElementById('sample6_postcode').value = data.zonecode;
-				document.getElementById("sample6_address").value = addr;
-				// 커서를 상세주소 필드로 이동한다.
-				document.getElementById("sample6_detailAddress").focus();
-			}
-		}).open();
-	}
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+	
+	                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+	                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+	                var addr = ''; // 주소 변수
+	                var extraAddr = ''; // 참고항목 변수
+	
+	                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+	                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+	                    addr = data.roadAddress;
+	                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+	                    addr = data.jibunAddress;
+	                }
+	
+	                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+	                if(data.userSelectedType === 'R'){
+	                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+	                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+	                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+	                        extraAddr += data.bname;
+	                    }
+	                    // 건물명이 있고, 공동주택일 경우 추가한다.
+	                    if(data.buildingName !== '' && data.apartment === 'Y'){
+	                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+	                    }
+	                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+	                    if(extraAddr !== ''){
+	                        extraAddr = ' (' + extraAddr + ')';
+	                    }
+	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    document.getElementById("sample6_extraAddress").value = extraAddr;
+	               																
+	                } else {
+	                    document.getElementById("sample6_extraAddress").value = '';
+	                }
+	
+	                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+	                document.getElementById('sample6_postcode').value = data.zonecode;
+	                document.getElementById("sample6_address").value = addr;
+	                // 커서를 상세주소 필드로 이동한다.
+	                document.getElementById("sample6_detailAddress").focus();
+	            }
+	        }).open();
+	    }
 		
 		
 		
@@ -52,10 +52,9 @@
 	function idcheck()	{
 		var id = document.form.id.value;
 		alert(id);
-		//location.href="IDCheck.jsp?id=" + id;
 		/*
 		$.ajax({
-			url:"#",/////////////////////////////////////////////////////////////////////////////////////////// 수정 해야함
+			url:"IDCheck",
 			type:"POST", // data: "param1=aaaa&param2=zzzz,
 			data:"id="+id,
 			success:function(result)	{
@@ -68,6 +67,42 @@
 			}
 		});*/
 	}
+		
+	//이메일 인증 버튼을 누르면 실행되는 함수
+	var check = false;
+	function EmailCheck()	{
+		$.ajax({
+			url:"mailSend",			//서블릿페이지로 이동.
+			type:"POST",
+			data:$("form").serialize(),
+			success:function(result)	{
+				var json = JSON.parse(result);
+				var data = "";
+				alert(json[0]["numStr"]);
+				var output = "";
+				output += "<input type='text' id='output' name='output'>";
+				output += "<button type='button' onclick='Good(" + json[0]["numStr"] + ")'>인증</button>";
+				$("#div1").append(output);
+			}
+		});
+	}
+	
+	//인증 버튼을 누르면 실행되는 함수.
+	function Good(num)	{
+		 var output = $("#output").val();
+		 if(output == num)	{
+			 check = true;
+			 alert("메일 인증이 확인되었습니다.");
+			 alert(check);
+			 $("#div1").html("메일 인증이 완료되었습니다.");
+		 }
+		 else	{
+			check = false;
+			alert("메일인증을 다시 해주세요."); 
+		 }
+	}
+		
+		
 	// 비밀번호를 입력하는데 있어서 특수문자를 입력하라거나 공백없이 입력하라는 문구를 무시하고 회원가입을 할 수 있기 때문에 이를 막아주는 로직
 	var pwCheckYn = false;		//비밀번호 체크를 하기 위한 변수 선언
 	
@@ -85,34 +120,10 @@
 		}else {
 			//console.log("통과");
 			pwCheckYn = true;
-			
 		}
 	}
-		
-	//이메일 인증 버튼을 누르면 실행되는 함수
-	function EmailCheck()	{
-		var email = document.form.email.value;
-		alert(email);
-		alert(email);
-		/*
-		$.ajax({
-			url:"#",
-			type:"",
-			data: ,
-			success:function(result)	{
-				if(result == 1)	{
-					alert("이메일 인증이 되었습니다.");
-				}
-				else if(result == 0)	{
-					alert("");
-				}
-			}
-		});
-		*/
-	}
-		
-	//***********************************
-	$(document).ready(function(){      // blur() 요소에서 포커스를 잃을 경우에 발생하는 이벤트 이다
+	
+	 $(document).ready(function(){      // blur() 요소에서 포커스를 잃을 경우에 발생하는 이벤트 이다
 		$("#password").blur(function(){
 			if($(this).val()!=""){
 				chkPW();		// result값이 true면 blur 실행
@@ -158,9 +169,9 @@
 				alert("비밀번호가 일치하지 않습니다.");
 				$("#confirmPassword").focus();
 				return false;
-			} else if($("#nick").val() == ""){
+			} else if($("#name").val() == ""){
 				alert("이름을 입력하세요.");
-				$("#nick").focus();
+				$("#name").focus();
 				return false;
 			}else if($("#email").val() == ""){
 				alert("이메일을 입력하세요.");
@@ -174,7 +185,8 @@
 				var postcode = $("#sample6_postcode").val();
 				var address = $("#sample6_address").val();
 				var detailAddress = $("#sample6_detailAddress").val();
-				var result = postcode.concat(" ", address," ", detailAddress);
+				var extraAddress = $("#sample6_extraAddress").val();			//각각의 주소값을 각각의 변수에 저장
+				var result = postcode.concat(" ", address," ", detailAddress," ", extraAddress);
 				
 				$("#address").val(result);
 				//---------------------------------

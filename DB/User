@@ -1,0 +1,14 @@
+create database project02;
+
+// 회원 테이블 
+create table user (
+id       VARCHAR(20) not null,		-- 아이디	pk
+password VARCHAR(20),				-- 비밀번호
+nick      VARCHAR(20),				-- 닉네임
+email    VARCHAR(50),				-- 이메일
+address  VARCHAR(200),				-- 주소
+phone    VARCHAR(100),				-- 폰번호
+picture  varchar(255),				-- 사진
+statusmessage varchar(255), 		-- 상태 메세지
+PRIMARY KEY (id)
+) DEFAULT CHARSET=utf8 COLLATE utf8_general_ci; 
