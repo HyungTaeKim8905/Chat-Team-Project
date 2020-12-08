@@ -106,7 +106,7 @@
   
   <div class="anchat" style="width: 105%;height: 70%; z-index: auto;">
   <%= session.getId() %>
-    <iframe src="an.jsp"
+    <iframe src="an.jsp?no=1"
     style="width: 97%;height: 98%; z-index: auto;" frameborder=0>
     
     </iframe>

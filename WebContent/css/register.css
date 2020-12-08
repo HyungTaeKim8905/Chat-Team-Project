@@ -1,4 +1,4 @@
-    /* °¡·Î 100%·Î */
+    /* ê°€ë¡œ 100%ë¡œ */
 input[type=text], input[type=password], input[type=email] {
     width: 100%;
     padding: 15px;
@@ -20,7 +20,7 @@ input[type=text], input[type=password], input[type=email] {
     margin-bottom: 25px;
   }
   
-  /* °¡ÀÔ ¹öÆ° */
+  /* ê°€ì… ë²„íŠ¼ */
   .registerbtn {
     background-color: #47cf73;
     color: white;
@@ -37,12 +37,12 @@ input[type=text], input[type=password], input[type=email] {
     opacity: 1;
   }
   
-  /* ÇÏÀÌÆÛ¸µÅ© »öÀ» ÆÄ¶õ»öÀ¸·Î */
+  /* í•˜ì´í¼ë§í¬ ìƒ‰ì„ íŒŒë€ìƒ‰ìœ¼ë¡œ */
   a {
     color: dodgerblue;
   }
   
-  /* ·Î±×ÀÎ ¿µ¿ª È¸»öÀ¸·Î */
+  /* ë¡œê·¸ì¸ ì˜ì—­ íšŒìƒ‰ìœ¼ë¡œ */
   .signin {
     padding-top: 0.5px;
     background-color: #f1f1f1;

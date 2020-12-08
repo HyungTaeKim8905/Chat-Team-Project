@@ -1,4 +1,4 @@
-/* Ã¤ÆÃ¿µ¿ª */
+/* ì±„íŒ…ì˜ì—­ */
 
 .chat{
   border: 2px ;
@@ -13,13 +13,13 @@
 	
 }
 
-/* Ã¤ÆÃÃ¢ ½ºÅ©·Ñ¹Ù º¯°æ*/
+/* ìŠ¤í¬ë¡¤ë°” */
 .chat::-webkit-scrollbar{ width: 10px; }
 .chat::-webkit-scrollbar-track { background-color: #f0f0f0; }
 .chat::-webkit-scrollbar-thumb { background:#0ebeff; }
 
 
-/* ´Ù¸¥ »ç¶÷ Ã¤ÆÃ */
+/* ë‹¤ë¥¸ ì‚¬ëŒ ì±„íŒ… */
 .chat.other {
   border-color:  #9bdcf3;
   background-color: #9bdcf3;
@@ -32,7 +32,7 @@
   height: 77px;
 }
 
-/* ³» Ã¤ÆÃ */
+/* ë‚´ ì±„íŒ… */
 .chat.me {
   float:right;
   border-color:  #0ebeff;
@@ -48,14 +48,14 @@
 }
 
 
-/* Ã¤ÆÃÃ¢ »çÀÌÀÇ °ø¹é */
+/* ì±„íŒ…ì°½ ì‚¬ì´ì˜ ê³µë°± */
 .container::after {
   content: "";
   clear: both;
   display: table;
 }
 
-/* ¿ŞÂÊ ÀÌ¹ÌÁö */
+/* ì™¼ìª½ ì´ë¯¸ì§€ */
 .container img {
   float: left;
   max-width: 60px;
@@ -64,26 +64,26 @@
   border-radius: 50%;
 }
 
-/* ¿À¸¥ÂÊ ÀÌ¹ÌÁö */
+/* ì˜¤ë¥¸ìª½ ì´ë¯¸ì§€ */
 .container img.right {
   float: right;
   margin-left: 20px;
   margin-right:0;
 }
 
-/* ¿À¸¥ÂÊ ½Ã°£ */
+/* ì˜¤ë¥¸ìª½ ì‹œê°„ */
 .time-right {
   float: right;
   color: rgb(24, 23, 23);
 }
 
-/* ¿ŞÂÊ ½Ã°£ */
+/* ì™¼ìª½ ì‹œê°„ */
 .time-left {
   float: left;
   color: rgb(24, 23, 23);
 }
 
-/* Ã¤ÆÃ ÀÔ·ÂÃ¢ */
+/* ì±„íŒ… ì…ë ¥ì°½ */
 .inputmessage{
   margin-left: 3%;
   margin-right: 1%;
@@ -91,7 +91,7 @@
   height: 90px;
   resize: none;
 }
-/* Ã¤ÆÃ ÀÔ·Â ¹öÆ° */
+/* ì±„íŒ… ì…ë ¥ ë²„íŠ¼ */
 .messagebutton{
   background-color: #ffd900;
   height: 100%;
