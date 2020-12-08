@@ -8,11 +8,11 @@ import VO.ChatRoomVO;
 
 public class ChatRoomDTO extends DBManager {
 	
-	//Æ¯Á¤ÇÑ ¾ÆÀÌµğ¿¡ µû¶ó¼­ Ã¤ÆÃ ³»¿ªÀ» °¡Á®¿À´Â ÇÔ¼ö
+	//íŠ¹ì •í•œ ì•„ì´ë””ì— ë”°ë¼ì„œ ì±„íŒ… ë‚´ì—­ì„ ê°€ì ¸ì˜¤ëŠ” í•¨ìˆ˜
 	public ArrayList<ChatRoomVO> getChatListByID(String no, String fromID, String toID){
 		ArrayList<ChatRoomVO> chatList = null;
 		String sql = "";
-		//º¸³½ »ç¶÷ÀÌµç°£¿¡ ¹ŞÀº »ç¶÷ÀÌµç °£¿¡ ÀüºÎ´Ù °¡Á®¿Ã¼ö ÀÖµµ·Ï ÇÔ.
+		//ë³´ë‚¸ ì‚¬ëŒì´ë“ ê°„ì— ë°›ì€ ì‚¬ëŒì´ë“  ê°„ì— ì „ë¶€ë‹¤ ê°€ì ¸ì˜¬ìˆ˜ ìˆë„ë¡ í•¨.
 		sql += "select * from chatroom where ((fromID = ? and toID = ?) or (fromID = ? and toID = ?)) and no > ? order by date";
 		try	{
 			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -31,29 +31,29 @@ public class ChatRoomDTO extends DBManager {
 				vo.setToID(m_ResultSet.getString("toID").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&rt;").replaceAll("\n", "<br>"));
 				vo.setContent(m_ResultSet.getString("content").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&rt;").replaceAll("\n", "<br>"));
 				int chatTime = Integer.parseInt(m_ResultSet.getString("date").substring(11, 13));
-				String timeType = "¿ÀÀü";
+				String timeType = "ì˜¤ì „";
 				if(chatTime > 12) {
-					timeType = "¿ÀÈÄ";
+					timeType = "ì˜¤í›„";
 					chatTime -= 12;
 				}
 				vo.setDate(m_ResultSet.getString("date").substring(0, 11) + " " + timeType + " " + chatTime + ":" + m_ResultSet.getString("date").substring(14, 16));
 				chatList.add(vo);
 				m_ResultSet.close();	
 				m_SelectStatment.close();
-				m_Connection.close(); // db ¿¬°á Á¾·á
+				m_Connection.close(); // db ì—°ê²° ì¢…ë£Œ
 			}
 		} catch(Exception e) {
 			System.out.println("ERROR: " + e.getMessage());
 		}
-		return chatList;	//¸ğµç Ã¤ÆÃ ³»¿ªÀ» ¸®ÅÏÇÔ.
+		return chatList;	//ëª¨ë“  ì±„íŒ… ë‚´ì—­ì„ ë¦¬í„´í•¨.
 	}
 	
 	
-	// ´ëÈ­ ³»¿ªÁß¿¡¼­ ÃÖ±Ù¿¡ ¸î°³¸¸ »Ì¾Æ¿À´Â ÇÔ¼ö
+	// ëŒ€í™” ë‚´ì—­ì¤‘ì—ì„œ ìµœê·¼ì— ëª‡ê°œë§Œ ë½‘ì•„ì˜¤ëŠ” í•¨ìˆ˜
 	public ArrayList<ChatRoomVO> getChatByRecent(int number, String fromID, String toID){
 		ArrayList<ChatRoomVO> chatList = null;
 		String sql = "";
-		//º¸³½ »ç¶÷ÀÌµç°£¿¡ ¹ŞÀº »ç¶÷ÀÌµç °£¿¡ ÀüºÎ´Ù °¡Á®¿Ã¼ö ÀÖµµ·Ï ÇÔ.
+		//ë³´ë‚¸ ì‚¬ëŒì´ë“ ê°„ì— ë°›ì€ ì‚¬ëŒì´ë“  ê°„ì— ì „ë¶€ë‹¤ ê°€ì ¸ì˜¬ìˆ˜ ìˆë„ë¡ í•¨.
 		sql += "select * from chatroom where ((fromID = ? and toID = ?) or (fromID = ? and toID = ?)) and no > (select max(no) - ? from chatroom where(fromID = ? and toID = ?) or (fromID = ? and toID = ?)) order by date";
 		try	{
 			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -76,30 +76,30 @@ public class ChatRoomDTO extends DBManager {
 				vo.setToID(m_ResultSet.getString("toID").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&rt;").replaceAll("\n", "<br>"));
 				vo.setContent(m_ResultSet.getString("content").replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&rt;").replaceAll("\n", "<br>"));
 				int chatTime = Integer.parseInt(m_ResultSet.getString("date").substring(11, 13));
-				String timeType = "¿ÀÀü";
+				String timeType = "ì˜¤ì „";
 				if(chatTime > 12) {
-					timeType = "¿ÀÈÄ";
+					timeType = "ì˜¤í›„";
 					chatTime -= 12;
 				}
 				vo.setDate(m_ResultSet.getString("date").substring(0, 11) + " " + timeType + " " + chatTime + ":" + m_ResultSet.getString("date").substring(14, 16));
 				chatList.add(vo);
 				m_ResultSet.close();	
 				m_SelectStatment.close();
-				m_Connection.close(); // db ¿¬°á Á¾·á
+				m_Connection.close(); // db ì—°ê²° ì¢…ë£Œ
 			}
 		} catch(Exception e) {
 			System.out.println("ERROR: " + e.getMessage());
 		}
-		return chatList;	//¸ğµç Ã¤ÆÃ ³»¿ªÀ» ¸®ÅÏÇÔ.
+		return chatList;	//ëª¨ë“  ì±„íŒ… ë‚´ì—­ì„ ë¦¬í„´í•¨.
 	}
 	
 	
-	// ´Ù¸¥ »ç¶÷ÇÑÅ× ¾î¶°ÇÑ ¸Ş¼¼Áö¸¦ º¸³»´Â Àü¼Û±â´ÉÀÎ ÇÔ¼ö
+	// ë‹¤ë¥¸ ì‚¬ëŒí•œí…Œ ì–´ë– í•œ ë©”ì„¸ì§€ë¥¼ ë³´ë‚´ëŠ” ì „ì†¡ê¸°ëŠ¥ì¸ í•¨ìˆ˜
 	public int submit(String fromID, String toID, String content){
 		String sql = "";
-		//º¸³½ »ç¶÷ÀÌµç°£¿¡ ¹ŞÀº »ç¶÷ÀÌµç °£¿¡ ÀüºÎ´Ù °¡Á®¿Ã¼ö ÀÖµµ·Ï ÇÔ.
+		//ë³´ë‚¸ ì‚¬ëŒì´ë“ ê°„ì— ë°›ì€ ì‚¬ëŒì´ë“  ê°„ì— ì „ë¶€ë‹¤ ê°€ì ¸ì˜¬ìˆ˜ ìˆë„ë¡ í•¨.
 		sql += "insert into chatroom values(NULL, ?, ?, ?, NOW(), 0)";
-		// null°ªÀ» ³ÖÀ½À¸·Î½á no°¡ +1 ÀÚµ¿À¸·Î Áõ°¡
+		// nullê°’ì„ ë„£ìŒìœ¼ë¡œì¨ noê°€ +1 ìë™ìœ¼ë¡œ ì¦ê°€
 		try	{
 			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
@@ -113,11 +113,11 @@ public class ChatRoomDTO extends DBManager {
 				try	{
 					m_ResultSet.close();	
 					m_SelectStatment.close();
-					m_Connection.close(); // db ¿¬°á Á¾·á
+					m_Connection.close(); // db ì—°ê²° ì¢…ë£Œ
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
 			}
-			return -1;	//DB ¿¡·¯
+			return -1;	//DB ì—ëŸ¬
 		}
 }

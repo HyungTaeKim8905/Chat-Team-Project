@@ -1,14 +1,14 @@
 create database project02;
 
-// È¸¿ø Å×ÀÌºí 
+// È¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ìºï¿½ 
 create table user (
-id       VARCHAR(20) not null,		-- ¾ÆÀÌµð	pk
-password VARCHAR(20),				-- ºñ¹Ð¹øÈ£
-nick      VARCHAR(20),				-- ´Ð³×ÀÓ
-email    VARCHAR(50),				-- ÀÌ¸ÞÀÏ
-address  VARCHAR(200),				-- ÁÖ¼Ò
-phone    VARCHAR(100),				-- Æù¹øÈ£
-picture  varchar(255),				-- »çÁø
-statusmessage varchar(255), 		-- »óÅÂ ¸Þ¼¼Áö
+id       VARCHAR(20) not null,		-- ï¿½ï¿½ï¿½Ìµï¿½	pk
+password text,				-- ï¿½ï¿½Ð¹ï¿½È£
+nick      VARCHAR(20),				-- ï¿½Ð³ï¿½ï¿½ï¿½
+email    VARCHAR(50),				-- ï¿½Ì¸ï¿½ï¿½ï¿½
+address  VARCHAR(200),				-- ï¿½Ö¼ï¿½
+phone    VARCHAR(100),				-- ï¿½ï¿½ï¿½ï¿½È£
+picture  varchar(255),				-- ï¿½ï¿½ï¿½ï¿½
+statusmessage varchar(255), 		-- ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 PRIMARY KEY (id)
 ) DEFAULT CHARSET=utf8 COLLATE utf8_general_ci; 

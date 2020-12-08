@@ -12,19 +12,19 @@ public class MailServlet extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse res) 
 			throws ServletException, IOException{
 		  Properties p = System.getProperties();
-	        p.put("mail.smtp.starttls.enable", "true");     // STARTTLS command ¸¦ »ç¿ë °¡´ÉÇÏ°Ô ¼³Á¤
-	        p.put("mail.smtp.host", "smtp.gmail.com");      // smtp ¼­¹ö ÁÖ¼Ò
-	        p.put("mail.smtp.auth","true");                 // AUTH command¸¦ »ç¿ëÇÏ¿© »ç¿ëÀÚÀÎÁõÀ» ÇÒ ¼ö ÀÖ°Ô ÇÏ´Â ¼³Á¤
-	        p.put("mail.smtp.port", "587");                 // gmail Æ÷Æ®
+	        p.put("mail.smtp.starttls.enable", "true");     // STARTTLS command ë¥¼ ì‚¬ìš© ê°€ëŠ¥í•˜ê²Œ ì„¤ì •
+	        p.put("mail.smtp.host", "smtp.gmail.com");      // smtp ì„œë²„ ì£¼ì†Œ
+	        p.put("mail.smtp.auth","true");                 // AUTH commandë¥¼ ì‚¬ìš©í•˜ì—¬ ì‚¬ìš©ìì¸ì¦ì„ í•  ìˆ˜ ìˆê²Œ í•˜ëŠ” ì„¤ì •
+	        p.put("mail.smtp.port", "587");                 // gmail í¬íŠ¸
 	        
 	        Authenticator auth = new MyAuthentication();
 	         
-	        //session »ı¼º ¹×  MimeMessage»ı¼º
+	        //session ìƒì„± ë°  MimeMessageìƒì„±
 	        Session session = Session.getDefaultInstance(p, auth);
 	        MimeMessage msg = new MimeMessage(session);
 	         
 	        try{
-	            //ÆíÁöº¸³½½Ã°£
+	            //í¸ì§€ë³´ë‚¸ì‹œê°„
 	            msg.setSentDate(new Date());
 	             
 	            InternetAddress from = new InternetAddress() ;
@@ -32,24 +32,24 @@ public class MailServlet extends HttpServlet{
 	             
 	            from = new InternetAddress("gudxo1226@naver.com");
 	             
-	            // ÀÌ¸ŞÀÏ ¹ß½ÅÀÚ
+	            // ì´ë©”ì¼ ë°œì‹ ì
 	            msg.setFrom(from);
 	             
 	             
-	            // ÀÌ¸ŞÀÏ ¼ö½ÅÀÚ
+	            // ì´ë©”ì¼ ìˆ˜ì‹ ì
 	            InternetAddress to = new InternetAddress("gudxo12261@gmail.com");
 	            msg.setRecipient(Message.RecipientType.TO, to);
 	             
-	            // ÀÌ¸ŞÀÏ Á¦¸ñ
-	            msg.setSubject("Å×½ºÆ®ÀÔ´Ï´Ù.", "UTF-8");
+	            // ì´ë©”ì¼ ì œëª©
+	            msg.setSubject("í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤.", "UTF-8");
 	             
-	            // ÀÌ¸ŞÀÏ ³»¿ë 
-	            msg.setText("Å×½ºÆ®ÀÔ´Ï´Ù.", "UTF-8");
+	            // ì´ë©”ì¼ ë‚´ìš© 
+	            msg.setText("í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤.", "UTF-8");
 	             
-	            // ÀÌ¸ŞÀÏ Çì´õ 
+	            // ì´ë©”ì¼ í—¤ë” 
 	            msg.setHeader("content-Type", "text/html");
 	             
-	            //¸ŞÀÏº¸³»±â
+	            //ë©”ì¼ë³´ë‚´ê¸°
 	            javax.mail.Transport.send(msg);
 	             
 	        }catch (AddressException addr_e) {
@@ -70,15 +70,15 @@ public class MailServlet extends HttpServlet{
 	 
 	    public MyAuthentication(){
 	         
-	        String id = "xptmxmkim1111@gmail.com";       // ±¸±Û ID
-	        String pw = "xptmxmxptmxm";          // ±¸±Û ºñ¹Ğ¹øÈ£
+	        String id = "xptmxmkim1111@gmail.com";       // êµ¬ê¸€ ID
+	        String pw = "xptmxmxptmxm";          // êµ¬ê¸€ ë¹„ë°€ë²ˆí˜¸
 	 
-	        // ID¿Í ºñ¹Ğ¹øÈ£¸¦ ÀÔ·ÂÇÑ´Ù.
+	        // IDì™€ ë¹„ë°€ë²ˆí˜¸ë¥¼ ì…ë ¥í•œë‹¤.
 	        pa = new PasswordAuthentication(id, pw);
 	      
 	    }
 	 
-	    // ½Ã½ºÅÛ¿¡¼­ »ç¿ëÇÏ´Â ÀÎÁõÁ¤º¸
+	    // ì‹œìŠ¤í…œì—ì„œ ì‚¬ìš©í•˜ëŠ” ì¸ì¦ì •ë³´
 	    public PasswordAuthentication getPasswordAuthentication() {
 	        return pa;
 	    }

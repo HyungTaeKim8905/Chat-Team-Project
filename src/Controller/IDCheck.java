@@ -41,7 +41,7 @@ public class IDCheck extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");		// ¼­ºí¸´¿¡ ÀÀ´äÇÒ µ¥ÀÌÅÍÀÇ Å¸ÀÔÀ» html ¹®¼­ Å¸ÀÔÀ¸·Î ¼³Á¤ÇÏ´Â ºÎºĞÀÌ´Ù.
+		response.setContentType("text/html;charset=utf-8");		// ì„œë¸”ë¦¿ì— ì‘ë‹µí•  ë°ì´í„°ì˜ íƒ€ì…ì„ html ë¬¸ì„œ íƒ€ì…ìœ¼ë¡œ ì„¤ì •í•˜ëŠ” ë¶€ë¶„ì´ë‹¤.
 		request.setCharacterEncoding("utf-8");
 		PrintWriter out = response.getWriter();
 		String id = request.getParameter("id");

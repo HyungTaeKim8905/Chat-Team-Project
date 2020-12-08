@@ -40,7 +40,7 @@ public class register extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");		// ¼­ºí¸´¿¡ ÀÀ´äÇÒ µ¥ÀÌÅÍÀÇ Å¸ÀÔÀ» html ¹®¼­ Å¸ÀÔÀ¸·Î ¼³Á¤ÇÏ´Â ºÎºĞÀÌ´Ù.
+		response.setContentType("text/html;charset=utf-8");		// ì„œë¸”ë¦¿ì— ì‘ë‹µí•  ë°ì´í„°ì˜ íƒ€ì…ì„ html ë¬¸ì„œ íƒ€ì…ìœ¼ë¡œ ì„¤ì •í•˜ëŠ” ë¶€ë¶„ì´ë‹¤.
 		PrintWriter out = response.getWriter();
 		request.setCharacterEncoding("utf-8");
 		String id       = request.getParameter("id");
@@ -56,19 +56,20 @@ public class register extends HttpServlet {
 		UserDTO dto = new UserDTO();
 		try {
 			int result = dto.Join(id, password, nick, email, address, phone, picture, statusmessage);
-			if(result == 1) 	{	//¸®´ÙÀÌ¿¢Æ®, µğ½ºÆĞÃ³
+			if(result == 1) 	{	//ë¦¬ë‹¤ì´ì—‘íŠ¸, ë””ìŠ¤íŒ¨ì²˜
 				HttpSession session = request.getSession();
 				session.setAttribute("id", id);
 				out.println("<script>");
-				out.println("alert('È¸¿ø°¡ÀÔÀ» ÃàÇÏµå¸³´Ï´Ù.')");
+				out.println("alert('" + nick + " ë‹˜ íšŒì›ê°€ì…ì„ ì¶•í•˜ë“œë¦½ë‹ˆë‹¤.')");
+				out.println("location.href='Main.jsp'");
 				out.println("</script>");
 				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("Main.jsp");
-				dispatcher.forward(request, response);
+				//RequestDispatcher dispatcher = request.getRequestDispatcher("Main.jsp");
+				//dispatcher.forward(request, response);
 			}
 			else if(result == 0)	{
 				out.println("<script>");
-				out.println("alert('È¸¿ø°¡ÀÔÀ» ½ÇÆĞÇÏ¿´½À´Ï´Ù.')");
+				out.println("alert('íšŒì›ê°€ì…ì„ ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.')");
 				out.println("history.back()");
 				out.println("</script>");
 			}

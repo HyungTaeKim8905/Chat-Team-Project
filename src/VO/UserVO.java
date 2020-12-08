@@ -1,14 +1,14 @@
 package VO;
 
 public class UserVO {
-	private String id; 					// ¾ÆÀÌµğ
-	private String password; 			// ºñ¹Ğ¹øÈ£
-	private String nick; 				// ´Ğ³×ÀÓ
-	private String email; 				// ÀÌ¸ŞÀÏ
-	private String address; 			// ÁÖ¼Ò
-	private String phone; 				// Æù¹øÈ£
-	private String picture; 			// »çÁø
-	private String statusmessage; 		// »óÅÂ ¸Ş¼¼Áö
+	private String id; 					// ì•„ì´ë””
+	private String password; 			// ë¹„ë°€ë²ˆí˜¸
+	private String nick; 				// ë‹‰ë„¤ì„
+	private String email; 				// ì´ë©”ì¼
+	private String address; 			// ì£¼ì†Œ
+	private String phone; 				// í°ë²ˆí˜¸
+	private String picture; 			// ì‚¬ì§„
+	private String statusmessage; 		// ìƒíƒœ ë©”ì„¸ì§€
 
 	public String getId() {
 		return id;

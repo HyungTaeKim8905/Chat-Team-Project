@@ -6,9 +6,9 @@ import DB.DBManager;
 
 public class UserDTO extends DBManager {
 	
-	//***************************¾ÆÀÌµğ ¹× ºñ¹Ğ¹øÈ£ Ã£±â ¹× ºñ¹Ğ¹øÈ£ Àç¼³Á¤ ¸Ş¼­µå************************************************************
+	//***************************ì•„ì´ë”” ë° ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ë° ë¹„ë°€ë²ˆí˜¸ ì¬ì„¤ì • ë©”ì„œë“œ************************************************************
 	
-		// ¾ÆÀÌµğ Ã£±â ¸Ş¼­µå 
+		// ì•„ì´ë”” ì°¾ê¸° ë©”ì„œë“œ 
 		public boolean FindID(String phone)	{
 			try {
 				String sql = "select id from user where phone = ?";
@@ -25,7 +25,7 @@ public class UserDTO extends DBManager {
 			}
 		}
 		
-		// ºñ¹Ğ¹øÈ£ Ã£±â ¸Ş¼­µå
+		// ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸° ë©”ì„œë“œ
 		public boolean FindPassWord(String id)	{
 			try {
 				String sql = "select password from user where id = ?";
@@ -44,78 +44,87 @@ public class UserDTO extends DBManager {
 		
 	//*************************************************************************************************************************************
 
-	//***************************È¸¿ø°¡ÀÔ ¸Ş¼­µå******************************************************************************************************
+	//***************************íšŒì›ê°€ì… ë©”ì„œë“œ******************************************************************************************************
 		
 		public int Join(String id, String password, String nick, String email, String address, String phone, String picture, String statusmessage)	{
 			try {
-				// È¸¿ø°¡ÀÔÆäÀÌÁö(join.jsp)¿¡¼­ ÆÄ¶ó¹ÌÅÍ·Î Àü¼ÛµÈ µ¥ÀÌÅÍµéÀ» userÅ×ÀÌºíÀÇ »õ·Î¿î ·¹ÄÚµå·Î »ğÀÔÇÏ´Â ºÎºĞÀÌ´Ù.
-				String sql = "insert into user (id, password, nick, email, address, phone, picture, statusmessage) values (?,?,?,?,?,?,?,?)";
+				// íšŒì›ê°€ì…í˜ì´ì§€(join.jsp)ì—ì„œ íŒŒë¼ë¯¸í„°ë¡œ ì „ì†¡ëœ ë°ì´í„°ë“¤ì„ userí…Œì´ë¸”ì˜ ìƒˆë¡œìš´ ë ˆì½”ë“œë¡œ ì‚½ì…í•˜ëŠ” ë¶€ë¶„ì´ë‹¤.
+				String sql = "insert into user (id, password, nick, email, address, phone, picture, statusmessage) values (?,md5(md5(md5(md5(md5(md5(?)))))),?,?,?,?,?,?)";
 				DBOpen();
 				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_UPDATABLE);
 				m_SelectStatment.setString(1, id);
 				m_SelectStatment.setString(2, password);
 				m_SelectStatment.setString(3, nick);
-				m_SelectStatment.setString(4, email);
+				m_SelectStatment.setString(4, email);	
 				m_SelectStatment.setString(5, address);
 				m_SelectStatment.setString(6, phone);
 				m_SelectStatment.setString(7, picture);
 				m_SelectStatment.setString(8, statusmessage);
-				m_SelectStatment.executeUpdate(); // Äõ¸®½ÇÇàÇÏ¸é ½ÇÇà °á°ú¸¦ java.sql.ResultSetÇüÀ¸·Î ¸®ÅÏÇÑ´Ù.
-				// m_SelectStatment ¸¦ ´İ´Â´Ù.
+				m_SelectStatment.executeUpdate(); // ì¿¼ë¦¬ì‹¤í–‰í•˜ë©´ ì‹¤í–‰ ê²°ê³¼ë¥¼ java.sql.ResultSetí˜•ìœ¼ë¡œ ë¦¬í„´í•œë‹¤.
+				// m_SelectStatment ë¥¼ ë‹«ëŠ”ë‹¤.
 				m_SelectStatment.close();
 				DBClose(); 
-				return 1;		//È¸¿ø°¡ÀÔ ¼º°øÇÏ¸é 1 ¹İÈ¯
+				return 1;		//íšŒì›ê°€ì… ì„±ê³µí•˜ë©´ 1 ë°˜í™˜
 			}
 			catch(Exception e) {
 				System.out.println("ERROR:" + e.getMessage());
-				return 0;		//½ÇÆĞÇÏ¸é 0 ¹İÈ¯
+				return 0;		//ì‹¤íŒ¨í•˜ë©´ 0 ë°˜í™˜
 			}
 		}
 		
 		//***********************************************************************************************************************************
 		
-		//********************************// ·Î±×ÀÎ Ã³¸® ¸Ş¼­µå**********************************************************************************
+		//********************************// ë¡œê·¸ì¸ ì²˜ë¦¬ ë©”ì„œë“œ**********************************************************************************
 		
-		//DB¿¡¼­ °¡Á®¿Â ºñ¹Ğ¹øÈ£¿Í Å¬¶óÀÌ¾ğÆ®°¡ ÀÔ·ÂÇÑ ºñ¹Ğ¹øÈ£¸¦ ºñ±³ÇÏ´Â ºÎºĞ
+		//DBì—ì„œ ê°€ì ¸ì˜¨ ë¹„ë°€ë²ˆí˜¸ì™€ í´ë¼ì´ì–¸íŠ¸ê°€ ì…ë ¥í•œ ë¹„ë°€ë²ˆí˜¸ë¥¼ ë¹„êµí•˜ëŠ” ë¶€ë¶„
 		public int LoginCheck(String id, String password)	{
 			try {
-				String sql = "select * from user where id = ?";// Å¬¶óÀÌ¾ğÆ®°¡ ÀÔ·ÂÇÑ ¾ÆÀÌµğ¸¦ °¡Áö°í ÀÖ´Â È¸¿øÀÇ Á¤º¸¸¦ Á¶È¸ÇÏ´Â sql¹®
 				DBOpen();
+				String sql = "";
+				sql = "select md5(md5(md5(md5(md5(md5(?))))))";
+				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_UPDATABLE);
+				m_SelectStatment.setString(1, password); 
+				m_ResultSet = m_SelectStatment.executeQuery(); //ê²°ê³¼ê°’ ë¦¬í„´
+				while(ResultNext()) {
+					password = m_ResultSet.getString("md5(md5(md5(md5(md5(md5('" + password + "'))))))");
+				}
+				sql = "select * from user where id = ?";// í´ë¼ì´ì–¸íŠ¸ê°€ ì…ë ¥í•œ ì•„ì´ë””ë¥¼ ê°€ì§€ê³  ìˆëŠ” íšŒì›ì˜ ì •ë³´ë¥¼ ì¡°íšŒí•˜ëŠ” sqlë¬¸
 				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_UPDATABLE);
 				m_SelectStatment.setString(1, id); 
-				m_ResultSet = m_SelectStatment.executeQuery(); //°á°ú°ª ¸®ÅÏ
-				if(ResultNext())	{
-					if(password.equals(m_ResultSet.getString("password")))	{//getStringÇÔ¼ö´Â ÇØ´ç ¼ø¼­ÀÇ ¿­¿¡ÀÖ´Â µ¥ÀÌÅÍ¸¦ StringÇüÀ¸·Î ¹Ş¾Æ¿Â´Ü ¶æÀÌ´Ù.
+				m_ResultSet = m_SelectStatment.executeQuery(); //ê²°ê³¼ê°’ ë¦¬í„´
+				if(ResultNext())	{		//DBì— ì €ì¥ë˜ì–´ìˆëŠ” ë¹„ë°€ë²ˆí˜¸
+					if(password.equals(m_ResultSet.getString("password")))	{//getStringí•¨ìˆ˜ëŠ” í•´ë‹¹ ìˆœì„œì˜ ì—´ì—ìˆëŠ” ë°ì´í„°ë¥¼ Stringí˜•ìœ¼ë¡œ ë°›ì•„ì˜¨ë‹¨ ëœ»ì´ë‹¤.
 						m_ResultSet.close();
 						m_SelectStatment.close();
 						m_Connection.close();
-						return 1;											 //¿¹¸¦µé¾î mResultSet.getString(2)¸¦ ÇÏ°ÔµÇ¸é 2¹øÂ° ¿­¿¡ÀÖ´Â µ¥ÀÌÅÍ¸¦ °¡Á®¿À°Ô µÈ´Ù. Áï ÄÃ·³ÀÌ name °ú num¸¸ ÀÖ´Ù°í °¡Á¤ÇÏ¸é
-					}				//·Î±×ÀÎ ¼º°ø								// ¤Ó--------consol------------------¤Ó
-					else	{												// ¤Ó±èÇüÅÂ      111000				¤Ó
-						m_ResultSet.close();								// ¤Ó±èÇüÅÂ      111000				¤Ó	
-						m_SelectStatment.close();							// ¤Ó--------------------------------¤Ó
+						return 1;											 //ì˜ˆë¥¼ë“¤ì–´ mResultSet.getString(2)ë¥¼ í•˜ê²Œë˜ë©´ 2ë²ˆì§¸ ì—´ì—ìˆëŠ” ë°ì´í„°ë¥¼ ê°€ì ¸ì˜¤ê²Œ ëœë‹¤. ì¦‰ ì»¬ëŸ¼ì´ name ê³¼ numë§Œ ìˆë‹¤ê³  ê°€ì •í•˜ë©´
+					}				//ë¡œê·¸ì¸ ì„±ê³µ								// ã…£--------consol------------------ã…£
+					else	{												// ã…£ê¹€í˜•íƒœ      111000				ã…£
+						m_ResultSet.close();								// ã…£ê¹€í˜•íƒœ      111000				ã…£	
+						m_SelectStatment.close();							// ã…£--------------------------------ã…£
 						m_Connection.close();				
-						return 0;	//ºñ¹Ğ¹øÈ£ Æ²¸²							    
+						return 0;	//ë¹„ë°€ë²ˆí˜¸ í‹€ë¦¼							    
 					}				 	 	 
 				}											 	     	
 					else {
 						m_ResultSet.close();
 						m_SelectStatment.close();
 						m_Connection.close();
-						return -1;	// Á¸ÀçÇÏÁö ¾Ê´Â ¾ÆÀÌµğ
+						return -1;	// ì¡´ì¬í•˜ì§€ ì•ŠëŠ” ì•„ì´ë””
 					}
 				}
 				catch(Exception e) {
 					System.out.println("ERROR:" + e.getMessage());
-					return -2;		//db ¿À·ù
+					return -2;		//db ì˜¤ë¥˜
 				}
 			}
 		
 		//*************************************************************************************************************************************
 		
-		//****************************************¾ÆÀÌµğ Áßº¹È®ÀÎ °Ë»ç ¸Ş¼­µå************************************************************************
+		//****************************************ì•„ì´ë”” ì¤‘ë³µí™•ì¸ ê²€ì‚¬ ë©”ì„œë“œ************************************************************************
 		
 		public boolean CheckID(String id)	{
 			try {
@@ -124,14 +133,14 @@ public class UserDTO extends DBManager {
 				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_UPDATABLE);
 				m_SelectStatment.setString(1, id); 
-				m_ResultSet = m_SelectStatment.executeQuery(); //°á°ú°ª ¸®ÅÏ
-				if(ResultNext())	{	//id°¡ ÀÖÀ¸¸é 1 
+				m_ResultSet = m_SelectStatment.executeQuery(); //ê²°ê³¼ê°’ ë¦¬í„´
+				if(ResultNext())	{	//idê°€ ìˆìœ¼ë©´ 1 
 					m_ResultSet.close();
 					m_SelectStatment.close();
 					m_Connection.close();
 					return false;
 				}
-				else	{				//id°¡ ¾øÀ¸¸é 0
+				else	{				//idê°€ ì—†ìœ¼ë©´ 0
 					m_ResultSet.close();
 					m_SelectStatment.close();
 					m_Connection.close();
@@ -140,11 +149,11 @@ public class UserDTO extends DBManager {
 				
 			} catch(Exception e) {
 				System.out.println("ERROR:" + e.getMessage());
-				return false;		//db ¿À·ù
+				return false;		//db ì˜¤ë¥˜
 			}
 		}
 		
-		//***************************°ü¸®ÀÚ ÆäÀÌÁö¿¡¼­ Å¬¶óÀÌ¾ğÆ® ¸ñ·Ï º¸¿©ÁÖ´Â ¸Ş¼­µå**************************************************
+		//***************************ê´€ë¦¬ì í˜ì´ì§€ì—ì„œ í´ë¼ì´ì–¸íŠ¸ ëª©ë¡ ë³´ì—¬ì£¼ëŠ” ë©”ì„œë“œ**************************************************
 		
 		public boolean ClientList()	{
 			try {
@@ -152,14 +161,14 @@ public class UserDTO extends DBManager {
 				DBOpen();
 				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_UPDATABLE);
-				m_ResultSet = m_SelectStatment.executeQuery(); //°á°ú°ª ¸®ÅÏ
+				m_ResultSet = m_SelectStatment.executeQuery(); //ê²°ê³¼ê°’ ë¦¬í„´
 				return true;
 			} catch(Exception e) {
 				System.out.println("ERROR:" + e.getMessage());
-				return false;		//db ¿À·ù
+				return false;		//db ì˜¤ë¥˜
 			}
 		}
-		//***********************°ü¸®ÀÚ°¡ Å¬¶óÀÌ¾ğÆ® Á¤º¸ »èÁ¦ÇÏ´Â ¸Ş¼­µå********************************************************************************
+		//***********************ê´€ë¦¬ìê°€ í´ë¼ì´ì–¸íŠ¸ ì •ë³´ ì‚­ì œí•˜ëŠ” ë©”ì„œë“œ********************************************************************************
 		
 		public boolean MemberDelete(String deleteid)	{
 			try {
@@ -167,19 +176,19 @@ public class UserDTO extends DBManager {
 				DBOpen();
 				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 				m_SelectStatment.setString(1, deleteid);
-				m_SelectStatment.executeUpdate(); // Äõ¸®½ÇÇàÇÏ¸é ½ÇÇà °á°ú¸¦ java.sql.ResultSetÇüÀ¸·Î ¸®ÅÏÇÑ´Ù.
-				// m_SelectStatment ¸¦ ´İ´Â´Ù.
+				m_SelectStatment.executeUpdate(); // ì¿¼ë¦¬ì‹¤í–‰í•˜ë©´ ì‹¤í–‰ ê²°ê³¼ë¥¼ java.sql.ResultSetí˜•ìœ¼ë¡œ ë¦¬í„´í•œë‹¤.
+				// m_SelectStatment ë¥¼ ë‹«ëŠ”ë‹¤.
 				m_SelectStatment.close();
 				return true;
 			} catch(Exception e) {
 				System.out.println("ERROR:" + e.getMessage());
-				return false;		//db ¿À·ù
+				return false;		//db ì˜¤ë¥˜
 			}
 		}
-		//********************È¸¿ø Á¤º¸¸¦ º¸¿©ÁÖ´Â ¸Ş¼­µå(°ü¸®ÀÚ¸¸ º¼ ¼öÀÖÀ½)****************************************************************************************************
+		//********************íšŒì› ì •ë³´ë¥¼ ë³´ì—¬ì£¼ëŠ” ë©”ì„œë“œ(ê´€ë¦¬ìë§Œ ë³¼ ìˆ˜ìˆìŒ)****************************************************************************************************
 		
 		public boolean MemberInfo(String infoid)	{
-			try {//user Å×ÀÌºí¿¡¼­ Á¤º¸¸¦ È®ÀÎÇÒ ¾ÆÀÌµğ¸¦ °¡Áö°í ÀÖ´Â È¸¿ø Á¤º¸¸¦ user Å×ÀÌºí¿¡¼­ Á¶È¸*********
+			try {//user í…Œì´ë¸”ì—ì„œ ì •ë³´ë¥¼ í™•ì¸í•  ì•„ì´ë””ë¥¼ ê°€ì§€ê³  ìˆëŠ” íšŒì› ì •ë³´ë¥¼ user í…Œì´ë¸”ì—ì„œ ì¡°íšŒ*********
 				String sql = "select * from user where id=?";
 				DBOpen();
 				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -189,12 +198,12 @@ public class UserDTO extends DBManager {
 				return true;
 			} catch(Exception e) {
 				System.out.println("ERROR:" + e.getMessage());
-				return false;		//db ¿À·ù
+				return false;		//db ì˜¤ë¥˜
 			}
 		}
 		//*********************************************************************************************************************
 		
-		//**********************Ã·ºÎÆÄÀÏÀ» ´Ù¿î·Îµå ÇÒ ¶§¸¶´Ù ´Ù¿î·Îµå È½¼ö¸¦ Áõ°¡½ÃÄÑÁÖ´Â ¸Ş¼­µå********************************************	
+		//**********************ì²¨ë¶€íŒŒì¼ì„ ë‹¤ìš´ë¡œë“œ í•  ë•Œë§ˆë‹¤ ë‹¤ìš´ë¡œë“œ íšŸìˆ˜ë¥¼ ì¦ê°€ì‹œì¼œì£¼ëŠ” ë©”ì„œë“œ********************************************	
 		
 		public void downloadcount(String filedownload)	{
 			String sql = "update board set downloadcount = downloadcount + 1 where filerealname='" + filedownload +"'";
@@ -203,7 +212,7 @@ public class UserDTO extends DBManager {
 				Excute(sql);
 				DBClose();
 			}catch(Exception e) {
-				System.out.println("Ã·ºÎÆÄÀÏ Ä«¿îÆ®¸¦ Áõ°¡ÇÏ´Âµ¥ ÀÖ¾î ¿À·ù");
+				System.out.println("ì²¨ë¶€íŒŒì¼ ì¹´ìš´íŠ¸ë¥¼ ì¦ê°€í•˜ëŠ”ë° ìˆì–´ ì˜¤ë¥˜");
 				System.out.println("ERROR:" + e.getMessage());
 			}
 		}
@@ -211,17 +220,17 @@ public class UserDTO extends DBManager {
 		//*******************************************************************************************************************
 
 		
-		//*************************************´ñ±Û µî·Ï ÇØÁÖ´Â ¸Ş¼­µå*****************************************************************
+		//*************************************ëŒ“ê¸€ ë“±ë¡ í•´ì£¼ëŠ” ë©”ì„œë“œ*****************************************************************
 		
 		public boolean commentok(String no, String id, String note)	{
 			String sql = "insert into comment (no, id, Reply, Rdate) values ('"+ no +"', '"+ id +"', '"+ note +"', now())";
-			try	{				// ÀÛ¼ºÀÚ, ³»¿ë, ÀÛ¼ºÀÏ
+			try	{				// ì‘ì„±ì, ë‚´ìš©, ì‘ì„±ì¼
 				DBOpen();	
 				Excute(sql);
 				DBClose();
-				return true;	//´ñ±ÛÀ» µî·ÏÇÏ¸é true ¹İÈ¯
+				return true;	//ëŒ“ê¸€ì„ ë“±ë¡í•˜ë©´ true ë°˜í™˜
 			} catch(Exception e)	{
-				System.out.println("ERROR : " + e.getMessage());	//½ÇÆĞÇÏ¸é false 
+				System.out.println("ERROR : " + e.getMessage());	//ì‹¤íŒ¨í•˜ë©´ false 
 				return false;
 			}
 		}

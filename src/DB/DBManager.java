@@ -6,16 +6,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 /*
-insert, update, delete Äõ¸®¸¦ ³¯¸± ¶§´Â executeUpdate() ÇÔ¼ö¸¦ »ç¿ëÇÑ´Ù.¿Ö³ÄÇÏ¸é °á°ú °ªÀÌ ¾ø±â ¶§¹®¿¡.
-select Äõ¸®¸¦ ³¯¸± ¶§´Â	executeQuery() ÇÔ¼ö¸¦ »ç¿ëÇÑ´Ù.¿Ö³ÄÇÏ¸é °á°ú °ªÀ» ¹Ş¾Æ¿Í¾ß ÇÏ±â ¶§¹®¿¡.
+insert, update, delete ì¿¼ë¦¬ë¥¼ ë‚ ë¦´ ë•ŒëŠ” executeUpdate() í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•œë‹¤.ì™œëƒí•˜ë©´ ê²°ê³¼ ê°’ì´ ì—†ê¸° ë•Œë¬¸ì—.
+select ì¿¼ë¦¬ë¥¼ ë‚ ë¦´ ë•ŒëŠ”	executeQuery() í•¨ìˆ˜ë¥¼ ì‚¬ìš©í•œë‹¤.ì™œëƒí•˜ë©´ ê²°ê³¼ ê°’ì„ ë°›ì•„ì™€ì•¼ í•˜ê¸° ë•Œë¬¸ì—.
 */
-public class DBManager {		//Å¸ÀÓÀ» ÀÎ½ÄÇÏÁö ¸øÇÏ±â ¶§¹®¿¡ serverTimezone=UTC ½áÁØ´Ù.
+public class DBManager {		//íƒ€ì„ì„ ì¸ì‹í•˜ì§€ ëª»í•˜ê¸° ë•Œë¬¸ì— serverTimezone=UTC ì¨ì¤€ë‹¤.
 	protected String m_DBMS = "jdbc:mysql://127.0.0.1/project02?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
 	protected String m_UserID = "root";
 	protected String m_UserPass = "mySQL1234";
-	// Statement °´Ã¼´Â SQL¹®À» µ¥ÀÌÅÍº£ÀÌ½º·Î Àü¼ÛÇÏ´Âµ¥ »ç¿ëÇÑ´Ù.
+	// Statement ê°ì²´ëŠ” SQLë¬¸ì„ ë°ì´í„°ë² ì´ìŠ¤ë¡œ ì „ì†¡í•˜ëŠ”ë° ì‚¬ìš©í•œë‹¤.
 	protected Connection m_Connection;
-	protected PreparedStatement m_SelectStatment; // Statement·Î ºÎÅÍ »ó¼Ó¹ŞÀ½  µ¿ÀûÀÎ Äõ¸®¿¡ »ç¿ëµÇ¸ç ÇÏ³ªÀÇ °´Ã¼·Î ¿©·¯¹øÀÇ Äõ¸®¸¦ ½ÇÇàÇÒ ¼ö ÀÖ´Ù.
+	protected PreparedStatement m_SelectStatment; // Statementë¡œ ë¶€í„° ìƒì†ë°›ìŒ  ë™ì ì¸ ì¿¼ë¦¬ì— ì‚¬ìš©ë˜ë©° í•˜ë‚˜ì˜ ê°ì²´ë¡œ ì—¬ëŸ¬ë²ˆì˜ ì¿¼ë¦¬ë¥¼ ì‹¤í–‰í•  ìˆ˜ ìˆë‹¤.
 	protected ResultSet m_ResultSet;
 	
 	public PreparedStatement getPreparedStatement()	{
@@ -34,10 +34,10 @@ public class DBManager {		//Å¸ÀÓÀ» ÀÎ½ÄÇÏÁö ¸øÇÏ±â ¶§¹®¿¡ serverTimezone=UTC ½áÁ
 		m_UserPass = pw;
 	}
 
-	// MySQL ¿¬°áÀ» À§ÇÑ ¶óÀÌºê·¯¸®¸¦ ·ÎµùÇÑ´Ù.
+	// MySQL ì—°ê²°ì„ ìœ„í•œ ë¼ì´ë¸ŒëŸ¬ë¦¬ë¥¼ ë¡œë”©í•œë‹¤.
 	protected boolean LoadDriver() {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver"); // com.mysql.cj.jdbc ÀÇ Å¬·¡½º¿¡ ÀÖ´Â DriverÅ¬·¡½º¸¦ ¾²°Ú´Ù´Â ¶æ
+			Class.forName("com.mysql.cj.jdbc.Driver"); // com.mysql.cj.jdbc ì˜ í´ë˜ìŠ¤ì— ìˆëŠ” Driverí´ë˜ìŠ¤ë¥¼ ì“°ê² ë‹¤ëŠ” ëœ»
 		} catch (Exception e) {
 			System.out.println("ERROR:" + e.getMessage());
 			return false;
@@ -45,14 +45,14 @@ public class DBManager {		//Å¸ÀÓÀ» ÀÎ½ÄÇÏÁö ¸øÇÏ±â ¶§¹®¿¡ serverTimezone=UTC ½áÁ
 		return true;
 	}
 
-	// MySQL¿¡ Á¢¼ÓÇÑ´Ù.
+	// MySQLì— ì ‘ì†í•œë‹¤.
 	public boolean DBOpen() {
 		if (LoadDriver() == false) {
 			return false;
 		}
 		try {
 			m_Connection = DriverManager.getConnection(m_DBMS, m_UserID, m_UserPass);
-		} // DriverManager.getConnection() ¸Ş¼Òµå¸¦ È£ÃâÇÏ¿© µ¥ÀÌÅÍº£ÀÌ½º¿¡ ¿¬°áÇÏ°í Connection °´Ã¼¸¦ ¹İÈ¯
+		} // DriverManager.getConnection() ë©”ì†Œë“œë¥¼ í˜¸ì¶œí•˜ì—¬ ë°ì´í„°ë² ì´ìŠ¤ì— ì—°ê²°í•˜ê³  Connection ê°ì²´ë¥¼ ë°˜í™˜
 		catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
 			return false;
@@ -60,22 +60,22 @@ public class DBManager {		//Å¸ÀÓÀ» ÀÎ½ÄÇÏÁö ¸øÇÏ±â ¶§¹®¿¡ serverTimezone=UTC ½áÁ
 		return true;
 	}
 
-	// MySQL Á¢¼ÓÀ» Á¾·áÇÑ´Ù.
+	// MySQL ì ‘ì†ì„ ì¢…ë£Œí•œë‹¤.
 	public void DBClose() {
 		try {
 			
-			m_Connection.close(); // db ¿¬°á Á¾·á
+			m_Connection.close(); // db ì—°ê²° ì¢…ë£Œ
 		} catch (SQLException e) {
-			System.out.println("ERROR:" + e.getMessage()); // ¿À·ù ¹ß»ı½Ã Ä³Ä¡¹®
+			System.out.println("ERROR:" + e.getMessage()); // ì˜¤ë¥˜ ë°œìƒì‹œ ìºì¹˜ë¬¸
 			return;
 		}
 	}
 	
-	// Query¸¦ ¼öÇàÇÑ´Ù.			
+	// Queryë¥¼ ìˆ˜í–‰í•œë‹¤.			
 	public boolean OpenQuery(String pSQL) {
 		try {
-			//select(Á¶È¸)¹®À» Àü¼ÛÇÒ ‹š »ç¿ëÇÏ´Â ¸Ş¼­µå·Î, ResultSet °´Ã¼¸¦ ¹İÈ¯ÇÑ´Ù.
-			//ÀÌ ¶§, ResultSetÀÌ¶õ select¸¦ ½ÇÇàÇÏ¿© Å×ÀÌºí·ÎºÎÅÍ ¾òÀº °á°ú¸¦ ÀúÀåÇÏ°íÀÖ´Â ÀúÀå¼Ò¶ó°í »ı°¢
+			//select(ì¡°íšŒ)ë¬¸ì„ ì „ì†¡í•  Â‹Âš ì‚¬ìš©í•˜ëŠ” ë©”ì„œë“œë¡œ, ResultSet ê°ì²´ë¥¼ ë°˜í™˜í•œë‹¤.
+			//ì´ ë•Œ, ResultSetì´ë€ selectë¥¼ ì‹¤í–‰í•˜ì—¬ í…Œì´ë¸”ë¡œë¶€í„° ì–»ì€ ê²°ê³¼ë¥¼ ì €ì¥í•˜ê³ ìˆëŠ” ì €ì¥ì†Œë¼ê³  ìƒê°
 			m_SelectStatment = m_Connection.prepareStatement(pSQL, ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 			
@@ -87,13 +87,13 @@ public class DBManager {		//Å¸ÀÓÀ» ÀÎ½ÄÇÏÁö ¸øÇÏ±â ¶§¹®¿¡ serverTimezone=UTC ½áÁ
 		return true;
 	}
 
-	// Query¸¦ Á¾·áÇÑ´Ù.
+	// Queryë¥¼ ì¢…ë£Œí•œë‹¤.
 	public void CloseQuery() {
 		try {
-			// °Ë»öµÈ °á°ú¸¦ ´İ´Â´Ù.
+			// ê²€ìƒ‰ëœ ê²°ê³¼ë¥¼ ë‹«ëŠ”ë‹¤.
 			m_ResultSet.close();
 
-			// stmt ¸¦ ´İ´Â´Ù.
+			// stmt ë¥¼ ë‹«ëŠ”ë‹¤.
 			m_SelectStatment.close();
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
@@ -101,8 +101,8 @@ public class DBManager {		//Å¸ÀÓÀ» ÀÎ½ÄÇÏÁö ¸øÇÏ±â ¶§¹®¿¡ serverTimezone=UTC ½áÁ
 		}
 	}
 
-	// ´ÙÀ½ ·¹ÄÚµå·Î ÀÌµ¿ÇÑ´Ù. ´ÙÀ½ ÁÙ·Î ³Ñ¾î°¡´Â ¸Ş¼Òµå
-	public boolean ResultNext() {// °á°ú°ª(DB¿¡ ÀúÀåµÇ¾îÀÖ´Â µ¥ÀÌÅÍÀÇ ÃÑ °³¼ö)À» ¾ò¾î¿È
+	// ë‹¤ìŒ ë ˆì½”ë“œë¡œ ì´ë™í•œë‹¤. ë‹¤ìŒ ì¤„ë¡œ ë„˜ì–´ê°€ëŠ” ë©”ì†Œë“œ
+	public boolean ResultNext() {// ê²°ê³¼ê°’(DBì— ì €ì¥ë˜ì–´ìˆëŠ” ë°ì´í„°ì˜ ì´ ê°œìˆ˜)ì„ ì–»ì–´ì˜´
 		try {
 			return m_ResultSet.next();
 		} catch (SQLException e) {
@@ -111,7 +111,7 @@ public class DBManager {		//Å¸ÀÓÀ» ÀÎ½ÄÇÏÁö ¸øÇÏ±â ¶§¹®¿¡ serverTimezone=UTC ½áÁ
 		}
 	}
 
-	// ·¹ÄÚµåÀÇ °ªÀ» ¾ò´Â´Ù.
+	// ë ˆì½”ë“œì˜ ê°’ì„ ì–»ëŠ”ë‹¤.
 	public String getString(String pName) {
 		try {
 			return m_ResultSet.getString(pName);
@@ -121,7 +121,7 @@ public class DBManager {		//Å¸ÀÓÀ» ÀÎ½ÄÇÏÁö ¸øÇÏ±â ¶§¹®¿¡ serverTimezone=UTC ½áÁ
 		}
 	}
 
-	// ·¹ÄÚµåÀÇ °ªÀ» ¾ò´Â´Ù.
+	// ë ˆì½”ë“œì˜ ê°’ì„ ì–»ëŠ”ë‹¤.
 	public int getInt(String pName) {
 		try {
 			return Integer.parseInt(m_ResultSet.getString(pName));
@@ -131,13 +131,13 @@ public class DBManager {		//Å¸ÀÓÀ» ÀÎ½ÄÇÏÁö ¸øÇÏ±â ¶§¹®¿¡ serverTimezone=UTC ½áÁ
 		}
 	}
 
-	// Insert, Delete, Update Ã³¸®¿ë ÇÔ¼ö
-	public boolean Excute(String pSQL) // ºÒ¸° Å¸ÀÔÀÇ °ªÀ» ¹İÈ¯
+	// Insert, Delete, Update ì²˜ë¦¬ìš© í•¨ìˆ˜
+	public boolean Excute(String pSQL) // ë¶ˆë¦° íƒ€ì…ì˜ ê°’ì„ ë°˜í™˜
 	{
-		try { //// Ä¿¼­ÀÌµ¿¹æ¹ı //¼öÁ¤°¡´ÉÇÑ ¸ğµå
+		try { //// ì»¤ì„œì´ë™ë°©ë²• //ìˆ˜ì •ê°€ëŠ¥í•œ ëª¨ë“œ
 			m_SelectStatment = m_Connection.prepareStatement(pSQL, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.executeUpdate(); // Äõ¸®½ÇÇàÇÏ¸é ½ÇÇà °á°ú¸¦ java.sql.ResultSetÇüÀ¸·Î ¸®ÅÏÇÑ´Ù.
-			// m_SelectStatment ¸¦ ´İ´Â´Ù.
+			m_SelectStatment.executeUpdate(); // ì¿¼ë¦¬ì‹¤í–‰í•˜ë©´ ì‹¤í–‰ ê²°ê³¼ë¥¼ java.sql.ResultSetí˜•ìœ¼ë¡œ ë¦¬í„´í•œë‹¤.
+			// m_SelectStatment ë¥¼ ë‹«ëŠ”ë‹¤.
 			m_SelectStatment.close();
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
@@ -146,12 +146,12 @@ public class DBManager {		//Å¸ÀÓÀ» ÀÎ½ÄÇÏÁö ¸øÇÏ±â ¶§¹®¿¡ serverTimezone=UTC ½áÁ
 		return true;
 	}
 	
-	public boolean Excutee(String pSQL) // ºÒ¸° Å¸ÀÔÀÇ °ªÀ» ¹İÈ¯
+	public boolean Excutee(String pSQL) // ë¶ˆë¦° íƒ€ì…ì˜ ê°’ì„ ë°˜í™˜
 	{
-		try { //// Ä¿¼­ÀÌµ¿¹æ¹ı //¼öÁ¤°¡´ÉÇÑ ¸ğµå
+		try { //// ì»¤ì„œì´ë™ë°©ë²• //ìˆ˜ì •ê°€ëŠ¥í•œ ëª¨ë“œ
 			m_SelectStatment = m_Connection.prepareStatement(pSQL, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.executeUpdate(); // Äõ¸®½ÇÇàÇÏ¸é ½ÇÇà °á°ú¸¦ java.sql.ResultSetÇüÀ¸·Î ¸®ÅÏÇÑ´Ù.
-			// m_SelectStatment ¸¦ ´İ´Â´Ù.
+			m_SelectStatment.executeUpdate(); // ì¿¼ë¦¬ì‹¤í–‰í•˜ë©´ ì‹¤í–‰ ê²°ê³¼ë¥¼ java.sql.ResultSetí˜•ìœ¼ë¡œ ë¦¬í„´í•œë‹¤.
+			// m_SelectStatment ë¥¼ ë‹«ëŠ”ë‹¤.
 			//m_SelectStatment.close();
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());

@@ -48,12 +48,12 @@ public class MailSendServlet extends HttpServlet {
 		String subject = request.getParameter("subject");
 		String content = request.getParameter("content");
 		response.setContentType("text/html;charset=UTF-8");
-		subject = "Ã¤ÆÃ »çÀÌÆ® ÀÌ¸ŞÀÏ ÀÎÁõ¹øÈ£ ÀÔ´Ï´Ù.";
+		subject = "ì±„íŒ… ì‚¬ì´íŠ¸ ì´ë©”ì¼ ì¸ì¦ë²ˆí˜¸ ì…ë‹ˆë‹¤.";
 
 		int len = 6;
-		int dupCd = 1; // 1 Áßº¹Çã¿ë , 2 Áßº¹Á¦°Å
+		int dupCd = 1; // 1 ì¤‘ë³µí—ˆìš© , 2 ì¤‘ë³µì œê±°
 		Random rand = new Random();
-		String numStr = ""; // ³­¼ö°¡ ÀúÀåµÉ º¯¼ö
+		String numStr = ""; // ë‚œìˆ˜ê°€ ì €ì¥ë  ë³€ìˆ˜
 
 		for (int i = 0; i < len; i++) {
 			String ran = Integer.toString(rand.nextInt(10));
@@ -68,7 +68,7 @@ public class MailSendServlet extends HttpServlet {
 			}
 		}
 		
-		content = "ÀÎÁõ ¹øÈ£´Â : " + numStr + " ÀÔ´Ï´Ù.";
+		content = "ì¸ì¦ ë²ˆí˜¸ëŠ” : " + numStr + " ì…ë‹ˆë‹¤.";
 		System.out.println(sender);	
 		System.out.println(receiver);
 		System.out.println(subject);
@@ -76,10 +76,10 @@ public class MailSendServlet extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		try {
 			Properties properties = System.getProperties();
-			properties.put("mail.smtp.starttls.enable", "true"); // gmailÀº ¹«Á¶°Ç true °íÁ¤
-			properties.put("mail.smtp.host", "smtp.gmail.com"); // smtp ¼­¹ö ÁÖ¼Ò
-			properties.put("mail.smtp.auth", "true"); // gmailÀº ¹«Á¶°Ç true °íÁ¤
-			properties.put("mail.smtp.port", "587"); // gmail Æ÷Æ®
+			properties.put("mail.smtp.starttls.enable", "true"); // gmailì€ ë¬´ì¡°ê±´ true ê³ ì •
+			properties.put("mail.smtp.host", "smtp.gmail.com"); // smtp ì„œë²„ ì£¼ì†Œ
+			properties.put("mail.smtp.auth", "true"); // gmailì€ ë¬´ì¡°ê±´ true ê³ ì •
+			properties.put("mail.smtp.port", "587"); // gmail í¬íŠ¸
 			System.out.println("2:::::::");
 			Authenticator auth = new GoogleAuthentication();
 			Session s = Session.getDefaultInstance(properties, auth);
@@ -87,7 +87,7 @@ public class MailSendServlet extends HttpServlet {
 			System.out.println("3:::::::");
 			Message message = new MimeMessage(s);
 			System.out.println("4:::::::");
-			Address sender_address = new InternetAddress(sender); //////////// ¿©±â¼­ ¿À·ù
+			Address sender_address = new InternetAddress(sender); //////////// ì—¬ê¸°ì„œ ì˜¤ë¥˜
 			System.out.println("5:::::::");
 			Address receiver_address = new InternetAddress(receiver);
 			message.setHeader("content-type", "text/html;charset=UTF-8");
@@ -98,15 +98,15 @@ public class MailSendServlet extends HttpServlet {
 			message.setSentDate(new java.util.Date());
 			Transport.send(message);
 			System.out.println("6:::::::");
-			// JSON Çü½Ä
+			// JSON í˜•ì‹
 			JSONArray jsonArrList = new JSONArray();
 			JSONObject jsonList = new JSONObject();
 			jsonList.put("numStr", numStr);
 			jsonArrList.add(jsonList);
 			out.println(jsonArrList);
-			System.out.println("¼º°øÀûÀ¸·Î ¸ŞÀÏÀ» Àü¼ÛÇß½À´Ï´Ù.");
+			System.out.println("ì„±ê³µì ìœ¼ë¡œ ë©”ì¼ì„ ì „ì†¡í–ˆìŠµë‹ˆë‹¤.");
 		} catch (Exception e) {
-			out.println("SMTP ¼­¹ö°¡ Àß¸ø ¼³Á¤µÇ¾ú°Å³ª, ¼­ºñ½º¿¡ ¹®Á¦°¡ ÀÖ½À´Ï´Ù.");
+			out.println("SMTP ì„œë²„ê°€ ì˜ëª» ì„¤ì •ë˜ì—ˆê±°ë‚˜, ì„œë¹„ìŠ¤ì— ë¬¸ì œê°€ ìˆìŠµë‹ˆë‹¤.");
 			e.printStackTrace();
 		}
 	}
