@@ -48,33 +48,52 @@
 		
 		
 		
-	// 아이디 중복확인 버튼을 눌렀을때 실행되는 함수 
+	// 아이디 중복확인 버튼을 눌렀을때 실행되는 함수
+	var IDKimCheck = false;
 	function idcheck()	{
 		var id = document.form.id.value;
-		alert(id);
-		/*
+		//alert(id);
 		$.ajax({
 			url:"IDCheck",
 			type:"POST", // data: "param1=aaaa&param2=zzzz,
 			data:"id="+id,
 			success:function(result)	{
-				if(result == 1)	{
-					alert("사용중인 아이디입니다.");
-				}
-				if(result == 0)	{
+				var json = JSON.parse(result);
+				alert(json[0]["result"]);
+				if(json[0]["result"] == true)	{
+					IDKimCheck = true;
+					alert(IDKimCheck);
 					alert("사용 가능한 아이디입니다.");
 				}
+				if(json[0]["result"] == false)	{
+					alert("사용중인 아이디입니다.");
+				}
 			}
-		});*/
+		});
 	}
 		
 	//이메일 인증 버튼을 누르면 실행되는 함수
 	var check = false;
 	function EmailCheck()	{
+	var mun = "@";
+	var sender = $("#sender").val();
+	var email = $("#email").val();
+	if(sender == null || sender == "")	{
+		return false;
+	}
+	if(email == null || email == "")	{
+		alert("이메일 형식이 올바르지 않습니다.");
+		return false;
+	}
+	if(email.indexOf("@") == -1 || email.indexOf(".") == -1)	{
+		alert("이메일 형식이 올바르지 않습니다.1111111111");
+		return false;
+	}
+	alert("귀하의 메일로 인증번호가 발송되었습니다.");
 		$.ajax({
-			url:"mailSend",			//서블릿페이지로 이동.
+			url:"mailSendServlet",			//서블릿페이지로 이동.
 			type:"POST",
-			data:$("form").serialize(),
+			data:"email="+email + "&sender="+sender,
 			success:function(result)	{
 				var json = JSON.parse(result);
 				var data = "";
@@ -98,7 +117,7 @@
 		 }
 		 else	{
 			check = false;
-			alert("메일인증을 다시 해주세요."); 
+			alert("인증번호가 다릅니다."); 
 		 }
 	}
 		
@@ -132,6 +151,7 @@
 		
 		
 		$("form").submit(function(){
+		/*
 			//아이디 중복확인을 쌩까고 회원가입하는걸 막아주는 로직(무조건 아이디 중복확인을 해야 회원가입이 가능)
 			var url = location.href;	//현재 url 가져와서 변수 url에 할당	
 			// 인자값으로 넘기는 문자열을 기준으로 잘라서 배열로 반환
@@ -147,6 +167,7 @@
 				alert("아이디 중복확인을 해주세요.");
 				return false;
 			}
+			*/
 			if($("#password").val() != ""){////////////////////
 				if(pwCheckYn == false){
 					alert("비밀번호를 다시 입력해주세요.");
@@ -181,7 +202,11 @@
 				alert("전화번호를 입력하세요.");
 				$("#phone2").focus();
 				return false;
-			} else{
+			}
+			else if(IDKimCheck == false)	{
+				alert("아이디 중복확인을 해주세요.");
+				return false;	
+			}else{
 				var postcode = $("#sample6_postcode").val();
 				var address = $("#sample6_address").val();
 				var detailAddress = $("#sample6_detailAddress").val();

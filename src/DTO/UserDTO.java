@@ -46,21 +46,21 @@ public class UserDTO extends DBManager {
 
 	//***************************회원가입 메서드******************************************************************************************************
 		
-		public int Join(String id, String password, String name, String birth, String gender, String email, String address, String phone)	{
+		public int Join(String id, String password, String nick, String email, String address, String phone, String picture, String statusmessage)	{
 			try {
 				// 회원가입페이지(join.jsp)에서 파라미터로 전송된 데이터들을 user테이블의 새로운 레코드로 삽입하는 부분이다.
-				String sql = "insert into user (id, password, name, birth, gender, email, address, phone) values (?,?,?,?,?,?,?,?)";
+				String sql = "insert into user (id, password, nick, email, address, phone, picture, statusmessage) values (?,?,?,?,?,?,?,?)";
 				DBOpen();
 				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_UPDATABLE);
 				m_SelectStatment.setString(1, id);
 				m_SelectStatment.setString(2, password);
-				m_SelectStatment.setString(3, name);
-				m_SelectStatment.setString(4, birth);
-				m_SelectStatment.setString(5, gender);
-				m_SelectStatment.setString(6, email);
-				m_SelectStatment.setString(7, address);
-				m_SelectStatment.setString(8, phone);
+				m_SelectStatment.setString(3, nick);
+				m_SelectStatment.setString(4, email);
+				m_SelectStatment.setString(5, address);
+				m_SelectStatment.setString(6, phone);
+				m_SelectStatment.setString(7, picture);
+				m_SelectStatment.setString(8, statusmessage);
 				m_SelectStatment.executeUpdate(); // 쿼리실행하면 실행 결과를 java.sql.ResultSet형으로 리턴한다.
 				// m_SelectStatment 를 닫는다.
 				m_SelectStatment.close();
@@ -88,13 +88,22 @@ public class UserDTO extends DBManager {
 				m_ResultSet = m_SelectStatment.executeQuery(); //결과값 리턴
 				if(ResultNext())	{
 					if(password.equals(m_ResultSet.getString("password")))	{//getString함수는 해당 순서의 열에있는 데이터를 String형으로 받아온단 뜻이다.
+						m_ResultSet.close();
+						m_SelectStatment.close();
+						m_Connection.close();
 						return 1;											 //예를들어 mResultSet.getString(2)를 하게되면 2번째 열에있는 데이터를 가져오게 된다. 즉 컬럼이 name 과 num만 있다고 가정하면
 					}				//로그인 성공								// ㅣ--------consol------------------ㅣ
 					else	{												// ㅣ김형태      111000				ㅣ
-						return 0;	//비밀번호 틀림							    // ㅣ--------------------------------ㅣ
+						m_ResultSet.close();								// ㅣ김형태      111000				ㅣ	
+						m_SelectStatment.close();							// ㅣ--------------------------------ㅣ
+						m_Connection.close();				
+						return 0;	//비밀번호 틀림							    
 					}				 	 	 
 				}											 	     	
 					else {
+						m_ResultSet.close();
+						m_SelectStatment.close();
+						m_Connection.close();
 						return -1;	// 존재하지 않는 아이디
 					}
 				}
@@ -108,7 +117,7 @@ public class UserDTO extends DBManager {
 		
 		//****************************************아이디 중복확인 검사 메서드************************************************************************
 		
-		public int CheckID(String id)	{
+		public boolean CheckID(String id)	{
 			try {
 				String sql ="select * from user where id=?";
 				DBOpen();
@@ -120,18 +129,18 @@ public class UserDTO extends DBManager {
 					m_ResultSet.close();
 					m_SelectStatment.close();
 					m_Connection.close();
-					return 1;
+					return false;
 				}
 				else	{				//id가 없으면 0
 					m_ResultSet.close();
 					m_SelectStatment.close();
 					m_Connection.close();
-					return 0;
+					return true;
 				}
 				
 			} catch(Exception e) {
 				System.out.println("ERROR:" + e.getMessage());
-				return -2;		//db 오류
+				return false;		//db 오류
 			}
 		}
 		

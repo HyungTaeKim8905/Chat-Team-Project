@@ -77,15 +77,15 @@
   </div>
   <!-- 로그인창 -->
   <div class="centerlo" style="width:50%; height: 100%; float: left; ">
-    <form action="#">
+    <form action="login" method="post">
       <div class="container">
         <h1>로그인</h1>
         <hr>
-        <label for="email"><b>이메일</b></label>
-        <input type="text" placeholder="이메일을 입력해주세요" name="email" id="email" required>
+        <label for="id"><b>아이디</b></label>
+        <input type="text" placeholder="이메일을 입력해주세요" name="id" id="id" required>
     
-        <label for="psw"><b>비밀번호</b></label>
-        <input type="password" placeholder="비밀번호를 입력해주세요" name="psw" id="psw" required>
+        <label for="password"><b>비밀번호</b></label>
+        <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" required>
         <hr>
 
         <input type="checkbox" checked="checked" name="rememberid">아이디 저장

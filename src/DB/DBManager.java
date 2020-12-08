@@ -63,6 +63,7 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTimezone=UTC 써�
 	// MySQL 접속을 종료한다.
 	public void DBClose() {
 		try {
+			
 			m_Connection.close(); // db 연결 종료
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage()); // 오류 발생시 캐치문

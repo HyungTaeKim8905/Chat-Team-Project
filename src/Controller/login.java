@@ -14,16 +14,16 @@ import javax.servlet.http.HttpSession;
 import DTO.UserDTO;
 
 /**
- * Servlet implementation class register
+ * Servlet implementation class login
  */
-@WebServlet("/register")
-public class register extends HttpServlet {
+@WebServlet("/login")
+public class login extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public register() {
+    public login() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,35 +45,37 @@ public class register extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		String id       = request.getParameter("id");
 		String password = request.getParameter("password");
-		String nick 	= request.getParameter("nick");
-		String email 	= request.getParameter("email");
-		String address 	= request.getParameter("address");
-		String phone 	= request.getParameter("phone");
-		String picture 	= request.getParameter("picture");
-		String statusmessage 	= request.getParameter("statusmessage");
-		System.out.println(nick);
-		System.out.println(address);
-		UserDTO dto = new UserDTO();
-		try {
-			int result = dto.Join(id, password, nick, email, address, phone, picture, statusmessage);
-			if(result == 1) 	{	//리다이엑트, 디스패처
-				HttpSession session = request.getSession();
-				session.setAttribute("id", id);
-				out.println("<script>");
-				out.println("alert('회원가입을 축하드립니다.')");
-				out.println("</script>");
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher("Main.jsp");
-				dispatcher.forward(request, response);
-			}
-			else if(result == 0)	{
-				out.println("<script>");
-				out.println("alert('회원가입을 실패하였습니다.')");
-				out.println("history.back()");
-				out.println("</script>");
-			}
-		} catch(Exception e) {
-			System.out.println("ERROR:" + e.getMessage());
+		UserDTO  dto = new UserDTO();
+		int result = dto.LoginCheck(id, password);
+		RequestDispatcher dispatcher = null;
+		if(result == 1) {
+			HttpSession session = request.getSession();
+			session.setAttribute("id", id);
+			
+			//dispatcher = request.getRequestDispatcher("Main.jsp");
+			out.println("<script>");
+			out.println("alert('" + id + "님 환영합니다.')");
+			out.println("location.href='Main.jsp'");
+			out.println("</script>");
+			//dispatcher.forward(request, response);
+		}
+		else if(result == 0)	{
+			out.println("<script>");
+			out.println("alert('비밀번호가 다릅니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		else if(result == -1)	{
+			out.println("<script>");
+			out.println("alert('존재하지 않는 아이디입니다.')");
+			out.println("history.back()");
+			out.println("</script>");
+		}
+		else if(result == -2) {
+			out.println("<script>");
+			out.println("로그인을 처리하는데 오류가 났습니다.')");		//DB ERROR
+			out.println("history.back()");
+			out.println("</script>");
 		}
 	}
 
