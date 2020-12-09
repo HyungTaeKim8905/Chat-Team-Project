@@ -106,10 +106,25 @@
   
   <div class="anchat" style="width: 105%;height: 70%; z-index: auto;">
   <%= session.getId() %>
-    <iframe src="an.jsp?no=1"
-    style="width: 97%;height: 98%; z-index: auto;" frameborder=0>
-    
-    </iframe>
+  
+  <p id="demo"></p>
+  
+  <script>
+  
+  <!-- json 출력 -->
+  var xmlhttp = new XMLHttpRequest();
+  
+  xmlhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+	    var myObj = JSON.parse(this.responseText);
+	    document.getElementById("demo").innerHTML = myObj.comment[2].name;
+	  }
+	};
+  
+  xmlhttp.open("GET", "json.jsp", true);
+  xmlhttp.send();
+  
+</script>
   </div>
     
   
