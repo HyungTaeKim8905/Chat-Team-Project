@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<% String chatno = request.getParameter("chatno"); %>
 {
 "comment" : 
 [
@@ -18,31 +19,29 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection( DBURL, DBID ,DBPass );
 		
-		String query = "select count(*) from comment";
+		String query = "select count(*) from anonymous where roomid="+chatno;
+		
 		pstmt = conn.prepareStatement(query);
 		rs = pstmt.executeQuery(); 
-		
-		
 		
 		if(rs.next()){
 		count = Integer.parseInt(rs.getString(1));
 		}
 		
-		
-		query = "select id, name, content  from comment ";
+		query = "select sessionid, content, time from anonymous ";
 		pstmt = conn.prepareStatement(query);
 		
 		rs = pstmt.executeQuery();
 		if(rs.next()){
 		do {
-			int id = rs.getInt(1);
-			String name = rs.getString(2);
-			String content = rs.getString(3);
+			String id = rs.getString(1);
+			String content = rs.getString(2);
+			String time = rs.getString(3);
 %>
  	{
-	"id" : <%=id%>, 
-	"name" : "<%=name%>",
-	"content" : "<%=content%>"
+	"id" : "<%=id%>", 
+	"content" : "<%=content%>",
+	"time" : "<%= time %>"
 	}
 <%	
 		if(rs.getRow()<count){

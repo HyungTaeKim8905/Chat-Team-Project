@@ -13,9 +13,6 @@
   <link rel="stylesheet" type="text/css" href="./css/chat.css" />
   <title>익명 채팅</title>
 
-
-
-
   <!-- 상단 네비바 -->
   <div class="topnav" id="myTopnav">
     
@@ -79,23 +76,23 @@
   <!-- 채팅방 목록 -->
   <div class="left" style="width:25%; float: left; ">
   <div class="chatlist">
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="chno(1)">
       <p>1번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="chno(2)">
       <p>2번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="chno(3)">
       <p>3번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="chno(4)">
       <p>4번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="chno(5)">
       <p>5번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
@@ -104,16 +101,34 @@
   <!-- 채팅창 -->
   <div class="center" style="width:66%; height: 100%; float: left; ">
   
-  <div class="anchat" id="anchat" style="width: 105%;height: 70%; z-index: auto; overflow-y : auto;">
-  <%= session.getId() %>
+  <div class="anchat" id="anchat" style="width: 105%;height: 70%; overflow-y : auto;">
   
   
   
   <script>
+  var chatno = 1; 
+  
+  function chno(ch){
+	  chatno = ch;
+  }
+	<!-- ajax 입력 -->
+ function messageinput(){
+   var xmlhttp = new XMLHttpRequest();
+   
+   var message = "message=" + document.inme.inputmessage.value;
+   var sessionid = "sessionid=<%=session.getId()%>";
+   
+   xmlhttp.open("POST", "inputjson.jsp", true);
+   xmlhttp.send("chatno="+chatno+"&"+message+"&"+sessionid);
+   
+   document.getElementById("inputmessage").innerHTML = "";
+   
+   alert("ㅡㅡ");
+ }
   function update() {
+	  
   <!-- json 출력 -->
   var xmlhttp = new XMLHttpRequest();
-  
   
   xmlhttp.onreadystatechange = function() {
 	  if (this.readyState == 4 && this.status == 200) {
@@ -122,50 +137,46 @@
 	    
 	    var mchead = "<div class='chat me'><p>";
 	    var ochead = "<div class='chat other'><p>";
-	    var mctail = "</p><span class='time-left'>11:00</span>";
-	    var octail = "</p><span class='time-right'>11:00</span>"
+	    
 	    
     	document.getElementById("anchat").innerHTML = "";
 	    
 	    for(var i = 0; i<mcount; i++){
-	    
-    	document.getElementById("anchat").innerHTML +=  mchead + myObj.comment[i].name + mctail ;
-	    
+    	var mctail = "</p><span class='time-left'>"+ myObj.comment[i].time +"</span>";
+	    var octail = "</p><span class='time-right'>"+ myObj.comment[i].time +"</span>"
+	    	
+	    	
+    	document.getElementById("anchat").innerHTML +=  mchead + myObj.comment[i].content + mctail ;
 	    }
 	  }
 	};
+  xmlhttp.open("POST", "json.jsp", true);
+  xmlhttp.send("chatno="+chatno);
   
-  xmlhttp.open("GET", "json.jsp", true);
-  xmlhttp.send();
-  }
+}
   
-  window.onload = setInterval(update, 1000);
-
+  <!-- 채팅 1초마다 새로고침 -->
+window.onload = setInterval(update, 3000);
 </script>
   </div>
-    
-  
-  
   <!-- 채팅입력창 -->
-  <div class="inputchat" style="width:100%; height: 30%;">
+  <div class="inputchat" style="width: 100%; height: 30%;">
     <hr>
-    <form>
+    <form name="inme">
       <table width="100%">
         <tr>
-          <td width="86%"><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
+          <td width="86%" ><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
           <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td><button type="submit" class="messagebutton">
+          <td ><button type="button" class="messagebutton" onclick="messageinput()">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
             </svg>
           </button></td>
         </tr>
-
       </table>
     </form>
   </div>
 </div>
-
 </div>
 </body>
 </html>
