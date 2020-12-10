@@ -118,10 +118,10 @@
    var message = "message=" + document.inme.inputmessage.value;
    var sessionid = "sessionid=<%=session.getId()%>";
    
-   xmlhttp.open("POST", "inputjson.jsp", true);
-   xmlhttp.send("chatno="+chatno+"&"+message+"&"+sessionid);
-   
-   document.getElementById("inputmessage").innerHTML = "";
+   xmlhttp.open("GET", "inputjson.jsp?chatno="+chatno+"&"+message+"&"+sessionid, true);
+   /* xmlhttp.send("chatno="+chatno+"&"+message+"&"+sessionid); */
+   xmlhttp.send();
+   document.getElementById("inputmessage").value = "";
    
    alert("ㅡㅡ");
  }
@@ -156,7 +156,7 @@
 }
   
   <!-- 채팅 1초마다 새로고침 -->
-window.onload = setInterval(update, 3000);
+window.onload = setInterval(update, 5000);
 </script>
   </div>
   <!-- 채팅입력창 -->
