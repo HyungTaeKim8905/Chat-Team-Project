@@ -28,7 +28,7 @@
   text-decoration: none;
   margin-left: 2%;
   margin-right: 3%;
-  height: 77px;
+  min-height: 77px;
 }
 
 /* 내 채팅 */
@@ -43,7 +43,7 @@
   text-align: right;
   margin-left: 2%;
   margin-right: 3%;
-  height: 77px;
+  min-height: 77px;
 }
 
 
