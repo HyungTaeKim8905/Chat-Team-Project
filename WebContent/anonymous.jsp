@@ -104,33 +104,43 @@
   <!-- 채팅창 -->
   <div class="center" style="width:66%; height: 100%; float: left; ">
   
-  <div class="anchat" style="width: 105%;height: 70%; z-index: auto;">
+  <div class="anchat" id="anchat" style="width: 105%;height: 70%; z-index: auto; overflow-y : auto;">
   <%= session.getId() %>
   
-  <p id="demo1"></p>
-  <p id="demo2"></p>
-  <p id="demo3"></p>
+  
   
   <script>
-  
+  function update() {
   <!-- json 출력 -->
   var xmlhttp = new XMLHttpRequest();
+  
   
   xmlhttp.onreadystatechange = function() {
 	  if (this.readyState == 4 && this.status == 200) {
 	    var myObj = JSON.parse(this.responseText);
+	    var mcount = Object.keys(myObj.comment).length;
 	    
+	    var mchead = "<div class='chat me'><p>";
+	    var ochead = "<div class='chat other'><p>";
+	    var mctail = "</p><span class='time-left'>11:00</span>";
+	    var octail = "</p><span class='time-right'>11:00</span>"
 	    
+    	document.getElementById("anchat").innerHTML = "";
 	    
-	    for(var i = 1; i<4; i++){
-	    document.getElementById("demo"+i).innerHTML = myObj.comment[i-1].name;
+	    for(var i = 0; i<mcount; i++){
+	    
+    	document.getElementById("anchat").innerHTML +=  mchead + myObj.comment[i].name + mctail ;
+	    
 	    }
 	  }
 	};
   
   xmlhttp.open("GET", "json.jsp", true);
   xmlhttp.send();
+  }
   
+  window.onload = setInterval(update, 1000);
+
 </script>
   </div>
     
