@@ -12,13 +12,24 @@
 	Connection        conn;
 	PreparedStatement pstmt;
 	ResultSet         rs;
+	Integer count = null;
 	
 	try{
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection( DBURL, DBID ,DBPass );
 		
-		String query = "select id, name, content  from comment ";
-
+		String query = "select count(*) from comment";
+		pstmt = conn.prepareStatement(query);
+		rs = pstmt.executeQuery(); 
+		
+		
+		
+		if(rs.next()){
+		count = Integer.parseInt(rs.getString(1));
+		}
+		
+		
+		query = "select id, name, content  from comment ";
 		pstmt = conn.prepareStatement(query);
 		
 		rs = pstmt.executeQuery();
@@ -34,7 +45,7 @@
 	"content" : "<%=content%>"
 	}
 <%	
-		if(rs.getRow()<3){
+		if(rs.getRow()<count){
 %>
 		,
 <%

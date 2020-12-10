@@ -107,7 +107,9 @@
   <div class="anchat" style="width: 105%;height: 70%; z-index: auto;">
   <%= session.getId() %>
   
-  <p id="demo"></p>
+  <p id="demo1"></p>
+  <p id="demo2"></p>
+  <p id="demo3"></p>
   
   <script>
   
@@ -117,7 +119,12 @@
   xmlhttp.onreadystatechange = function() {
 	  if (this.readyState == 4 && this.status == 200) {
 	    var myObj = JSON.parse(this.responseText);
-	    document.getElementById("demo").innerHTML = myObj.comment[2].name;
+	    
+	    
+	    
+	    for(var i = 1; i<4; i++){
+	    document.getElementById("demo"+i).innerHTML = myObj.comment[i-1].name;
+	    }
 	  }
 	};
   
