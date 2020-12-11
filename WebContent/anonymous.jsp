@@ -13,9 +13,6 @@
   <link rel="stylesheet" type="text/css" href="./css/chat.css" />
   <title>익명 채팅</title>
 
-
-
-
   <!-- 상단 네비바 -->
   <div class="topnav" id="myTopnav">
     
@@ -79,23 +76,23 @@
   <!-- 채팅방 목록 -->
   <div class="left" style="width:25%; float: left; ">
   <div class="chatlist">
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="chno(1)">
       <p>1번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="chno(2)">
       <p>2번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="chno(3)">
       <p>3번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="chno(4)">
       <p>4번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="chno(5)">
       <p>5번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
@@ -104,36 +101,101 @@
   <!-- 채팅창 -->
   <div class="center" style="width:66%; height: 100%; float: left; ">
   
-  <div class="anchat" style="width: 105%;height: 70%; z-index: auto;">
-  <%= session.getId() %>
-    <iframe src="an.jsp?no=1"
-    style="width: 97%;height: 98%; z-index: auto;" frameborder=0>
+  <div class="anchat" id="anchat" style="width: 105%;height: 70%; overflow-y : auto;">
+  
+  
+  
+  <script>
+  var chatno = 1; 
+  
+  function chno(ch){
+	  chatno = ch;
+  }
+	<!-- ajax 입력 -->
+ function messageinput(){
+   var xmlhttp = new XMLHttpRequest();
+   
     
-    </iframe>
+   var chatnum = "chatno="+chatno;
+   var message = "message=" + encodeURIComponent(document.inme.inputmessage.value);
+   var sessionid = "sessionid=<%=session.getId()%>";
+   
+   xmlhttp.open("POST", "inputjson.jsp", true);
+   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+   xmlhttp.send(chatnum+"&"+message+"&"+sessionid);
+   document.getElementById("inputmessage").value = "";
+ }
+  function update() {
+	  
+  <!-- json 출력 -->
+  var xmlhttp = new XMLHttpRequest();
+  
+  xmlhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+	    var myObj = JSON.parse(this.responseText);
+	    var mcount = Object.keys(myObj.comment).length;
+	    
+	    var mchead = "<div class='chat me'><p style='margin:5px; word-break:break-all;'>";
+	    var ochead = "<div class='chat other'><p style='margin:5px; word-break:break-all;'>";
+	    
+	    
+    	document.getElementById("anchat").innerHTML = "";
+	    
+	    for(var i = 0; i<mcount; i++){
+    	var mctail = "</p><span class='time-left'>"+ myObj.comment[i].time +"</span>";
+	    var octail = "</p><span class='time-right'>"+ myObj.comment[i].time +"</span>"
+	    
+	    var chatid = "<b>" + myObj.comment[i].id.substring(0, 6) + "</b><br>";
+	    var chat = myObj.comment[i].content;
+	    
+	    <!-- 내 채팅 -->
+	    if("<%=session.getId()%>" == myObj.comment[i].id){
+    	document.getElementById("anchat").innerHTML += mchead + chatid + chat + mctail ;
+	    }
+	    <!-- 다른사람 채팅 -->
+	    if("<%=session.getId()%>" != myObj.comment[i].id){
+	    document.getElementById("anchat").innerHTML += ochead + chatid + chat + octail ;
+	    }
+	    }
+	  }
+	};
+  xmlhttp.open("POST", "json.jsp", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlhttp.send("chatno="+chatno);
+}
+  <!-- 채팅 1초마다 새로고침 -->
+window.onload = setInterval(update, 1000);
+
+<!-- 엔터키 입력 -->
+window.onload=function(){
+document.getElementById('inputmessage').addEventListener('keydown',function(event){
+    if(event.keyCode ==13){
+    event.preventDefault();
+        document.getElementById('messagebutton').click();
+    }
+});
+}
+
+</script>
   </div>
-    
-  
-  
   <!-- 채팅입력창 -->
-  <div class="inputchat" style="width:100%; height: 30%;">
+  <div class="inputchat" style="width: 100%; height: 30%;">
     <hr>
-    <form>
+    <form name="inme">
       <table width="100%">
         <tr>
-          <td width="86%"><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
+          <td width="86%" ><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
           <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td><button type="submit" class="messagebutton">
+          <td ><button type="button" class="messagebutton" id= "messagebutton" onclick="messageinput()">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
             </svg>
           </button></td>
         </tr>
-
       </table>
     </form>
   </div>
 </div>
-
 </div>
 </body>
 </html>

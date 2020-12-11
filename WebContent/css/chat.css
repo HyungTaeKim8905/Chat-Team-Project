@@ -10,13 +10,12 @@
   text-decoration: none;
   height: 90%;
   overflow-y : auto;
-	
 }
 
-/* 스크롤바 */
-.chat::-webkit-scrollbar{ width: 10px; }
-.chat::-webkit-scrollbar-track { background-color: #f0f0f0; }
-.chat::-webkit-scrollbar-thumb { background:#0ebeff; }
+/* 익명채팅 스크롤바 */
+.anchat::-webkit-scrollbar{ width: 10px; }
+.anchat::-webkit-scrollbar-track { background-color: #f0f0f0; }
+.anchat::-webkit-scrollbar-thumb { background:#0ebeff; }
 
 
 /* 다른 사람 채팅 */
@@ -30,6 +29,7 @@
   margin-left: 2%;
   margin-right: 3%;
   height: 77px;
+  max-height:150px;
 }
 
 /* 내 채팅 */
@@ -44,7 +44,8 @@
   text-align: right;
   margin-left: 2%;
   margin-right: 3%;
-  height: 77px;
+  overflow:hidden;
+  height:auto;
 }
 
 
