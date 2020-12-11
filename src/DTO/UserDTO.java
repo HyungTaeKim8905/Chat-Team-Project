@@ -3,6 +3,7 @@ package DTO;
 import java.sql.ResultSet;
 
 import DB.DBManager;
+import VO.UserVO;
 
 public class UserDTO extends DBManager {
 	
@@ -74,6 +75,13 @@ public class UserDTO extends DBManager {
 		}
 		
 		//***********************************************************************************************************************************
+		
+		public UserVO MyPageModify(String id, String nick, String picture, String statusmessage, String filename, String filerealname)	{
+			String sql = "";
+			
+			
+			return new UserVO();
+		}
 		
 		//********************************// 로그인 처리 메서드**********************************************************************************
 		

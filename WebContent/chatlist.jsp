@@ -125,10 +125,8 @@
 			output += "</div>";
 			output += "<hr>";
 			$("#div1").append(output);
+			//$("#div1").scrollTop($("#div1")[0].scrollHeight);
 			
-			if( ($("#div1")[0]) == ($("#div1")[0].scrollHeigh)){
-			$("#div1").scrollTop($("#div1")[0].scrollHeight);
-			}
 		}
 		
 		
@@ -136,6 +134,16 @@
 			setInterval(function (){
 				ChattingList(lastNo1);
 			}, 1000);
+		}
+
+		<!-- 엔터키 입력 -->
+		window.onload=function(){
+		document.getElementById('inputmessage').addEventListener('keydown',function(event){
+		    if(event.keyCode ==13){
+		    event.preventDefault();
+		        document.getElementById('messagebutton').click();
+		    }
+		});
 		}
 		
 		$(document).ready(function(){
@@ -315,7 +323,7 @@
         <tr><!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 -->
           <td width="86%"><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
           <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td><button type="button" class="messagebutton" onclick="test()">
+          <td><button type="button" id="messagebutton" class="messagebutton" onclick="test()">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
             </svg>

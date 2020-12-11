@@ -33,8 +33,8 @@
 					<input type="file" id="file" name="file" onchange="readInputFile(event.target)">
 				</div>
 				
-			<label for="fname">이름</label>
-			<input type="text" id="fname" name="firstname" placeholder="홍길동" readonly>
+			<label for="nick">닉네임</label>
+			<input type="text" id="nick" name="nick" placeholder="홍길동" readonly>
 			
 			<label for="country">언어</label>
 			<select id="country" name="country">
@@ -44,11 +44,11 @@
 			  <option value="Korea">Korea</option>
 			</select>
 	
-			<label for="lname">상태 메세지</label>
+			<label for="statusmessage">상태 메세지</label>
 			<div id="StatusMessage_d">
-			<input type="text" id="StatusMessage" name="StatusMessage" value="test" placeholder="상태 메세지 입력..">
+			<input type="text" id="statusmessage" name="statusmessage" value="test" placeholder="상태 메세지 입력..">
 			</div>
-			<input type="submit" value="저장"><button type="button" class="PasswordChange" onclick="PasswordChange()"> 비밀번호 변경</button><button type="button" onclick="Withdrawal()">회원탈퇴</button>
+			<button type="button" onclick="Modify()">저장</button><button type="button" class="PasswordChange" onclick="PasswordChange()"> 비밀번호 변경</button><button type="button" onclick="Withdrawal()">회원탈퇴</button>
 		  </form>
 		</div>
 	</body>
