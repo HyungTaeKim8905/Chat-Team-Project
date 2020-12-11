@@ -13,7 +13,7 @@
 			function PasswordChange()	{
 				// chatlist.html?id=<%= id %> id를 파라미터로 붙인다.
 				window.open("chatlist.html","비밀번호 변경","width=600px,height=400px");
-			}
+		
 			
 			// 회원탈퇴 버튼을 누르면 실행되는 함수.
 			function Withdrawal()	{

@@ -4,6 +4,7 @@
 
 <link rel="stylesheet" type="text/css" href="./css/chat.css" />
 <% 
+/*
 	String no = request.getParameter("no");
 
 	Connection m_Connection = null;
@@ -25,7 +26,7 @@
 	}catch(Exception e){
 		
 	}
-	
+	*/
 %>
 
 

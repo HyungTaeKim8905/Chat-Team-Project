@@ -12,7 +12,7 @@
 		<!-- 마이페이지 js -->
 		<script src="./js/mypage.js"></script>
 		<!-- jQuery -->
-		<script src="jquery-3.5.1.min.js"></script>
+		<script src="./js/jquery-3.5.1.min.js"></script>
 		<title>마이 페이지</title>
 	</head>
 	<body>
@@ -24,16 +24,15 @@
 		
 		<!-- 마이페이지 -->
 		<div class="container">
-			<form id="ProfilePicture" name="ProfilePicture" action="#" method="post">
-				<div id="imgfile">
-					<img src="man-avatar-profile-on-round-icon_24640-14046.jpg">
+			<form id="form" name="form" action="Mypage" method="post">
+			<div id="imgfile">
+					<img src="./image/man.jpg">
 				</div>
 				<div class="filebox">
 					<label for="file">사진 변경</label>
 					<input type="file" id="file" name="file" onchange="readInputFile(event.target)">
 				</div>
-			</form>
-			<form id="form" name="form" action="#" method="post">
+				
 			<label for="fname">이름</label>
 			<input type="text" id="fname" name="firstname" placeholder="홍길동" readonly>
 			

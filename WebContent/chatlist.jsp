@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<% 
-	String ID = (String)session.getAttribute("id");
-	if(ID == null)	{
-		%><script> alert("잘못된 접근입니다."); history.back(); </script> <%
+<%
+	String myID = null;
+	if (session.getAttribute("id") != null) {
+		myID = (String) session.getAttribute("id");
+	}
+	
+	
+	String toID = null;
+	if(request.getParameter("toID") != null){
+		toID = (String)request.getParameter("toID");	
 	}
 %>
 <!DOCTYPE html>
@@ -24,13 +30,120 @@
   <link rel="stylesheet" type="text/css" href="./css/iconbar.css" />
   
   <!-- 자바스크립트문 -->
-  <script type="text/javascript" src="./js/chatlist.js"></script>
+  <script src="./js/chatlist.js"></script>
 
   <title>채팅</title>
+  <script src="./js/jquery-3.5.1.min.js"></script>
+  <!-- 채팅 기능 script -->
+  <script>
+	  function test()	{
+			var fromID = '<%= myID %>';
+			var toID = "123";
+			var inputmessage = $("#inputmessage").val();
+		//	alert(inputmessage);
+			$.ajax({
+				url:"ChatSubmit",
+				type:"POST",
+				data:{
+					fromID:fromID,
+					toID:toID,
+					content:inputmessage
+				},
+				success:function(result){
+					var json = JSON.parse(result);
+					if(json[0]["result"] == 1){
+					//	alert(" test() => 메세지를 보냈다.");
+					} else if(json[0]["result"] == 0){
+						alert(" test() => 오류");
+					} else{
+						alert(" test() => 오류!!");
+					}
+				}
+			});
+			$("#inputmessage").val("");
+		}
+	  
+	  	//var lastNo = "";
+	  	var lastNo1 = ""; //*******************
+		function ChattingList(num){
+			var fromID = '<%= myID %>';
+			var toID = "123";
+			//alert("listNo1 ::::" + lastNo1);
+			$.ajax({
+				type : "POST",
+				url : "ChatList",
+				data : {
+					fromID:fromID,
+					toID:toID,
+					lastNo: num, /*처음에는 no가 0 이상인것부터 쭉, 그다음부터는 lastNo 이후로 쭉(lastNo는 계속 업데이트됨)*/
+				},
+				success : function(result){
+					if(result === undefined) {
+						alert("ChattingList() => ajax통신 후 result 결과 값 알수 없는 오류 입니다.");
+						return false;
+					}
+					//else	{
+						//alert("리스트를 가져왔습니다.");	
+					//}
+					var json = JSON.parse(result);
+					if(json.length == 0)	{
+						return false;
+					}
+					//alert("json.length :: " + json.length);
+					//no만 따로 받아 배열로 저장 후 정렬
+					var list = [];
+					for(var j = 0; j < json.length; j++){
+						list[j] = json[j]["no"];
+						//alert(list[j]);
+					}
+					
+					for(var i = 0; i < json.length; i++){
+						if(json[i]["fromID"].value == fromID){
+							json[i]["fromID"].value = "";
+						}
+						ListCount(json[i]["fromID"], json[i]["content"], json[i]["date"]);
+					} //*******************
+					lastNo1 = list[list.length - 1];
+				}
+			});
+		}
 
+		function ListCount(name, content, date)	{
+			var output = "";
+			output += "<div>";
+			output += 	"<div>";
+			output += 		"<div>";
+			output +=			"<a href='#'>";
+			output += 				"<img src='./image/man.jpg' style='width:30px;height:30px'>";
+			output +=			"</a>";
+			output +=			"<div>";
+			output +=				"<h4>" + name + "<span>" + date + "</span></h4>";
+			output +=				"<p>" + content + "</p>";
+			output +=			"</div>";
+			output += 		"</div>";
+			output += 	"</div>";
+			output += "</div>";
+			output += "<hr>";
+			$("#div1").append(output);
+			$("#div1").scrollTop($("#div1")[0].scrollHeight);
+		}
+		
+		
+		function Reload(){
+			setInterval(function (){
+				ChattingList(lastNo1);
+			}, 1000);
+		}
+		
+		$(document).ready(function(){
+			ChattingList("0"); 
+			Reload();
+		});
+  </script>
+</head>
+<body>
   <!-- 상단 네비바 -->
   <div class="topnav" id="myTopnav">
-    
     <abbr title="회원 채팅">
       <a href="chatlist.jsp" class="active" >
         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chat-left-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -48,7 +161,9 @@
     </a>
     </abbr>
 
-    
+<%
+	if(myID != null)	{
+%> 
     <abbr title="회원가입">
     <a href="register.jsp" style="float: right;">
       <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -56,31 +171,28 @@
       </svg>
     </a>
     </abbr>
-<%
-	if(ID != null)	{
-%>
-	<abbr title="로그아웃">
-    <a href="logout.jsp" style="float: right;">
+
+    <abbr title="로그아웃">
+    <a href="#" style="float: right;">
       <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-unlock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M9.655 8H2.333c-.264 0-.398.068-.471.121a.73.73 0 0 0-.224.296 1.626 1.626 0 0 0-.138.59V14c0 .342.076.531.14.635.064.106.151.18.256.237a1.122 1.122 0 0 0 .436.127l.013.001h7.322c.264 0 .398-.068.471-.121a.73.73 0 0 0 .224-.296 1.627 1.627 0 0 0 .138-.59V9c0-.342-.076-.531-.14-.635a.658.658 0 0 0-.255-.237A1.122 1.122 0 0 0 9.655 8zm.012-1H2.333C.5 7 .5 9 .5 9v5c0 2 1.833 2 1.833 2h7.334c1.833 0 1.833-2 1.833-2V9c0-2-1.833-2-1.833-2zM8.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
       </svg>
     </a>
-    </abbr>
+  </abbr>
 <%
 	}
-	
-	if(ID == null)	{
+	if(myID == null)	{
 %>
-	<abbr title="로그인">
+    <abbr title="로그인">
     <a href="login.jsp" style="float: right;">
       <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
       </svg>
     </a>
-  	</abbr>
-	
+  </abbr>
 <%
 	}
+	if(myID != null)	{
 %>
     <abbr title="마이페이지">
       <a href="mypage.jsp" style="float: right;">
@@ -91,10 +203,11 @@
           <circle cx="8" cy="4.5" r="1"/>
         </svg>
       </a>
-    </abbr>
+      </abbr>
+<%
+	}
+%>
   </div>
-</head>
-<body>
   <div class="container">
   <!-- 채팅방 목록 -->
   <div class="left" style="width:25%; float: left; ">
@@ -183,12 +296,12 @@
   </div>
   <!-- 채팅창 -->
   <div class="center" style="width:66%; height: 100%; float: left; ">
-  <div class="chat">
-    
-    <iframe style="width: 97%;height: 98%; z-index: auto;" frameborder=0>
-    
-    </iframe>
-
+  <div class="chat" id="div1">
+  
+ <!-- ***************************************************************** -->   
+ <!-- ***************************************************************** -->
+ <!-- ***************************************************************** -->
+ <!-- ***************************************************************** -->
   </div>
   
   <!-- 채팅입력창 -->
@@ -196,10 +309,10 @@
     <hr>
     <form>
       <table width="100%">
-        <tr>
+        <tr><!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 -->
           <td width="86%"><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
           <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td><button type="submit" class="messagebutton">
+          <td><button type="button" class="messagebutton" onclick="test()">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
             </svg>
