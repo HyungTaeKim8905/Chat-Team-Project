@@ -115,15 +115,15 @@
  function messageinput(){
    var xmlhttp = new XMLHttpRequest();
    
+    
+   var chatnum = "chatno="+chatno;
    var message = "message=" + document.inme.inputmessage.value;
    var sessionid = "sessionid=<%=session.getId()%>";
    
-   xmlhttp.open("GET", "inputjson.jsp?chatno="+chatno+"&"+message+"&"+sessionid, true);
-   /* xmlhttp.send("chatno="+chatno+"&"+message+"&"+sessionid); */
-   xmlhttp.send();
+   xmlhttp.open("POST", "inputjson.jsp", true);
+   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+   xmlhttp.send(chatnum+"&"+message+"&"+sessionid);
    document.getElementById("inputmessage").value = "";
-   
-   alert("ㅡㅡ");
  }
   function update() {
 	  
@@ -135,8 +135,8 @@
 	    var myObj = JSON.parse(this.responseText);
 	    var mcount = Object.keys(myObj.comment).length;
 	    
-	    var mchead = "<div class='chat me'><p>";
-	    var ochead = "<div class='chat other'><p>";
+	    var mchead = "<div class='chat me'><p style='margin:5px;'>";
+	    var ochead = "<div class='chat other'><p style='margin:5px;'>";
 	    
 	    
     	document.getElementById("anchat").innerHTML = "";
@@ -144,17 +144,25 @@
 	    for(var i = 0; i<mcount; i++){
     	var mctail = "</p><span class='time-left'>"+ myObj.comment[i].time +"</span>";
 	    var octail = "</p><span class='time-right'>"+ myObj.comment[i].time +"</span>"
-	    	
-	    	
-    	document.getElementById("anchat").innerHTML +=  mchead + myObj.comment[i].content + mctail ;
+	    
+	    var chatid = "<b>" + myObj.comment[i].id + "</b><br>";
+	    var chat = myObj.comment[i].content;
+	    
+	    <!-- 내 채팅 -->
+	    if("<%=session.getId()%>" == myObj.comment[i].id){
+    	document.getElementById("anchat").innerHTML += mchead + chatid + chat + mctail ;
+	    }
+	    <!-- 다른사람 채팅 -->
+	    if("<%=session.getId()%>" != myObj.comment[i].id){
+	    document.getElementById("anchat").innerHTML += ochead + chatid + chat + octail ;
+	    }
 	    }
 	  }
 	};
   xmlhttp.open("POST", "json.jsp", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send("chatno="+chatno);
-  
 }
-  
   <!-- 채팅 1초마다 새로고침 -->
 window.onload = setInterval(update, 5000);
 </script>

@@ -28,7 +28,7 @@
 		count = Integer.parseInt(rs.getString(1));
 		}
 		
-		query = "select sessionid, content, time from anonymous ";
+		query = "select sessionid, content, time from anonymous where roomid="+chatno;
 		pstmt = conn.prepareStatement(query);
 		
 		rs = pstmt.executeQuery();

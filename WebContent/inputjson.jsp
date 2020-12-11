@@ -8,7 +8,6 @@
 
 <% 
 	String chatno = request.getParameter("chatno"); 
-	out.print("test:::"+chatno);
 	String message = request.getParameter("message");
 	String sessionid = request.getParameter("sessionid");
 
