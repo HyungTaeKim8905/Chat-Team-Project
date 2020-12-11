@@ -44,8 +44,8 @@
   text-align: right;
   margin-left: 2%;
   margin-right: 3%;
-  height: 77px;
-  max-height:150px;
+  overflow:hidden;
+  height:auto;
 }
 
 

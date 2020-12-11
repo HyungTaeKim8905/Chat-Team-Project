@@ -117,7 +117,7 @@
    
     
    var chatnum = "chatno="+chatno;
-   var message = "message=" + document.inme.inputmessage.value;
+   var message = "message=" + encodeURIComponent(document.inme.inputmessage.value);
    var sessionid = "sessionid=<%=session.getId()%>";
    
    xmlhttp.open("POST", "inputjson.jsp", true);
@@ -135,8 +135,8 @@
 	    var myObj = JSON.parse(this.responseText);
 	    var mcount = Object.keys(myObj.comment).length;
 	    
-	    var mchead = "<div class='chat me'><p style='margin:5px;'>";
-	    var ochead = "<div class='chat other'><p style='margin:5px;'>";
+	    var mchead = "<div class='chat me'><p style='margin:5px; word-break:break-all;'>";
+	    var ochead = "<div class='chat other'><p style='margin:5px; word-break:break-all;'>";
 	    
 	    
     	document.getElementById("anchat").innerHTML = "";
@@ -164,7 +164,7 @@
   xmlhttp.send("chatno="+chatno);
 }
   <!-- 채팅 1초마다 새로고침 -->
-window.onload = setInterval(update, 5000);
+window.onload = setInterval(update, 1000);
 </script>
   </div>
   <!-- 채팅입력창 -->
