@@ -114,9 +114,9 @@
 	<!-- ajax 입력 -->
  function messageinput(){
    var xmlhttp = new XMLHttpRequest();
-   
     
    var chatnum = "chatno="+chatno;
+   <!-- encodeURIComponent : 한글 인코딩 -->
    var message = "message=" + encodeURIComponent(document.inme.inputmessage.value);
    var sessionid = "sessionid=<%=session.getId()%>";
    
@@ -135,6 +135,7 @@
 	    var myObj = JSON.parse(this.responseText);
 	    var mcount = Object.keys(myObj.comment).length;
 	    
+	    <!-- word-break : 자동 엔터 -->
 	    var mchead = "<div class='chat me'><p style='margin:5px; word-break:break-all;'>";
 	    var ochead = "<div class='chat other'><p style='margin:5px; word-break:break-all;'>";
 	    

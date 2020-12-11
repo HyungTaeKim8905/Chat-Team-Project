@@ -6,6 +6,7 @@
 <% 
 	String chatno = request.getParameter("chatno"); 
 	String message = request.getParameter("message");
+	out.print(message);
 	message = Util.toJS(message);
 	String sessionid = request.getParameter("sessionid");
 
