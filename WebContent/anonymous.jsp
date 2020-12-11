@@ -121,7 +121,7 @@
    var sessionid = "sessionid=<%=session.getId()%>";
    
    xmlhttp.open("POST", "inputjson.jsp", true);
-   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
    xmlhttp.send(chatnum+"&"+message+"&"+sessionid);
    document.getElementById("inputmessage").value = "";
  }
