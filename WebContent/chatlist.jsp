@@ -38,7 +38,7 @@
   <script>
 	  function test()	{
 			var fromID = '<%= myID %>';
-			var toID = "123";
+			var toID = "상대방";
 			var inputmessage = $("#inputmessage").val();
 		//	alert(inputmessage);
 			$.ajax({
@@ -67,7 +67,7 @@
 	  	var lastNo1 = ""; //*******************
 		function ChattingList(num){
 			var fromID = '<%= myID %>';
-			var toID = "123";
+			var toID = "상대방";
 			//alert("listNo1 ::::" + lastNo1);
 			$.ajax({
 				type : "POST",
@@ -125,7 +125,7 @@
 			output += "</div>";
 			output += "<hr>";
 			$("#div1").append(output);
-			//$("#div1").scrollTop($("#div1")[0].scrollHeight);
+			$("#div1").scrollTop($("#div1")[0].scrollHeight);
 			
 		}
 		
@@ -345,7 +345,9 @@
       </svg>
     </a>
     </abbr>
-    <iframe id="friendfm" class="friendfm" frameborder=0></iframe>
+    <iframe id="friendfm" class="friendfm" frameborder=0>
+	
+    </iframe>
     </div>
   <!-- 검색 아이콘 -->
   <div style="position: relative;">
@@ -357,7 +359,19 @@
       </svg>
     </a> 
     </abbr>
-    <iframe id="searchfm" class="searchfm" frameborder=0  ></iframe>
+    <div id="searchfm" class="searchfm" style="width:100%; height:100%;">
+		<div>  
+			<center> <!-- @@@@@@@@@@@@@@@@@@@@@@@@@ -->   <!-- @@@@@@@@@@@@@@@@@@@@@@@@@ -->   
+    			<h2>친구 찾기</h2><!-- @@@@@@@@@@@@@@@@@@@@@@@@@ -->   <!-- @@@@@@@@@@@@@@@@@@@@@@@@@ -->   
+    			<input type="text" id="friendid" name="friendid">
+    			<button type="button" onclick="FindTest()">검색</button>
+    		</center>
+    	</div>
+    	<hr>
+    	<div id="div2">
+    		
+    	</div>
+    </div>
   </div>
 
   <!-- 파일 업로드 -->
@@ -379,5 +393,39 @@
   </abbr>
 </div>
 </div>
+<script>
+function FindTest()	{
+	var ID = $("#friendid").val();
+	alert(ID);
+	$.ajax({ 
+		url:"FindFriend",
+		type:"POST",
+		data:{ID:ID},
+		success:function(result){
+			var json = JSON.parse(result);
+			if(json.length == 0)	{
+				alert("친구목록을 가져오지 못했다.");
+				NoFriend();
+			}		//"Num"
+			for(var i = 0; json.length; i++)	{
+				SuccessFriend(json[i]["Num"]);
+			}
+		}
+	});
+}
+
+function SuccessFriend(Str) {
+	var output = "";		//마이페이지 기능 구현 후 함.
+	output += "<a href='#'>" + Str + "</a>";		//이미지 상태메세지도 출력 되야한다.
+	output += "<hr>";
+	$("#div2").html(output);
+} 
+
+function NoFriend()	{
+	var output = "";
+	output += "<h5>검색 결과를 얻어오지 못했습니다.</h5>";
+	$("#div2").html(output);
+}
+</script>
 </body>
 </html>
