@@ -7,7 +7,7 @@
 	String chatno = request.getParameter("chatno"); 
 	String message = request.getParameter("message");
 	out.print(message);
-	message = Util.toJS(message);
+	//message = Util.toJS(message);
 	String sessionid = request.getParameter("sessionid");
 
 	String  DBURL     = "jdbc:mysql://127.0.0.1/project02?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";	

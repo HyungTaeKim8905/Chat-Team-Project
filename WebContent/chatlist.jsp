@@ -125,7 +125,9 @@
 			output += "</div>";
 			output += "<hr>";
 			$("#div1").append(output);
+			if( ($("#div1")[0]) == ($("#div1")[0].scrollHeigh)){
 			$("#div1").scrollTop($("#div1")[0].scrollHeight);
+			}
 		}
 		
 		

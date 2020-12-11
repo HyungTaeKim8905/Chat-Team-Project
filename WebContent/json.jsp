@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<%@ page import="util.Util" %>
 <% String chatno = request.getParameter("chatno"); %>
 {
 "comment" : 
@@ -42,7 +43,7 @@
 %>
  	{
 	"id" : "<%=id%>", 
-	"content" : "<%=content%>",
+	"content" : "<%=Util.toJS(content)%>",
 	"time" : "<%= time %>"
 	}
 <%	//마지막 객체 이전에는 쉼표를 찍어서 객체 구분
