@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
-
-<%=request.getParameter("chatno") %>
-<%=request.getParameter("message") %>
-<%=request.getParameter("sessionid") %>
+<%@ page import="util.Util" %>
 
 <% 
 	String chatno = request.getParameter("chatno"); 
 	String message = request.getParameter("message");
+	message = Util.toJS(message);
 	String sessionid = request.getParameter("sessionid");
 
 	String  DBURL     = "jdbc:mysql://127.0.0.1/project02?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";	

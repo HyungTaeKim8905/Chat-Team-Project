@@ -145,7 +145,7 @@
     	var mctail = "</p><span class='time-left'>"+ myObj.comment[i].time +"</span>";
 	    var octail = "</p><span class='time-right'>"+ myObj.comment[i].time +"</span>"
 	    
-	    var chatid = "<b>" + myObj.comment[i].id + "</b><br>";
+	    var chatid = "<b>" + myObj.comment[i].id.substring(0, 6) + "</b><br>";
 	    var chat = myObj.comment[i].content;
 	    
 	    <!-- 내 채팅 -->
@@ -165,6 +165,17 @@
 }
   <!-- 채팅 1초마다 새로고침 -->
 window.onload = setInterval(update, 1000);
+
+<!-- 엔터키 입력 -->
+window.onload=function(){
+document.getElementById('inputmessage').addEventListener('keydown',function(event){
+    if(event.keyCode ==13){
+    event.preventDefault();
+        document.getElementById('messagebutton').click();
+    }
+});
+}
+
 </script>
   </div>
   <!-- 채팅입력창 -->
@@ -175,7 +186,7 @@ window.onload = setInterval(update, 1000);
         <tr>
           <td width="86%" ><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
           <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td ><button type="button" class="messagebutton" onclick="messageinput()">
+          <td ><button type="button" class="messagebutton" id= "messagebutton" onclick="messageinput()">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
             </svg>

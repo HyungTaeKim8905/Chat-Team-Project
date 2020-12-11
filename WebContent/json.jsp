@@ -19,6 +19,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection( DBURL, DBID ,DBPass );
 		
+		//마지막 객체 이전에 쉼표 찍을 수 있도록 쿼리 갯수를 구함  
 		String query = "select count(*) from anonymous where roomid="+chatno;
 		
 		pstmt = conn.prepareStatement(query);
@@ -28,6 +29,7 @@
 		count = Integer.parseInt(rs.getString(1));
 		}
 		
+		// n번 채팅방에 있는 채팅 목록 가져옴
 		query = "select sessionid, content, time from anonymous where roomid="+chatno;
 		pstmt = conn.prepareStatement(query);
 		
@@ -43,7 +45,7 @@
 	"content" : "<%=content%>",
 	"time" : "<%= time %>"
 	}
-<%	
+<%	//마지막 객체 이전에는 쉼표를 찍어서 객체 구분
 		if(rs.getRow()<count){
 %>
 		,
