@@ -11,6 +11,9 @@
   <link rel="stylesheet" type="text/css" href="./css/chatlist.css" />
   <!-- 채팅창 css -->
   <link rel="stylesheet" type="text/css" href="./css/chat.css" />
+  <!-- 제이쿼리 -->
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  
   <title>익명 채팅</title>
 
   <!-- 상단 네비바 -->
@@ -126,7 +129,14 @@
    document.getElementById("inputmessage").value = "";
  }
   function update() {
+	  <!-- 스크롤 높이 구하기 -->
+  var scroll = false;
+  //왼쪽이 전체 높이 오른쪽이 현재 높이
+  if(($("#anchat").scroll('scrollHeight')) == ($("#anchat").scrollTop())){
+	  scroll = true;
+  }
 	  
+  
   <!-- json 출력 -->
   var xmlhttp = new XMLHttpRequest();
   
@@ -163,6 +173,10 @@
   xmlhttp.open("POST", "json.jsp", true);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send("chatno="+chatno);
+  
+  if( scroll==true){
+	  $("#anchat").scrollTop($("#anchat")[0].scrollHeight);
+  }
 }
   <!-- 채팅 1초마다 새로고침 -->
 window.onload = setInterval(update, 1000);
