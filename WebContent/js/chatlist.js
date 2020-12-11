@@ -8,3 +8,31 @@
       document.getElementById("friendfm").classList.toggle("show");
       document.getElementById("searchfm").classList.remove("show");
     }
+    
+    
+    /////@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  		function submit(){
+  			var fromID = '<%=userID%>';
+			var toID = '<%=toID%>';
+			var inputmessage = $("#inputmessage").val();
+			alert(inputmessage);
+			$.ajax({
+				url:"ChatSubmit",
+				type:"POST",
+				data:{
+					fromID:encodeURIComponent(fromID),
+					toID:encodeURIComponent(toID),
+					content:encodeURIComponent(inputmessage)
+				},
+				success:function(result){
+					if(result == 1){
+						alert("메세지를 보냈다.");
+					} else if(result == 0){
+						alert("오류");
+					} else{
+						alert("오류");
+					}
+				}
+			});
+			$('#inputmessage').val('');
+		}

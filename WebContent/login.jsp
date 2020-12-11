@@ -2,6 +2,10 @@
     pageEncoding="EUC-KR"%>
 <%
 //*************** 쿠키값 가져오기 **********************************************************************************
+String sessionID = (String)session.getAttribute("id");
+if(sessionID != null){
+	%> <script>alert("잘못된 접근입니다."); location.href="Main.jsp"; </script> <%
+}
 String cookie = "";
 String check = request.getHeader("cookie"); 
 // out.println("getHeader : " + check);
@@ -14,9 +18,7 @@ if((cookies != null) && (cookies.length > 0))	{	// cookies == null 이면 쿠키가 �
 	for(int i = 0; i < cookies.length; i++)		{
 		if(cookies[i].getName().equals("id"))	{	// getName()메서드를 이용하여 쿠키 이름을 가져와 id와 비교 일치한다면
 			cookie = cookies[i].getValue();			// getValue()메서드를 이용하여 쿠키 값을 cookie에 저장.
-			//out.println(cookies[i].getName());	
-			//out.println(cookies[i].getValue());
-			//id test111 JSESSIONID 8F42460C22C1AFC2DB20558D9CF664B2
+			//session.setAttribute("id", cookies[i].getValue());
 		}
 	}
 }
@@ -116,8 +118,8 @@ if((cookies != null) && (cookies.length > 0))	{	// cookies == null 이면 쿠키가 �
         <input type="password" placeholder="비밀번호를 입력해주세요" name="password" id="password" required>
         <hr>
 
-        <input type="checkbox" checked="checked" name="rememberid">아이디 저장
-        <input type="checkbox" checked="checked" name="rememberlogin">자동 로그인
+        <input type="checkbox" name="rememberid">아이디 저장
+        <input type="checkbox" name="rememberlogin">자동 로그인
 
         <button type="submit" class="registerbtn">로그인</button>
       </div>
