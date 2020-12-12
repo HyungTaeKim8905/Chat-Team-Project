@@ -1,5 +1,5 @@
 package Controller;
-
+import java.io.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-
+import java.util.*;
 import DTO.UserDTO;
 import VO.UserVO;
 /**
@@ -52,12 +53,14 @@ public class Mypage extends HttpServlet {
 		int size 			= 1024*1024*15;						// 15메가로 지정함. 15메가를 넘을 경우 예외 발생
 		//한 번의 요청으로 업로드할 수 있는 업로드 파일의 최대 크기를 지정한다.
 		String filename	    = "";								// 폼에서 선택한 원본 파일명
-		String filerealname = "";								// 서버에 실제로 저장된 파일의 이르
+		String filerealname = "";								// 서버에 실제로 저장된 파일의 이름
 		//String filepath     = uploadPath;						// 저장될 파일의 경로
+		System.out.println(uploadPath);
+		JSONArray jsonArrList = null;
 		try	{
 			MultipartRequest multipart = new MultipartRequest(request, uploadPath, size, "UTF-8", new DefaultFileRenamePolicy());
+			String id = multipart.getParameter("id");
 			String nick = multipart.getParameter("nick");
-			String imagefile = multipart.getParameter("file");
 			String statusmessage = multipart.getParameter("statusmessage");
 			Enumeration files = multipart.getFileNames();		//폼에서 전송되어온 파일 타입의 입력상자의 이름을 반환한다.
 			//getFileNames()메서드는 파일을 여러개 업로드할 경우 타입이 file인 파라미터 이름들을 Enumeration 타입으로 반환한다.
@@ -68,15 +71,31 @@ public class Mypage extends HttpServlet {
 			
 			filename = multipart.getOriginalFileName(file);	//업로드된 파일의 처음에 폼에서 선택한 원본 파일명을 얻어온다.
 			//클라이언트가 업로드한 파일의 원본 이름을 반환한다.
-			UserDTO dto = new UserDTO();
-			//세션 아이디 값을 가져와 아이디로 비교해서 업데이트를 해준다.
-			HttpSession session = request.getSession();
-			String id = (String)session.getAttribute("id");
-			UserVO vo = dto.MyPageModify(id, nick, imagefile, statusmessage, filename, filerealname);
+			System.out.println("id : "+id);
+			System.out.println("nick : "+nick);
+			System.out.println("statusmessage : "+statusmessage);
+			System.out.println("filename원본 파일 명 : "+filename);
+			System.out.println("filerealname서버에 저장되는 파일 명 : "+filename);
+			System.out.println("파일을 업로드 했을 때 입력상자의 이름을 얻어온다. : "+file);
 			
+			UserDTO dto = new UserDTO();
+			UserVO vo = dto.MyPageModify(id, nick, statusmessage, filename, filerealname);
+			if(vo == null)	{
+				System.out.println("doPost() ==>  vo가 null 입니다.");
+				return ;
+			}
+			jsonArrList = new JSONArray();
+			JSONObject jsonList = new JSONObject();
+			jsonList.put("nick", vo.getNick());
+			jsonList.put("Statusmessage", vo.getStatusmessage());
+			jsonList.put("PictureOriginName", vo.getPictureOriginName());
+			jsonList.put("PictureRealName", vo.getPictureRealName());
+			jsonArrList.add(jsonList);
 		} catch(Exception e) {
 			System.out.println("ERROR : " + e.getMessage());
+			e.printStackTrace();
 		}
+		out.println(jsonArrList);
 	}
 
 }

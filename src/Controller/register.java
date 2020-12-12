@@ -49,13 +49,11 @@ public class register extends HttpServlet {
 		String email 	= request.getParameter("email");
 		String address 	= request.getParameter("address");
 		String phone 	= request.getParameter("phone");
-		String picture 	= request.getParameter("picture");
-		String statusmessage 	= request.getParameter("statusmessage");
 		System.out.println(nick);
 		System.out.println(address);
 		UserDTO dto = new UserDTO();
 		try {
-			int result = dto.Join(id, password, nick, email, address, phone, picture, statusmessage);
+			int result = dto.Join(id, password, nick, email, address, phone);
 			if(result == 1) 	{	//리다이엑트, 디스패처
 				HttpSession session = request.getSession();
 				session.setAttribute("id", id);

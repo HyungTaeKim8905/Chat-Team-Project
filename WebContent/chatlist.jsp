@@ -5,6 +5,9 @@
 	if (session.getAttribute("id") != null) {
 		myID = (String) session.getAttribute("id");
 	}
+	else if(session.getAttribute("id") == null)	{
+		%><script>alert("로그인 후 이용해주세요."); location.href="login.jsp";</script><%
+	}
 	
 	
 	String toID = null;
@@ -41,7 +44,7 @@
   <script>
 	  function test()	{
 			var fromID = '<%= myID %>';
-			var toID = "상대방";
+			var toID = "123";
 			var inputmessage = $("#inputmessage").val();
 		//	alert(inputmessage);
 			$.ajax({
@@ -70,7 +73,7 @@
 	  	var lastNo1 = ""; //*******************
 		function ChattingList(num){
 			var fromID = '<%= myID %>';
-			var toID = "상대방";
+			var toID = "123";
 			//alert("listNo1 ::::" + lastNo1);
 			$.ajax({
 				type : "POST",

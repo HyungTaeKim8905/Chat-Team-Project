@@ -83,9 +83,10 @@ function Withdrawal()	{
 
 
 
+//마이페이지 수정해주는 함수.
 function Modify()	{
 	//찍어보자
-	var check = confirm("정말 회원탈퇴를 하시겠습니까?");
+	var check = confirm("수정하시겟습니까?");
 	if(check == true)	{
 		alert("확인 버튼 눌렀다.");
 	}
@@ -94,10 +95,14 @@ function Modify()	{
 		alert("취소 버튼 눌렀다.");
 		return false;
 	}
+	var data = new FormData(form);	//ajax로 파일 전송시 FormData객체 생성 후 form을 넣어줘야한다.
 	$.ajax({
 		url:"Mypage",
 		type:"POST", // data: "param1=aaaa&param2=zzzz,
-		data:$("form").serialize(),		//data:"id=" + <%= id %>
+		enctype: "multipart/form-data",
+		contentType : false,
+		processData : false,
+		data:data,		//data:"id=" + <%= id %>
 		success:function(result)	{
 			//회원탈퇴 처리 완료되면 무슨 페이지로 이동?
 		}

@@ -47,10 +47,10 @@ public class UserDTO extends DBManager {
 
 	//***************************회원가입 메서드******************************************************************************************************
 		
-		public int Join(String id, String password, String nick, String email, String address, String phone, String picture, String statusmessage)	{
+		public int Join(String id, String password, String nick, String email, String address, String phone)	{
 			try {
 				// 회원가입페이지(join.jsp)에서 파라미터로 전송된 데이터들을 user테이블의 새로운 레코드로 삽입하는 부분이다.
-				String sql = "insert into user (id, password, nick, email, address, phone, picture, statusmessage) values (?,md5(md5(md5(md5(md5(md5(?)))))),?,?,?,?,?,?)";
+				String sql = "insert into user (id, password, nick, email, address, phone) values (?,md5(md5(md5(md5(md5(md5(?)))))),?,?,?,?)";
 				DBOpen();
 				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 						ResultSet.CONCUR_UPDATABLE);
@@ -60,8 +60,6 @@ public class UserDTO extends DBManager {
 				m_SelectStatment.setString(4, email);	
 				m_SelectStatment.setString(5, address);
 				m_SelectStatment.setString(6, phone);
-				m_SelectStatment.setString(7, picture);
-				m_SelectStatment.setString(8, statusmessage);
 				m_SelectStatment.executeUpdate(); // 쿼리실행하면 실행 결과를 java.sql.ResultSet형으로 리턴한다.
 				// m_SelectStatment 를 닫는다.
 				m_SelectStatment.close();
@@ -75,12 +73,41 @@ public class UserDTO extends DBManager {
 		}
 		
 		//***********************************************************************************************************************************
-		
-		public UserVO MyPageModify(String id, String nick, String picture, String statusmessage, String filename, String filerealname)	{
+		// 마이페이지 수정하면 실행되는 함수.
+		public UserVO MyPageModify(String id, String nick, String statusmessage, String filename, String filerealname)	{
+			UserVO vo = new UserVO();
 			String sql = "";
-			
-			
-			return new UserVO();
+			sql = "update chatroom set nick = ?, statusmessage = ?, pictureOriginName = ?, pictureRealName = ? where id = ?";
+			try	{
+				DBOpen();
+				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_UPDATABLE);
+				m_SelectStatment.setString(1, nick);
+				m_SelectStatment.setString(2, statusmessage);
+				m_SelectStatment.setString(3, filename);
+				m_SelectStatment.setString(4, filerealname);
+				m_SelectStatment.setString(5, id);
+				m_SelectStatment.executeUpdate();
+				
+				sql = "select nick, statusmessage, pictureOriginName, pictureRealName from user where id = ?";
+				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+						ResultSet.CONCUR_UPDATABLE);
+				m_SelectStatment.setString(1, id);
+				m_ResultSet = m_SelectStatment.executeQuery();
+				while(m_ResultSet.next())	{
+					vo.setNick(m_ResultSet.getString("nick"));
+					vo.setStatusmessage(m_ResultSet.getString("statusmessage"));
+					vo.setPictureOriginName(m_ResultSet.getString("pictureOriginName"));
+					vo.setPictureRealName(m_ResultSet.getString("pictureRealName"));
+				}
+				m_ResultSet.close();
+				m_SelectStatment.close();
+				DBClose();
+			} catch(Exception e) {
+				System.out.println("MyPageModify() 오류");
+				System.out.println("ERROR : " + e.getMessage());
+			}
+			return vo;
 		}
 		
 		//********************************// 로그인 처리 메서드**********************************************************************************
