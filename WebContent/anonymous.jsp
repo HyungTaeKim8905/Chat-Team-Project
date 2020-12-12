@@ -126,6 +126,11 @@
   }
 	<!-- ajax 입력 -->
  function messageinput(){
+	<!-- 공백 제거 -->
+   if(!document.getElementById("inputmessage").value.replace(/(^\s*)|(\s*$)/gi, "")){
+	   return;
+   }
+	 
    var xmlhttp = new XMLHttpRequest();
     
    var chatnum = "chatno="+chatno;
