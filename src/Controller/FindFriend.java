@@ -58,13 +58,19 @@ public class FindFriend extends HttpServlet {
 		}
 		UserDTO dto = new UserDTO();
 		ArrayList<UserVO> list = dto.FriendCheck(id);
+		if(list.size() == 0)	{
+			return;
+		}
 		JSONArray jsonArrList = new JSONArray();
 		try {
 			for (int i = 0; i < list.size(); i++) {
 				JSONObject jsonList = new JSONObject();
-				jsonList.put("Num", list.get(i).getId());
+				jsonList.put("ID", list.get(i).getId());
+				jsonList.put("pictureRealName", list.get(i).getPictureRealName());
+				jsonList.put("statusmessage", list.get(i).getStatusmessage());
 				jsonArrList.add(jsonList);
 			}
+			System.out.println("검색 결과를 제이슨 데이터로 뿌려주기");
 			System.out.println(jsonArrList);
 			out.println(jsonArrList);
 		} catch (Exception e) {
