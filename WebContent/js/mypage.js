@@ -16,10 +16,31 @@ function readInputFile(input) {
 //이미지 확장자가 아니면 실행되는 함수
 function fileCheck()	{
 	var fileName = $("#file").val();
+	var maxsize = 400000;
+	var filesize = 0;
+	//5 * 1024 * 1024 30mb
+	var browser = navigator.appName;	//브라우저 확인
+	
+	// 익스플로러일 경우
+	if (browser == "Microsoft Internet Explorer") {
+		var oas = new ActiveXObject("Scripting.FileSystemObject");
+		filesize = oas.getFile(file.value).size;
+	}
+	else {
+		filesize = file.files[0].size;
+	}
+	
+	alert("파일 사이즈 : " + filesize);
+	
+	if(maxsize < filesize)	{
+		alert("파일 용량을 초과하였습니다.....(제한 용량 : " + maxsize + "바이트)");
+		return false;
+	}
+	alert("브라우저 종류 : " + browser);
 	alert(fileName);
 	if(fileName != "")	{
 		var num = fileName.slice(fileName.lastIndexOf(".") + 1).toLowerCase();
-		alert("핉러링 한 이미지 확장자 네임 ::::::" + num);
+		alert("필터링 한 이미지 확장자 네임 ::::::" + num);
 		if(num != "gif" && num != "jpg" && num != "png")	{
 			alert("이미지파일 (.jpg, .png, .gif)만 업로드 가능합니다.");
 			return false;
@@ -82,4 +103,26 @@ function Modify()	{
 		}
 	});
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		
