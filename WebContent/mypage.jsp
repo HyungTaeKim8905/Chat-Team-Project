@@ -40,7 +40,7 @@
 				</div>
 				
 			<label for="nick">닉네임</label>
-			<input type="text" id="nick" name="nick" placeholder="홍길동">
+			<input type="text" id="nick" name="nick" placeholder="홍길동" value="">
 			
 			<label for="country">언어</label>
 			<select id="country" name="country">
@@ -52,7 +52,7 @@
 	
 			<label for="statusmessage">상태 메세지</label>
 			<div id="StatusMessage_d">
-			<input type="text" id="statusmessage" name="statusmessage" value="test" placeholder="상태 메세지 입력..">
+			<input type="text" id="statusmessage" name="statusmessage" value="" placeholder="상태 메세지 입력..">
 			</div>
 			<input type="hidden" id="id" name="id" value="<%= sessionID %>">
 			<button type="button" onclick="Modify()">저장</button><button type="button" class="PasswordChange" onclick="PasswordChange()"> 비밀번호 변경</button><button type="button" onclick="Withdrawal()">회원탈퇴</button>

@@ -104,7 +104,11 @@ function Modify()	{
 		processData : false,
 		data:data,		//data:"id=" + <%= id %>
 		success:function(result)	{
-			//회원탈퇴 처리 완료되면 무슨 페이지로 이동?
+			var json = JSON.parse(result);
+			if(json.length == 0)	{
+				alert("받아온 제이슨 데이터가 0입니다.");
+			}
+			var 
 		}
 	});
 }
