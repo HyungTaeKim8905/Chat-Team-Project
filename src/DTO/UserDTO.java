@@ -1,6 +1,7 @@
 package DTO;
 
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import DB.DBManager;
 import VO.UserVO;
@@ -127,11 +128,41 @@ public class UserDTO extends DBManager {
 		}
 		return vo;
 	}
-
-	// ********************************// 로그인 처리
-	// 메서드**********************************************************************************
-
-	// DB에서 가져온 비밀번호와 클라이언트가 입력한 비밀번호를 비교하는 부분
+	
+	
+	public ArrayList<UserVO> FriendCheck(String text)	{
+		//아이디 프로필 사진, 상태메세지를 가져와 뽀려줘야한다.
+		String sql = "";
+		ArrayList<UserVO> list = new ArrayList<UserVO>();				//	'%" + text + "%'
+		sql = "select id, pictureRealName, statusmessage from user where id like '%" + text + "%'";
+		try	{
+			DBOpen();
+			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
+					ResultSet.CONCUR_UPDATABLE);
+//			m_SelectStatment.setString(1, id);
+			m_ResultSet = m_SelectStatment.executeQuery();
+			while(m_ResultSet.next())	{
+				UserVO vo = new UserVO();
+				vo.setId(m_ResultSet.getString("id"));
+				vo.setPictureRealName(m_ResultSet.getString("pictureRealName"));
+				vo.setStatusmessage(m_ResultSet.getString("statusmessage"));
+				list.add(vo);
+			}
+			m_ResultSet.close();
+			m_SelectStatment.close();
+			DBClose();
+			if(list.size() == 0)	{
+				return null;
+			}
+		} catch(Exception e)	{
+			System.out.println("FriendCheck() 오류");
+			System.out.println("ERROR : " + e.getMessage());
+		}
+		return list; 
+	}
+	
+	
+	// DB에서 가져온 비밀번호와 클라이언트가 입력한 비밀번호를 비교하는 부분(로그인)
 	public int LoginCheck(String id, String password) {
 		try {
 			DBOpen();
