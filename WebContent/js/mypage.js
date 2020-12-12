@@ -3,9 +3,31 @@
 				if(input.files && input.files[0]) { 	//파일이 선택된 상태라면
 					var reader = new FileReader();		// 파일을 읽기 위해서 객체 생성
 					reader.onload = function (e) {		// 파일을 읽어들이기를 성공했을때 호출되는 이벤트
+						var check = fileCheck();
+						if(check != true)	{
+							return false;
+						}
 						$("#imgfile").html("<img src='"+ event.target.result +"'>");	// event.target.result => 파일의 경로 + 이미지 이름
 					}
 					reader.readAsDataURL(input.files[0]);
+				}
+			}
+			
+			
+			//이미지 확장자가 아니면 실행되는 함수
+			function fileCheck()	{
+				var fileName = $("#file").val();
+				alert(fileName);
+				if(fileName != "")	{
+					var num = fileName.slice(fileName.lastIndexOf(".") + 1).toLowerCase();
+					alert("핉러링 한 이미지 확장자 네임 ::::::" + num);
+					if(num != "gif" || num != "jpg" || num != "png")	{
+						alert("이미지파일 (.jpg, .png, .gif)만 업로드 가능합니다.");
+						return false;
+					}
+					else	{
+						return true;
+					}
 				}
 			}
 			
@@ -61,26 +83,4 @@
 					}
 				});
 			}
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
-			
+		
