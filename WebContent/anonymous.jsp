@@ -102,7 +102,7 @@
   </div>
   </div>
   <!-- 채팅창 -->
-  <div class="center" style="width:66%; height: 100%; float: left; ">
+  <div class="center" id="center" style="width:66%; height: 100%; float: left; ">
   
   <div class="anchat" id="anchat" style="width: 105%;height: 70%; overflow-y : auto;">
   
@@ -127,10 +127,23 @@
    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
    xmlhttp.send(chatnum+"&"+message+"&"+sessionid);
    document.getElementById("inputmessage").value = "";
+   
+   //입력하면 스크롤 내림
+   scrolldown();
  }
   function update() {
-	  <!-- 스크롤 높이 구하기 -->
+  <!-- 스크롤 높이 구하기 -->
+
+  //채팅창 div의 높이
+  let elmnt = document.getElementById("anchat").scrollHeight;
+  elmnt -= document.getElementById("anchat").offsetHeight;
+  //현재 스크롤의 높이
+  let scrollLocation = document.getElementById('anchat').scrollTop;
   
+  var scr = false;
+  if(scrollLocation >= elmnt){
+	  scr = true;
+  }
   
   <!-- json 출력 -->
   var xmlhttp = new XMLHttpRequest();
@@ -140,7 +153,7 @@
 	    var myObj = JSON.parse(this.responseText);
 	    var mcount = Object.keys(myObj.comment).length;
 	    
-	    <!-- word-break : 자동 엔터 -->
+	    <!-- word-break : 글이 길어지면 자동 엔터 -->
 	    var mchead = "<div class='chat me'><p style='margin:5px; word-break:break-all;'>";
 	    var ochead = "<div class='chat other'><p style='margin:5px; word-break:break-all;'>";
 	    
@@ -169,11 +182,16 @@
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send("chatno="+chatno);
   
+  if(scr == true){
+  //5초뒤 스크롤 내림
+  scrolldown();
+  }
+  
 }
   <!-- 채팅 1초마다 새로고침 -->
 window.onload = setInterval(update, 1000);
 
-<!-- 엔터키 입력 -->
+<!-- 엔터키 눌렀을 때 입력 -->
 window.onload=function(){
 document.getElementById('inputmessage').addEventListener('keydown',function(event){
     if(event.keyCode ==13){
@@ -183,15 +201,23 @@ document.getElementById('inputmessage').addEventListener('keydown',function(even
 });
 }
 
+//스크롤 위치 받아오기
+/*
 window.addEventListener('scroll', () => {
-	let scrollLocation = document.getElementById(anchat).scrollTop; // 현재 스크롤바 위치
-	 let windowHeight = window.innerHeight; // 스크린 창
-	let fullHeight = document.getElementById(anchat).scrollHeight; //  margin 값은 포함 x
+	let scrollLocation = document.getElementById('anchat').scrollTop; // 현재 스크롤바 위치
+	let windowHeight = window.innerHeight; // 스크린 창
+	let fullHeight = document.getElementById('anchat').scrollHeight; //  margin 값은 포함 x
 
 	if(scrollLocation + windowHeight >= fullHeight){
 		alert('끝')
 	}
 })
+*/
+
+//스크롤 제일 아래로
+function scrolldown(){
+	document.getElementById('anchat').scrollTop = document.getElementById('anchat').scrollHeight;
+}
 
 </script>
   </div>
