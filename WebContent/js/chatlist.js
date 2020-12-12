@@ -21,17 +21,30 @@ function FindTest()	{
 			if(json.length == 0)	{
 				alert("친구목록을 가져오지 못했다.");
 				NoFriend();
-			}		//"Num"
+			}
+			alert(json[0]["statusmessage"]);
 			for(var i = 0; json.length; i++)	{
-				SuccessFriend(json[i]["Num"]);
+				SuccessFriend(json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"]);
 			}
 		}
 	});
 }
 
-function SuccessFriend(Str) {
+function SuccessFriend(ID, pictureRealName, statusmessage) {
 	var output = "";		//마이페이지 기능 구현 후 함.
-	output += "<a href='#'>" + Str + "</a>";		//이미지 상태메세지도 출력 되야한다.
+	output += "<div>";
+	output += 	"<div>";
+	output += 		"<div>";
+	output +=			"<a href='#' style='padding-top:0px; padding-bottom:0px;'>";
+	output += 				"<img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'>";
+	output +=			"</a>";
+	output +=				"<span>" + ID + "</span>";
+	output +=			"<div>";
+	output +=				"<p>" + statusmessage + "</p>";
+	output +=			"</div>";
+	output += 		"</div>";
+	output += 	"</div>";
+	output += "</div>";
 	output += "<hr>";
 	$("#div2").html(output);
 } 
