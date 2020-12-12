@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%
+	String sessionID = (String)session.getAttribute("id");
+	if(sessionID == null)	{
+		%><script> alert("권한이 없습니다."); location.href="Main.jsp"; </script><%	
+	}
+%>
 <!DOCTPYE html lang="ko">
 <html>
 	<head>
@@ -24,13 +30,13 @@
 		
 		<!-- 마이페이지 -->
 		<div class="container">
-			<form id="form" name="form" action="Mypage" method="post">
+			<form id="form" name="form" action="Mypage" method="post" enctype="multipart/form-data">
 			<div id="imgfile">
 					<img src="./image/man.jpg">
 				</div>
 				<div class="filebox">
 					<label for="file">사진 변경</label>
-					<input type="file" id="file" name="file" onchange="readInputFile(event.target)">
+					<input type="file" id="file" name="file" accept=".gif, .jpg, .png" onchange="readInputFile(event.target)">
 				</div>
 				
 			<label for="nick">닉네임</label>
