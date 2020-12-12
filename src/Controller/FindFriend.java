@@ -53,7 +53,7 @@ public class FindFriend extends HttpServlet {
 		String id = request.getParameter("ID");
 
 		if (id == null || id.equals("")) {
-			System.out.println("id°¡ °ø¹éÀ¸·Î ³Ñ¾î¿Ô½À´Ï´Ù.");
+			System.out.println("idê°€ ê³µë°±ìœ¼ë¡œ ë„˜ì–´ì™”ìŠµë‹ˆë‹¤.");
 			out.println("0");
 		}
 		UserDTO dto = new UserDTO();
@@ -68,7 +68,7 @@ public class FindFriend extends HttpServlet {
 			System.out.println(jsonArrList);
 			out.println(jsonArrList);
 		} catch (Exception e) {
-			System.out.println("doPost() ¿À·ù");
+			System.out.println("doPost() ì˜¤ë¥˜");
 			System.out.println("ERROR : " + e.getMessage());
 		}
 	}
