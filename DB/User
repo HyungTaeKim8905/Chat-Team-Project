@@ -8,7 +8,6 @@ nick      VARCHAR(20),				-- �г���
 email    VARCHAR(50),				-- �̸���
 address  VARCHAR(200),				-- �ּ�
 phone    VARCHAR(100),				-- ����ȣ
-picture  varchar(255),				-- ����
 pictureOriginName varchar(255),	
 pictureRealName varchar(255),	
 statusmessage varchar(255), 		-- ���� �޼���
