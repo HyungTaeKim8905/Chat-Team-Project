@@ -109,6 +109,16 @@
   
   
   <script>
+  <!-- 페이지 접속 시간 -->
+  var connectedDate = new Date();
+  connectedDate = connectedDate.getFullYear() + '-' +
+  ('00' + (connectedDate.getMonth()+1)).slice(-2) + '-' +
+  ('00' + connectedDate.getDate()).slice(-2) + ' ' + 
+  ('00' + connectedDate.getHours()).slice(-2) + ':' + 
+  ('00' + connectedDate.getMinutes()).slice(-2) + ':' + 
+  ('00' + connectedDate.getSeconds()).slice(-2);
+  
+  <!-- 채팅방 번호 -->
   var chatno = 1; 
   
   function chno(ch){
@@ -132,19 +142,7 @@
    scrolldown();
  }
   function update() {
-  <!-- 스크롤 높이 구하기 -->
 
-  //채팅창 div의 높이
-  let elmnt = document.getElementById("anchat").scrollHeight;
-  elmnt -= document.getElementById("anchat").offsetHeight;
-  //현재 스크롤의 높이
-  let scrollLocation = document.getElementById('anchat').scrollTop;
-  
-  var scr = false;
-  if(scrollLocation >= elmnt){
-	  scr = true;
-  }
-  
   <!-- json 출력 -->
   var xmlhttp = new XMLHttpRequest();
   
@@ -160,32 +158,28 @@
 	    
     	document.getElementById("anchat").innerHTML = "";
 	    
+    	
 	    for(var i = 0; i<mcount; i++){
-    	var mctail = "</p><span class='time-left'>"+ myObj.comment[i].time +"</span>";
-	    var octail = "</p><span class='time-right'>"+ myObj.comment[i].time +"</span>"
-	    
-	    var chatid = "<b>" + myObj.comment[i].id.substring(0, 6) + "</b><br>";
-	    var chat = myObj.comment[i].content;
-	    
-	    <!-- 내 채팅 -->
-	    if("<%=session.getId()%>" == myObj.comment[i].id){
-    	document.getElementById("anchat").innerHTML += mchead + chatid + chat + mctail ;
-	    }
-	    <!-- 다른사람 채팅 -->
-	    if("<%=session.getId()%>" != myObj.comment[i].id){
-	    document.getElementById("anchat").innerHTML += ochead + chatid + chat + octail ;
-	    }
+		   	var mctail = "</p><span class='time-left'>"+ myObj.comment[i].time +"</span>";
+		    var octail = "</p><span class='time-right'>"+ myObj.comment[i].time +"</span>"
+		    
+		    var chatid = "<b>" + myObj.comment[i].id.substring(0, 6) + "</b><br>";
+		    var chat = myObj.comment[i].content;
+		    
+		    <!-- 내 채팅 -->
+		    if("<%=session.getId()%>" == myObj.comment[i].id){
+		   	document.getElementById("anchat").innerHTML += mchead + chatid + chat + mctail ;
+		    }
+		    <!-- 다른사람 채팅 -->
+		    if("<%=session.getId()%>" != myObj.comment[i].id){
+		    document.getElementById("anchat").innerHTML += ochead + chatid + chat + octail ;
+		    }
 	    }
 	  }
 	};
   xmlhttp.open("POST", "json.jsp", true);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xmlhttp.send("chatno="+chatno);
-  
-  if(scr == true){
-  //5초뒤 스크롤 내림
-  scrolldown();
-  }
+  xmlhttp.send("chatno="+chatno+"&connectiontime="+connectedDate);
   
 }
   <!-- 채팅 1초마다 새로고침 -->
@@ -200,19 +194,6 @@ document.getElementById('inputmessage').addEventListener('keydown',function(even
     }
 });
 }
-
-//스크롤 위치 받아오기
-/*
-window.addEventListener('scroll', () => {
-	let scrollLocation = document.getElementById('anchat').scrollTop; // 현재 스크롤바 위치
-	let windowHeight = window.innerHeight; // 스크린 창
-	let fullHeight = document.getElementById('anchat').scrollHeight; //  margin 값은 포함 x
-
-	if(scrollLocation + windowHeight >= fullHeight){
-		alert('끝')
-	}
-})
-*/
 
 //스크롤 제일 아래로
 function scrolldown(){
