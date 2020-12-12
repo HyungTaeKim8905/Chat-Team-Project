@@ -130,12 +130,7 @@
  }
   function update() {
 	  <!-- 스크롤 높이 구하기 -->
-  var scroll = false;
-  //왼쪽이 전체 높이 오른쪽이 현재 높이
-  if(($("#anchat").scroll('scrollHeight')) == ($("#anchat").scrollTop())){
-	  scroll = true;
-  }
-	  
+  
   
   <!-- json 출력 -->
   var xmlhttp = new XMLHttpRequest();
@@ -174,9 +169,6 @@
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send("chatno="+chatno);
   
-  if( scroll==true){
-	  $("#anchat").scrollTop($("#anchat")[0].scrollHeight);
-  }
 }
   <!-- 채팅 1초마다 새로고침 -->
 window.onload = setInterval(update, 1000);
@@ -190,6 +182,16 @@ document.getElementById('inputmessage').addEventListener('keydown',function(even
     }
 });
 }
+
+window.addEventListener('scroll', () => {
+	let scrollLocation = document.getElementById(anchat).scrollTop; // 현재 스크롤바 위치
+	 let windowHeight = window.innerHeight; // 스크린 창
+	let fullHeight = document.getElementById(anchat).scrollHeight; //  margin 값은 포함 x
+
+	if(scrollLocation + windowHeight >= fullHeight){
+		alert('끝')
+	}
+})
 
 </script>
   </div>
