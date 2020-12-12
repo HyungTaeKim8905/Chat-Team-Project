@@ -2,7 +2,10 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
 <%@ page import="util.Util" %>
-<% String chatno = request.getParameter("chatno"); %>
+<% 
+	String chatno = request.getParameter("chatno");
+	String connectiontime = request.getParameter("connectiontime"); 
+%>
 {
 "comment" : 
 [
@@ -21,7 +24,7 @@
 		conn = DriverManager.getConnection( DBURL, DBID ,DBPass );
 		
 		//마지막 객체 이전에 쉼표 찍을 수 있도록 쿼리 갯수를 구함  
-		String query = "select count(*) from anonymous where roomid="+chatno;
+		String query = "select count(*) from anonymous where roomid='"+chatno+"'and time>='"+connectiontime+"'";
 		
 		pstmt = conn.prepareStatement(query);
 		rs = pstmt.executeQuery(); 
@@ -31,7 +34,7 @@
 		}
 		
 		// n번 채팅방에 있는 채팅 목록 가져옴
-		query = "select sessionid, content, time from anonymous where roomid="+chatno;
+		query = "select sessionid, content, time from anonymous where roomid='"+chatno+"'and time>='"+connectiontime+"'";
 		pstmt = conn.prepareStatement(query);
 		
 		rs = pstmt.executeQuery();
