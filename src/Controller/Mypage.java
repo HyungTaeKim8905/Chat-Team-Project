@@ -1,5 +1,4 @@
 package Controller;
-import java.io.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
@@ -10,12 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
-import java.util.*;
+
 import DTO.UserDTO;
 import VO.UserVO;
 /**
@@ -77,9 +77,18 @@ public class Mypage extends HttpServlet {
 			System.out.println("filename원본 파일 명 : "+filename);
 			System.out.println("filerealname서버에 저장되는 파일 명 : "+filename);
 			System.out.println("파일을 업로드 했을 때 입력상자의 이름을 얻어온다. : "+file);
-			
+			String Str1 = "";
+			String Str2 = "";
+			if(filename == null || filerealname == null)	{
+				Str1 = null;
+				Str2 = null;
+			}
+			else	{
+				Str1 = "./image/" + filename;
+				Str2 = "./image/" + filerealname;
+			}
 			UserDTO dto = new UserDTO();
-			UserVO vo = dto.MyPageModify(id, nick, statusmessage, filename, filerealname);
+			UserVO vo = dto.MyPageModify(id, nick, statusmessage, Str1, Str2);
 			if(vo == null)	{
 				System.out.println("doPost() ==>  vo가 null 입니다.");
 				return ;
@@ -91,11 +100,12 @@ public class Mypage extends HttpServlet {
 			jsonList.put("PictureOriginName", vo.getPictureOriginName());
 			jsonList.put("PictureRealName", vo.getPictureRealName());
 			jsonArrList.add(jsonList);
+			System.out.println(jsonArrList);
+			out.println(jsonArrList);
 		} catch(Exception e) {
 			System.out.println("ERROR : " + e.getMessage());
 			e.printStackTrace();
 		}
-		out.println(jsonArrList);
 	}
 
 }

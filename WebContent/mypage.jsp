@@ -1,9 +1,35 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import="DB.*"%>
 <%
 	String sessionID = (String)session.getAttribute("id");
 	if(sessionID == null)	{
 		%><script> alert("권한이 없습니다."); location.href="Main.jsp"; </script><%	
+	}
+	DBManager dbm = new DBManager();
+	String sql = "select nick, statusmessage, pictureOriginName, pictureRealName from user where id = '" + sessionID + "'";
+	String nick = "";
+	String img = "";
+	String statusmessage = "";
+	try	{
+		dbm.DBOpen();
+		dbm.OpenQuery(sql);
+		while(dbm.ResultNext())	{
+			nick = dbm.getString("nick");
+			img = dbm.getString("pictureRealName");
+			statusmessage = dbm.getString("statusmessage");
+		}
+		dbm.CloseQuery();
+		dbm.DBClose();
+	} catch(Exception e)	{
+		System.out.println("ERRO : " + e.getMessage());
+	}
+	if(statusmessage == null)	{
+		statusmessage = "";
+	}
+	if(img == "null" || img == "NULL" || img == null)	{
+		//신규 회원가입이라면 기본 사진을 뽀려준다.
+		img = "./image/man.jpg";
 	}
 %>
 <!DOCTPYE html lang="ko">
@@ -32,7 +58,7 @@
 		<div class="container">
 			<form id="form" name="form" action="Mypage" method="post" enctype="multipart/form-data">
 			<div id="imgfile">
-					<img src="./image/man.jpg">
+					<img src="<%= img %>">
 				</div>
 				<div class="filebox">
 					<label for="file">사진 변경</label>
@@ -40,7 +66,7 @@
 				</div>
 				
 			<label for="nick">닉네임</label>
-			<input type="text" id="nick" name="nick" placeholder="홍길동" value="">
+			<input type="text" id="nick" name="nick" placeholder="홍길동" value="<%= nick %>">
 			
 			<label for="country">언어</label>
 			<select id="country" name="country">
@@ -52,7 +78,7 @@
 	
 			<label for="statusmessage">상태 메세지</label>
 			<div id="StatusMessage_d">
-			<input type="text" id="statusmessage" name="statusmessage" value="" placeholder="상태 메세지 입력..">
+			<input type="text" id="statusmessage" name="statusmessage" value="<%= statusmessage %>" placeholder="상태 메세지 입력..">
 			</div>
 			<input type="hidden" id="id" name="id" value="<%= sessionID %>">
 			<button type="button" onclick="Modify()">저장</button><button type="button" class="PasswordChange" onclick="PasswordChange()"> 비밀번호 변경</button><button type="button" onclick="Withdrawal()">회원탈퇴</button>
