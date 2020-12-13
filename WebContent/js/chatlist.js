@@ -29,7 +29,7 @@ function FindTest()	{
 		}
 	});
 }
-
+/*
 function SuccessFriend(ID, pictureRealName, statusmessage) {
 	var output = "";		//마이페이지 기능 구현 후 함.
 	output += "<div>";
@@ -38,7 +38,9 @@ function SuccessFriend(ID, pictureRealName, statusmessage) {
 	output +=			"<a href='#' style='padding-top:0px; padding-bottom:0px;'>";
 	output += 				"<img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'>";
 	output +=			"</a>";
-	output +=				"<span>" + ID + "</span>";
+	output +=				"<div>";
+	output +=					"<span>" + ID + "</span><a href='chatlist.jsp?toID=" + ID + "'><span>친구 추가</span></a>";
+	output +=				"</div>";
 	output +=			"<div>";
 	output +=				"<p>" + statusmessage + "</p>";
 	output +=			"</div>";
@@ -48,9 +50,32 @@ function SuccessFriend(ID, pictureRealName, statusmessage) {
 	output += "<hr>";
 	$("#div2").html(output);
 } 
+*/
+
+function SuccessFriend(ID, pictureRealName, statusmessage)	{
+	var output = "";
+	output += "<table>";
+	output += 		"<tr>";
+	output +=			"<td><a href='#' style='padding-top:0px; padding-bottom:0px;'><img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'></a></td>";
+	output +=			"<td style='width:72%;'><h4>" + statusmessage + "</h4></td>";
+	output +=			"<td><button type='button' onclick='AddFriend(" + ID + ");' style='width:55px;'>친구추가</button></td>";
+	output += 		"</tr>";
+	output += 		"<tr>";
+	output +=			"<td>&nbsp&nbsp&nbsp" + ID + "</td>";
+	output += 		"</tr>";
+	output += "</table>";
+	output == "<hr>";
+	$("#div2").append(output);
+}
 
 function NoFriend()	{
 	var output = "";
 	output += "<h5>검색 결과를 얻어오지 못했습니다.</h5>";
 	$("#div2").html(output);
+}
+
+function AddFriend(ID)	{
+	alert(ID);
+	//ajax
+	
 }
