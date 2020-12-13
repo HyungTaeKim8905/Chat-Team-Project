@@ -108,7 +108,6 @@ function Modify()	{
 			if(json.length == 0)	{
 				alert("받아온 제이슨 데이터가 0입니다.");
 			}
-			var 
 		}
 	});
 }
