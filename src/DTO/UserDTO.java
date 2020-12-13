@@ -51,8 +51,9 @@ public class UserDTO extends DBManager {
 	public int Join(String id, String password, String nick, String email, String address, String phone) {
 		try {
 			// 회원가입페이지(join.jsp)에서 파라미터로 전송된 데이터들을 user테이블의 새로운 레코드로 삽입하는 부분이다.
-			String sql = "insert into user (id, password, nick, email, address, phone) values (?,md5(md5(md5(md5(md5(md5(?)))))),?,?,?,?)";
+			String sql = "insert into user (id, password, nick, email, address, phone, pictureOriginName, pictureRealName, statusmessage) values (?,md5(md5(md5(md5(md5(md5(?)))))),?,?,?,?,?,?,?)";
 			DBOpen();
+			//pictureOriginName    | pictureRealName       | statusmessage
 			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
 					ResultSet.CONCUR_UPDATABLE);
 			m_SelectStatment.setString(1, id);
@@ -61,6 +62,9 @@ public class UserDTO extends DBManager {
 			m_SelectStatment.setString(4, email);
 			m_SelectStatment.setString(5, address);
 			m_SelectStatment.setString(6, phone);
+			m_SelectStatment.setString(7, "./image/man.jpg");///////////
+			m_SelectStatment.setString(8, "./image/man.jpg");
+			m_SelectStatment.setString(9, "");
 			m_SelectStatment.executeUpdate(); // 쿼리실행하면 실행 결과를 java.sql.ResultSet형으로 리턴한다.
 			// m_SelectStatment 를 닫는다.
 			m_SelectStatment.close();
