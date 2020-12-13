@@ -44,7 +44,7 @@
   <script>
 	  function test()	{
 			var fromID = '<%= myID %>';
-			var toID = "123";
+			var toID = "ljk8905";
 			var inputmessage = $("#inputmessage").val();
 		//	alert(inputmessage);
 			$.ajax({
@@ -73,7 +73,7 @@
 	  	var lastNo1 = ""; //*******************
 		function ChattingList(num){
 			var fromID = '<%= myID %>';
-			var toID = "123";
+			var toID = "ljk8905";
 			//alert("listNo1 ::::" + lastNo1);
 			$.ajax({
 				type : "POST",
@@ -230,8 +230,8 @@
   <div class="left" style="width:25%; float: left; ">
   <div class="chatlist">
     <div class="chatlist other" onclick="location.href='#'">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
-      <p>1번 채팅방</p>
+      <img src="./image/man.jpg" alt="사용자">
+      <p>내용이 들어가야되는 부분입니다.</p>
       <span class="time-right">11:00</span>
     </div>
     <div class="chatlist other" onclick="location.href='#'">
@@ -351,9 +351,19 @@
       </svg>
     </a>
     </abbr>
-    <iframe id="friendfm" class="friendfm" frameborder=0>
-	
-    </iframe>
+    <div id="friendfm" class="friendfm" style="width:100%; height:100%;">
+		<div>  
+			<center> 
+    			<h2>친구 목록</h2>   
+    			<input type="text" id="friend" name="friend">
+    			<button type="button" onclick="SerachFriend()">친구</button>
+    		</center>
+    	</div>
+    	<hr>
+    	<div id="div2">
+    		
+    	</div>
+    </div>
     </div>
   <!-- 검색 아이콘 -->
   <div style="position: relative;">
@@ -367,14 +377,14 @@
     </abbr>
     <div id="searchfm" class="searchfm" style="width:100%; height:100%;">
 		<div>  
-			<center> <!-- @@@@@@@@@@@@@@@@@@@@@@@@@ -->   <!-- @@@@@@@@@@@@@@@@@@@@@@@@@ -->   
-    			<h2>친구 찾기</h2><!-- @@@@@@@@@@@@@@@@@@@@@@@@@ -->   <!-- @@@@@@@@@@@@@@@@@@@@@@@@@ -->   
+			<center> 
+    			<h2>친구 찾기</h2>   
     			<input type="text" id="friendid" name="friendid">
     			<button type="button" onclick="FindTest()">검색</button>
     		</center>
     	</div>
     	<hr>
-    	<div id="div2">
+    	<div id="div3">
     		
     	</div>
     </div>
