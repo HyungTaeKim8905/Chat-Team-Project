@@ -17,40 +17,19 @@ function FindTest()	{
 		type:"POST",
 		data:{ID:ID},
 		success:function(result){
+			alert(result);
 			var json = JSON.parse(result);
 			if(json.length == 0)	{
-				alert("친구목록을 가져오지 못했다.");
-				NoFriend();
+				alert("친구목록을 가져오지 못했습니다.");
 			}
-			//alert(json[0]["statusmessage"]);
+			$("#div3").html("");
 			for(var i = 0; json.length; i++)	{
 				SuccessFriend(json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"]);
 			}
 		}
 	});
 }
-/*
-function SuccessFriend(ID, pictureRealName, statusmessage) {
-	var output = "";		//마이페이지 기능 구현 후 함.
-	output += "<div>";
-	output += 	"<div>";
-	output += 		"<div>";
-	output +=			"<a href='#' style='padding-top:0px; padding-bottom:0px;'>";
-	output += 				"<img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'>";
-	output +=			"</a>";
-	output +=				"<div>";
-	output +=					"<span>" + ID + "</span><a href='chatlist.jsp?toID=" + ID + "'><span>친구 추가</span></a>";
-	output +=				"</div>";
-	output +=			"<div>";
-	output +=				"<p>" + statusmessage + "</p>";
-	output +=			"</div>";
-	output += 		"</div>";
-	output += 	"</div>";
-	output += "</div>";
-	output += "<hr>";
-	$("#div3").html(output);
-}
-*/
+
 
 function SuccessFriend(ID, pictureRealName, statusmessage)	{
 	var output = "";
@@ -68,15 +47,11 @@ function SuccessFriend(ID, pictureRealName, statusmessage)	{
 	$("#div3").append(output);
 }
 
-function NoFriend()	{
-	var output = "";
-	output += "<h5>검색 결과를 얻어오지 못했습니다.</h5>";
-	$("#div3").html(output);
-}
-
 function AddFriend(AddID)	{
 	alert(AddID);
 	//알럿이 안뜸 해결 바람
+	
+	/*
 	var check = confirm(AddID + "님을 친구추가 하시겠습니까?");
 	if(check == true)	{
 		alert("확인 버튼 눌렀다.");
@@ -101,5 +76,6 @@ function AddFriend(AddID)	{
 				SuccessFriend(json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"]);
 			}
 		}
-	});
+	});*/
+	
 }
