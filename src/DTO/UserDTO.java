@@ -195,7 +195,10 @@ public class UserDTO extends DBManager {
 		return list; 
 	}
 	
-	
+	public ArrayList<UserVO> AddFriend(String AddID, String sessionID){
+		return new ArrayList<UserVO>();
+		
+	}
 	// DB에서 가져온 비밀번호와 클라이언트가 입력한 비밀번호를 비교하는 부분(로그인)
 	public int LoginCheck(String id, String password) {
 		try {
