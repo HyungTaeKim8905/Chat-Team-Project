@@ -3,6 +3,7 @@ package Action;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,25 +39,21 @@ public class mypageAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		String sessionID = (String)session.getAttribute("id");
 		if(sessionID == null || sessionID.equals(""))	{
+			System.out.println(sessionID);
 			return;
 		}
 		UserDTO dto = new UserDTO();
 		System.out.println(sessionID);
 		System.out.println("print 함수 실행");
 		UserVO vo = dto.MyPagePrint(sessionID);
-		/*
-		 * RequestDispatcher dispatcher = request.getRequestDispatcher("mypage.jsp");
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mypage.jsp");
 		request.setAttribute("vo", vo);
 		dispatcher.forward(request, response);
-		 */
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
 
 }
