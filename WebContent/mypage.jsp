@@ -11,34 +11,6 @@
 	if(vo == null){
 		%> <script>alert("vo가 널입니다.");</script><%
 	}
-	/*
-	DBManager dbm = new DBManager();
-	String sql = "select nick, statusmessage, pictureOriginName, pictureRealName from user where id = '" + sessionID + "'";
-	String nick = "";
-	String img = "";
-	String statusmessage = "";
-	try	{
-		dbm.DBOpen();
-		dbm.OpenQuery(sql);
-		while(dbm.ResultNext())	{
-			nick = dbm.getString("nick");
-			img = dbm.getString("pictureRealName");
-			statusmessage = dbm.getString("statusmessage");
-		}
-		dbm.CloseQuery();
-		dbm.DBClose();
-	} catch(Exception e)	{
-		System.out.println("ERROR : " + e.getMessage());
-	}
-	
-	if(statusmessage == null)	{
-		statusmessage = "";
-	}
-	if(img == "null" || img == "NULL" || img == null)	{
-		//신규 회원가입이라면 기본 사진을 뽀려준다.
-		img = "./image/man.jpg";
-	}
-	*/
 %>
 <!DOCTPYE html lang="ko">
 <html>
