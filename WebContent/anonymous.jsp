@@ -18,7 +18,7 @@
 
   <!-- 상단 네비바 -->
   <div class="topnav" id="myTopnav">
-    
+    <%if((String)session.getAttribute("id")!=null){ %>
     <abbr title="회원 채팅">
       <a href="chatlist.jsp">
         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chat-left-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -27,7 +27,7 @@
           </svg>
     </a>
     </abbr>
-
+<%} %>
     <abbr title="비회원 채팅">
       <a href="anonymous.jsp" class="active">
     <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chat-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -35,7 +35,9 @@
         </svg>
     </a>
     </abbr>
-
+    
+    <!-- 로그인 상태 아니면 띄우는 화면 -->
+ <%if((String)session.getAttribute("id")==null){ %>
     <abbr title="회원가입">
       <a href="register.jsp" style="float: right;">
         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -43,15 +45,7 @@
         </svg>
       </a>
       </abbr>
-  
-      <abbr title="로그아웃">
-      <a href="logout.jsp" style="float: right;">
-        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-unlock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" d="M9.655 8H2.333c-.264 0-.398.068-.471.121a.73.73 0 0 0-.224.296 1.626 1.626 0 0 0-.138.59V14c0 .342.076.531.14.635.064.106.151.18.256.237a1.122 1.122 0 0 0 .436.127l.013.001h7.322c.264 0 .398-.068.471-.121a.73.73 0 0 0 .224-.296 1.627 1.627 0 0 0 .138-.59V9c0-.342-.076-.531-.14-.635a.658.658 0 0 0-.255-.237A1.122 1.122 0 0 0 9.655 8zm.012-1H2.333C.5 7 .5 9 .5 9v5c0 2 1.833 2 1.833 2h7.334c1.833 0 1.833-2 1.833-2V9c0-2-1.833-2-1.833-2zM8.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
-        </svg>
-      </a>
-    </abbr>
-  
+      
       <abbr title="로그인">
       <a href="login.jsp" style="float: right;">
         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -59,7 +53,18 @@
         </svg>
       </a>
     </abbr>
+      
+  <%} %>
   
+  <!-- 로그인 상태이면 띄우는 화면 -->
+  <%if((String)session.getAttribute("id")!=null){ %>
+      <abbr title="로그아웃">
+      <a href="logout.jsp" style="float: right;">
+        <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-unlock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M9.655 8H2.333c-.264 0-.398.068-.471.121a.73.73 0 0 0-.224.296 1.626 1.626 0 0 0-.138.59V14c0 .342.076.531.14.635.064.106.151.18.256.237a1.122 1.122 0 0 0 .436.127l.013.001h7.322c.264 0 .398-.068.471-.121a.73.73 0 0 0 .224-.296 1.627 1.627 0 0 0 .138-.59V9c0-.342-.076-.531-.14-.635a.658.658 0 0 0-.255-.237A1.122 1.122 0 0 0 9.655 8zm.012-1H2.333C.5 7 .5 9 .5 9v5c0 2 1.833 2 1.833 2h7.334c1.833 0 1.833-2 1.833-2V9c0-2-1.833-2-1.833-2zM8.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
+        </svg>
+      </a>
+      </abbr>
       <abbr title="마이페이지">
         <a href="mypage.jsp" style="float: right;">
           <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +74,8 @@
             <circle cx="8" cy="4.5" r="1"/>
           </svg>
         </a>
-        </abbr>
+       </abbr>
+  <%} %>
   </div>
 </head>
 <body>
