@@ -12,7 +12,7 @@ select 쿼리를 날릴 때는	executeQuery() 함수를 사용한다.왜냐하�
 public class DBManager {		//타임을 인식하지 못하기 때문에 serverTimezone=UTC 써준다.
 	protected String m_DBMS = "jdbc:mysql://127.0.0.1/project02?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
 	protected String m_UserID = "root";
-	protected String m_UserPass = "mySQL1234";
+	protected String m_UserPass = "8905love";
 	// Statement 객체는 SQL문을 데이터베이스로 전송하는데 사용한다.
 	protected Connection m_Connection;
 	protected PreparedStatement m_SelectStatment; // Statement로 부터 상속받음  동적인 쿼리에 사용되며 하나의 객체로 여러번의 쿼리를 실행할 수 있다.
@@ -76,23 +76,60 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 		try {
 			//select(조회)문을 전송할  사용하는 메서드로, ResultSet 객체를 반환한다.
 			//이 때, ResultSet이란 select를 실행하여 테이블로부터 얻은 결과를 저장하고있는 저장소라고 생각
-			m_SelectStatment = m_Connection.prepareStatement(pSQL, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
+			m_SelectStatment = m_Connection.prepareStatement(pSQL, ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			
-			m_ResultSet = m_SelectStatment.executeQuery();
+			//m_ResultSet = m_SelectStatment.executeQuery();
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
 			return false;
 		}
 		return true;
 	}
+	
+	public boolean ExecuteQuery()	{
+		try	{
+			
+			m_ResultSet = m_SelectStatment.executeQuery();
+			
+		} catch (SQLException e) {
+			System.out.println("ERROR:" + e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
 
-	// Query를 종료한다.
-	public void CloseQuery() {
+	// Insert, Delete, Update 처리용 함수
+	public boolean ExcuteUpdate(String pSQL) // 불린 타입의 값을 반환
+	{
+		try {
+			m_SelectStatment.executeUpdate(); // 쿼리실행하면 실행 결과를 java.sql.ResultSet형으로 리턴한다
+		} catch (SQLException e) {
+			System.out.println("ERROR:" + e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	// Result를 닫는다.
+	public boolean CloseResultSet()	{
 		try {
 			// 검색된 결과를 닫는다.
 			m_ResultSet.close();
 
+		} catch (SQLException e) {
+			System.out.println("ERROR:" + e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	
+	// Query를 종료한다.
+	public void CloseQuery() {
+		try {
+			// 검색된 결과를 닫는다.
+			//m_ResultSet.close();
+			
 			// stmt 를 닫는다.
 			m_SelectStatment.close();
 		} catch (SQLException e) {
@@ -129,34 +166,5 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 			System.out.println("ERROR:" + e.getMessage());
 			return 0;
 		}
-	}
-
-	// Insert, Delete, Update 처리용 함수
-	public boolean Excute(String pSQL) // 불린 타입의 값을 반환
-	{
-		try { //// 커서이동방법 //수정가능한 모드
-			m_SelectStatment = m_Connection.prepareStatement(pSQL, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.executeUpdate(); // 쿼리실행하면 실행 결과를 java.sql.ResultSet형으로 리턴한다.
-			// m_SelectStatment 를 닫는다.
-			m_SelectStatment.close();
-		} catch (SQLException e) {
-			System.out.println("ERROR:" + e.getMessage());
-			return false;
-		}
-		return true;
-	}
-	
-	public boolean Excutee(String pSQL) // 불린 타입의 값을 반환
-	{
-		try { //// 커서이동방법 //수정가능한 모드
-			m_SelectStatment = m_Connection.prepareStatement(pSQL, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.executeUpdate(); // 쿼리실행하면 실행 결과를 java.sql.ResultSet형으로 리턴한다.
-			// m_SelectStatment 를 닫는다.
-			//m_SelectStatment.close();
-		} catch (SQLException e) {
-			System.out.println("ERROR:" + e.getMessage());
-			return false;
-		}
-		return true;
 	}
 }
