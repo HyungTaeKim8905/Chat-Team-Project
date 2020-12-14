@@ -133,16 +133,7 @@ public class UserDTO extends DBManager {
 		return vo;
 	}
 	
-	public ArrayList<UserVO> AddID(String ID)	{
-		String sql = "";
-		sql = "insert into ";
-		try	{
-			
-		}
-		return new ArrayList<UserVO>();
-	}
 	
-	//친구 검색을 했을시 실행되는 함수.
 	public ArrayList<UserVO> FriendCheck(String text)	{
 		//아이디 프로필 사진, 상태메세지를 가져와 뽀려줘야한다.
 		String sql = "";
