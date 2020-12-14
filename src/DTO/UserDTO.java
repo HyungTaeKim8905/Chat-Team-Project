@@ -133,7 +133,35 @@ public class UserDTO extends DBManager {
 		return vo;
 	}
 	
-	
+	///수정해야 하는 함수4$$$$$$$$$$$$$$$$$$$$$
+	public UserVO MyPagePrint(String ID)	{
+		DBManager dbm = new DBManager();
+		String sql = "select nick, statusmessage, pictureOriginName, pictureRealName from user where id = '" + ID + "'";
+		String nick = "";
+		String img = "";
+		String statusmessage = "";
+		try	{
+			dbm.DBOpen();
+			dbm.OpenQuery(sql);
+			while(dbm.ResultNext())	{
+				nick = dbm.getString("nick");
+				img = dbm.getString("pictureRealName");
+				statusmessage = dbm.getString("statusmessage");
+			}
+			dbm.CloseQuery();
+			dbm.DBClose();
+		} catch(Exception e)	{
+			System.out.println("ERRO : " + e.getMessage());
+		}
+		if(statusmessage == null)	{
+			statusmessage = "";
+		}
+		if(img == "null" || img == "NULL" || img == null)	{
+			//신규 회원가입이라면 기본 사진을 뽀려준다.
+			img = "./image/man.jpg";
+		}
+		return vo;
+	}
 	public ArrayList<UserVO> FriendCheck(String text)	{
 		//아이디 프로필 사진, 상태메세지를 가져와 뽀려줘야한다.
 		String sql = "";
