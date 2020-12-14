@@ -39,7 +39,7 @@
   <script src="./js/chatlist.js"></script> -
 
   <!-- 이미지 업로드 자바스크립트 -->
-  <script src="./js/imageupload.js"></script>
+  <script src="./js/fileupload.js"></script>
 
   <title>채팅</title>
   
@@ -407,29 +407,22 @@
   </div>
 
   <!-- 파일 업로드 -->
+  <div class="fileupload">
+  <form enctype="multipart/form-data" method="post">
+  	  <input type="file" id="fileuld" accept=".gif, .jpg, .png, .bmp, .jpeg" maxlength="5" onchange="filecheck(this)" multiple style='display: none;'>
   <abbr title="파일 업로드">
-  <a href="#">
+  <a href="javascript:void(0)">
+   <label for="fileuld">
     <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
       <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
       <path fill-rule="evenodd" d="M7.646.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 1.707V10.5a.5.5 0 0 1-1 0V1.707L5.354 3.854a.5.5 0 1 1-.708-.708l3-3z"/>
     </svg>
+    </label>
   </a> 
   </abbr>
-  <!-- 이미지 업로드 -->
-  <div class="imageupload">
-    <form enctype="multipart/form-data" method="post">
-  	  <input type="file" id="imguld" accept=".gif, .jpg, .png, .bmp, .jpeg" maxlength="5" onchange="imagecheck(this)" multiple style='display: none;'>	
-	   <abbr title="이미지 업로드">
-		 <a href="javascript:void(0)">
-		   <label for="imguld">
-		    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-card-image" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-		     <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9c0 .013 0 .027.002.04V12l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15 9.499V3.5a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13zm4.502 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-		    </svg>
-		   </label>
-		 </a> 
-	  </abbr>
-	</form>
-  </div>
+ </form>
+</div>
+	
 </div>
 </div>
 </body>
