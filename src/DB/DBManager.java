@@ -18,20 +18,12 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 	protected PreparedStatement m_SelectStatment; // Statement로 부터 상속받음  동적인 쿼리에 사용되며 하나의 객체로 여러번의 쿼리를 실행할 수 있다.
 	protected ResultSet m_ResultSet;
 	
-	public PreparedStatement getPreparedStatement()	{
+	public PreparedStatement ps() {
 		return m_SelectStatment;
 	}
-	
+
 	public String getVersion() {
 		return "Java Beans Board v1.0";
-	}
-
-	public void setUserID(String id) {
-		m_UserID = id;
-	}
-
-	public void setPassword(String pw) {
-		m_UserPass = pw;
 	}
 
 	// MySQL 연결을 위한 라이브러리를 로딩한다.
