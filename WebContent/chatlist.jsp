@@ -159,87 +159,6 @@
 			ChattingList("0"); 
 			Reload();
 		});
-		
-/*
-		function SuccessFriend(ID, pictureRealName, statusmessage)	{
-			var output = "";
-			output += "<table>";
-			output += 		"<tr>";
-			output +=			"<td><a href='#' style='padding-top:0px; padding-bottom:0px;'><img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'></a></td>";
-			output +=			"<td style='width:72%;'><h4>" + statusmessage + "</h4></td>";
-			output +=			"<td><button type='button' onclick='AddFriend(" + ID + ")' style='width:55px;'>친구추가</button></td>";
-			output += 		"</tr>";
-			output += 		"<tr>";
-			output +=			"<td>&nbsp&nbsp&nbsp" + ID + "</td>";
-			output += 		"</tr>";
-			output += "</table>";
-			output == "<hr>";
-			$("#div3").append(output);
-			
-			alert("test:::"+ID);
-		}
-		
-
-		function AddFriend(AddID)	{
-			alert(AddID);
-			//알럿이 안뜸 해결 바람
-			var check = confirm(AddID + "님을 친구추가 하시겠습니까?");
-			if(check == true)	{
-				alert("확인 버튼 눌렀다.");
-			}
-			
-			if(check == false)	{
-				alert("취소 버튼 눌렀다.");
-				return false;
-			}
-			$.ajax({ 
-				url:"#",
-				type:"POST",
-				data:{AddID:AddID},
-				success:function(result){
-					var json = JSON.parse(result);
-					if(json == null)	{
-						alert("친구목록을 가져오지 못했다.");
-						NoFriend();
-					}
-					alert(json[0]["statusmessage"]);
-					for(var i = 0; json.length; i++)	{
-						SuccessFriend(json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"]);
-					}
-				}
-			});
-		}
-		
-		function searchfn() {
-		  document.getElementById("searchfm").classList.toggle("show");
-		  document.getElementById("friendfm").classList.remove("show");
-		}
-		function friendfn() {
-		  document.getElementById("friendfm").classList.toggle("show");
-		  document.getElementById("searchfm").classList.remove("show");
-		}
-
-		function FindTest()	{
-			var ID = $("#friendid").val();
-			alert(ID);
-			$.ajax({ 
-				url:"FindFriend",
-				type:"POST",
-				data:{ID:ID},
-				success:function(result){
-					var json = JSON.parse(result);
-					if(json.length == 0)	{
-						alert("친구목록을 가져오지 못했다.");
-						NoFriend();
-					}
-					//alert(json[0]["statusmessage"]);
-					for(var i = 0; json.length; i++)	{
-						SuccessFriend(json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"]);
-					}
-				}
-			});
-		}
-		*/
   </script>
 </head>
 <body>
@@ -298,7 +217,7 @@
 	if(myID != null)	{
 %>
     <abbr title="마이페이지">
-      <a href="mypage.jsp" style="float: right;">
+      <a href="mypageAction" style="float: right;">
         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
           <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
