@@ -43,7 +43,7 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 			return false;
 		}
 		try {
-			m_Connection = DriverManager.getConnection(m_DBMS, m_UserID, m_UserPass);
+			this.m_Connection = DriverManager.getConnection(m_DBMS, m_UserID, m_UserPass);
 		} // DriverManager.getConnection() 메소드를 호출하여 데이터베이스에 연결하고 Connection 객체를 반환
 		catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
@@ -56,7 +56,7 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 	public void DBClose() {
 		try {
 			
-			m_Connection.close(); // db 연결 종료
+			this.m_Connection.close(); // db 연결 종료
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage()); // 오류 발생시 캐치문
 			return;
@@ -68,7 +68,7 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 		try {
 			//select(조회)문을 전송할  사용하는 메서드로, ResultSet 객체를 반환한다.
 			//이 때, ResultSet이란 select를 실행하여 테이블로부터 얻은 결과를 저장하고있는 저장소라고 생각
-			m_SelectStatment = m_Connection.prepareStatement(pSQL, ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
+			this.m_SelectStatment = m_Connection.prepareStatement(pSQL, ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_UPDATABLE);
 			
 			//m_ResultSet = m_SelectStatment.executeQuery();
 		} catch (SQLException e) {
@@ -81,10 +81,11 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 	public boolean ExecuteQuery()	{
 		try	{
 			
-			m_ResultSet = m_SelectStatment.executeQuery();
-			
+			this.m_ResultSet = this.m_SelectStatment.executeQuery();
+			System.out.println("실행");
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
+			System.out.println("resultset이 널이다.");
 			return false;
 		}
 		return true;
@@ -95,7 +96,7 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 	public boolean ExcuteUpdate(String pSQL) // 불린 타입의 값을 반환
 	{
 		try {
-			m_SelectStatment.executeUpdate(); // 쿼리실행하면 실행 결과를 java.sql.ResultSet형으로 리턴한다
+			this.m_SelectStatment.executeUpdate(); // 쿼리실행하면 실행 결과를 java.sql.ResultSet형으로 리턴한다
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
 			return false;
@@ -107,7 +108,7 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 	public boolean CloseResultSet()	{
 		try {
 			// 검색된 결과를 닫는다.
-			m_ResultSet.close();
+			this.m_ResultSet.close();
 
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
@@ -119,11 +120,9 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 	// Query를 종료한다.
 	public void CloseQuery() {
 		try {
-			// 검색된 결과를 닫는다.
-			//m_ResultSet.close();
 			
 			// stmt 를 닫는다.
-			m_SelectStatment.close();
+			this.m_SelectStatment.close();
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
 			return;
@@ -143,7 +142,7 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 	// 레코드의 값을 얻는다.
 	public String getString(String pName) {
 		try {
-			return m_ResultSet.getString(pName);
+			return this.m_ResultSet.getString(pName);
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
 			return null;
@@ -153,7 +152,7 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 	// 레코드의 값을 얻는다.
 	public int getInt(String pName) {
 		try {
-			return Integer.parseInt(m_ResultSet.getString(pName));
+			return Integer.parseInt(this.m_ResultSet.getString(pName));
 		} catch (SQLException e) {
 			System.out.println("ERROR:" + e.getMessage());
 			return 0;
