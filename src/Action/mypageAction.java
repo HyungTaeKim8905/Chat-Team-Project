@@ -41,8 +41,14 @@ public class mypageAction extends HttpServlet {
 			return;
 		}
 		UserDTO dto = new UserDTO();
+		System.out.println(sessionID);
+		System.out.println("print 함수 실행");
 		UserVO vo = dto.MyPagePrint(sessionID);
-		
+		/*
+		 * RequestDispatcher dispatcher = request.getRequestDispatcher("mypage.jsp");
+		request.setAttribute("vo", vo);
+		dispatcher.forward(request, response);
+		 */
 	}
 
 	/**
