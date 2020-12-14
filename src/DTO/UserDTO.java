@@ -133,26 +133,27 @@ public class UserDTO extends DBManager {
 		return vo;
 	}
 	
-	///수정해야 하는 함수4$$$$$$$$$$$$$$$$$$$$$
+	///마이페이지 뿌려주는 함수
 	public UserVO MyPagePrint(String ID)	{
-		DBManager dbm = new DBManager();
-		String sql = "select nick, statusmessage, pictureOriginName, pictureRealName from user where id = '" + ID + "'";
-		String nick = "";
-		String img = "";
-		String statusmessage = "";
+		String sql = "select nick, statusmessage, pictureRealName from user where id = '" + ID + "'";
+		UserVO vo = new UserVO();
 		try	{
-			dbm.DBOpen();
-			dbm.OpenQuery(sql);
-			while(dbm.ResultNext())	{
-				nick = dbm.getString("nick");
-				img = dbm.getString("pictureRealName");
-				statusmessage = dbm.getString("statusmessage");
+			DBOpen();
+			OpenQuery(sql);
+			ExecuteQuery();
+			while(ResultNext())	{
+				vo.setNick(getString("nick"));
+				vo.setPictureRealName(getString("pictureRealName"));
+				vo.setStatusmessage(getString("statusmessage"));
 			}
-			dbm.CloseQuery();
-			dbm.DBClose();
+			CloseResultSet();
+			CloseQuery();
+			DBClose();
 		} catch(Exception e)	{
-			System.out.println("ERRO : " + e.getMessage());
+			System.out.println("ERROR : " + e.getMessage());
+			System.out.println("MyPagePrint() 오류");
 		}
+		/*
 		if(statusmessage == null)	{
 			statusmessage = "";
 		}
@@ -160,6 +161,7 @@ public class UserDTO extends DBManager {
 			//신규 회원가입이라면 기본 사진을 뽀려준다.
 			img = "./image/man.jpg";
 		}
+		*/
 		return vo;
 	}
 	public ArrayList<UserVO> FriendCheck(String text)	{
@@ -331,7 +333,7 @@ public class UserDTO extends DBManager {
 		String sql = "update board set downloadcount = downloadcount + 1 where filerealname='" + filedownload + "'";
 		try {
 			DBOpen();
-			Excute(sql);
+			ExcuteUpdate(sql);
 			DBClose();
 		} catch (Exception e) {
 			System.out.println("첨부파일 카운트를 증가하는데 있어 오류");
@@ -349,7 +351,7 @@ public class UserDTO extends DBManager {
 				+ "', now())";
 		try { // 작성자, 내용, 작성일
 			DBOpen();
-			Excute(sql);
+			ExcuteUpdate(sql);
 			DBClose();
 			return true; // 댓글을 등록하면 true 반환
 		} catch (Exception e) {
