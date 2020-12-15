@@ -26,6 +26,7 @@ function friendfn() {
 	});
 }
 
+//친구 검색을 하면 실행되는 메서드
 function FindTest()	{
 	var ID = $("#friendid").val();
 	alert(ID);
@@ -46,6 +47,7 @@ function FindTest()	{
 	});
 }
 
+// 친구 검색을 하면 실행되는 메서드후 친구들을 뿌려주는 메서드
 function SuccessFriend(Nick, pictureRealName, statusmessage, i)	{
 	var output = "";
 	output += "<div id='Sdiv_" + i + "'>";
@@ -155,7 +157,26 @@ function DeleteFriend(DeleteID, i)	{
 }
 
 
-
+//친구목록 검색을하면 실행되는 메서드
+function SerachFriend()	{	//서블릿 만들어야함.
+	var SearchID = $("#friend").val();
+	alert(SearchID);
+	$.ajax({ 
+		url:"SearchFriend",
+		type:"POST",
+		data:{SearchID:SearchID},
+		success:function(result){
+			var json = JSON.parse(result);
+			if(json.length == 0)	{
+				alert("친구목록을 가져오지 못했습니다.");
+			}
+			$("#div2").html("");
+			for(var i = 0; json.length; i++)	{
+				FriendList(json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"],i);
+			}
+		}
+	});
+}
 
 
 
