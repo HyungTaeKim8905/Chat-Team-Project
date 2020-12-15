@@ -70,9 +70,10 @@ function SuccessFriend(ID, pictureRealName, statusmessage, i)	{
 }
 
 //친구추가 버튼을 누르면 실행되는 함수
-function AddFriend(AddID, i )	{
+function AddFriend(AddID, i)	{
 	//alert(AddID);
-	$("#Sdiv_"+i).remove();
+	$("#Sdiv_"+i).remove();	//삭제를 해줄때는 무조건 i값을 파라미터로 받아서 처리해준다.
+							//전역변수로 i값을 설정하면 아래있는 div가 삭제된다.
 	var check = confirm(AddID + "님을 친구추가 하시겠습니까?");
 	if(check == true)	{
 		alert("확인 버튼 눌렀다.");
