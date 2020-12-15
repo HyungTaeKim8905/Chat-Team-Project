@@ -1,0 +1,1 @@
+select (nick, pictureRealName, statusmessage) from user where friend.id=sessionid and friend.friendid=user.id;
