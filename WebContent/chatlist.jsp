@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="DB.DBManager" %>
+<%@ page import="file.*" %>
 <%
 	String myID = null;
 	if (session.getAttribute("id") != null) {
@@ -39,8 +41,8 @@
   <!-- 자바스크립트문 -->
   <script src="./js/chatlist.jsp"></script> 
 
-  <!-- 이미지 업로드 자바스크립트 -->
-  <script src="./js/fileupload.js"></script>
+  <!-- 파일 업로드 자바스크립트 -->
+  <%@ include file="./js/fileupload.jsp" %>
 
   <title>채팅</title>
   
@@ -135,7 +137,7 @@
   </div>
   </div>
   <!-- 채팅창 -->
-  <div class="center" style="width:66%; height: 100%; float: left; ">
+  <div class="center" style="width:66%; height: 100%; float: left;">
   <div class="chat" id="div1">
   
  <!-- ***************************************************************** -->   
@@ -215,7 +217,7 @@
 
   <!-- 파일 업로드 -->
   <div class="fileupload">
-  <form enctype="multipart/form-data" method="post">
+  <form enctype="multipart/form-data" method="post" id="fileuploadform">
   	  <input type="file" id="fileuld" accept=".gif, .jpg, .png, .bmp, .jpeg" maxlength="5" onchange="filecheck(this)" multiple style='display: none;'>
   <abbr title="파일 업로드">
   <a href="javascript:void(0)">
