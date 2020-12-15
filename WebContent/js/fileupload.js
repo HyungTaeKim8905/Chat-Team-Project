@@ -26,6 +26,9 @@
         }else{   //취소
             return;
         }
-
+        
+        function drop(event){
+        	event.preventDefault();
+        }
 
     }

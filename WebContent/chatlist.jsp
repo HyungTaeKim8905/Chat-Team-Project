@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="DB.DBManager" %>
+<%@ page import="file.*" %>
 <%
 	String myID = null;
 	if (session.getAttribute("id") != null) {
@@ -247,7 +249,7 @@
   </div>
   </div>
   <!-- 채팅창 -->
-  <div class="center" style="width:66%; height: 100%; float: left; ">
+  <div class="center" style="width:66%; height: 100%; float: left;">
   <div class="chat" id="div1">
   
  <!-- ***************************************************************** -->   
