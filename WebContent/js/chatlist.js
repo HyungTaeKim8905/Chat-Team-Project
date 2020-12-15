@@ -9,7 +9,7 @@ function searchfn() {
 function friendfn() {
   document.getElementById("friendfm").classList.toggle("show");
   document.getElementById("searchfm").classList.remove("show");
-   //친구 목록 버튼을 눌렀을때 실행되는 ajax
+  //친구 목록 버튼을 눌렀을때 실행되는 ajax
   $.ajax({
 		url:"PrintFriend",
 		type:"POST",
@@ -18,6 +18,7 @@ function friendfn() {
 			if(json.length == 0)	{
 				alert("친구 리스트가 없습니다.");
 			}
+			$("#div2").html("");
 			for(var i = 0; i <json.length; i++)	{
 				FriendList(json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"]);
 			}
