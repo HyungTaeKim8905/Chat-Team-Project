@@ -157,8 +157,8 @@ public class UserDTO extends DBManager {
 		// 아이디 프로필 사진, 상태메세지를 가져와 뽀려줘야한다.
 		String sql = "";
 		ArrayList<UserVO> list = new ArrayList<UserVO>(); 
-		sql = "select * from user where id not in (select friendid from friend where friendid like '%" + text + "%') and id != '" + sessionID + "'";
-		try {		
+		sql = "select * from user where id not in (select friendid from friend where friendid like '%" + text + "%') and id != '" + sessionID + "' and id like '%" + text + "%'";
+		try {
 			DBOpen();
 			OpenQuery(sql);
 			//m_SelectStatment.setString(1, id);
@@ -183,7 +183,7 @@ public class UserDTO extends DBManager {
 		return list;
 	}
 	
-	//친구 추가해주는 함수
+	//친구리스트를 가져오는 함수
 	public ArrayList<UserVO> PrintFriend(String sessionID) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
 		String sql = "";
@@ -216,6 +216,8 @@ public class UserDTO extends DBManager {
 		return list;
 	}
 	
+	
+	//친구 추가해주는 함수
 	public int AddFriend(String AddID, String sessionID)	{
 		String sql = "";
 		try	{
@@ -234,7 +236,28 @@ public class UserDTO extends DBManager {
 		}
 		return 1;		//잘되면 1
 	}
-
+	
+	public int DeleteFriend(String DeleteID, String sessionID)	{
+		String sql = "";
+		sql = "delete from friend where (id = ?) and (friendid = ?)";
+		try	{
+			DBOpen();
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, sessionID);
+			getM_SelectStatment().setString(2, DeleteID);
+			ExcuteUpdate();
+			CloseQuery();
+			DBClose();
+		} catch(Exception e) {
+			System.out.println("DeleteFriend() 오류");
+			System.out.println("ERROR : " + e.getMessage());
+			return -1;
+		}
+		return 1;
+	}
+	
+	
+	
 	// DB에서 가져온 비밀번호와 클라이언트가 입력한 비밀번호를 비교하는 부분(로그인)
 	public int LoginCheck(String id, String password) {
 		try {
