@@ -237,14 +237,15 @@ public class UserDTO extends DBManager {
 		return 1;		//잘되면 1
 	}
 	
-	public int DeleteFriend(String DeleteID, String sessionID)	{
+	//친구 삭제해주는 함수
+	public int DeleteFriend(String nick, String sessionID)	{
 		String sql = "";
-		sql = "delete from friend where (id = ?) and (friendid = ?)";
-		try	{
+		sql = "delete from friend where friendid = (select id from user where nick = ?) and id = ?";
+		try	{  
 			DBOpen();
 			OpenQuery(sql);
-			getM_SelectStatment().setString(1, sessionID);
-			getM_SelectStatment().setString(2, DeleteID);
+			getM_SelectStatment().setString(1, nick);
+			getM_SelectStatment().setString(2, sessionID);//아이디가 아니고 닉네임이 들어간다.
 			ExcuteUpdate();
 			CloseQuery();
 			DBClose();
