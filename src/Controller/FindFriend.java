@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -51,13 +52,20 @@ public class FindFriend extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		String id = request.getParameter("ID");
-
+		HttpSession session = request.getSession();
+		String sessionID = (String)session.getAttribute("id");
 		if (id == null || id.equals("")) {
 			System.out.println("id가 공백으로 넘어왔습니다.");
 			out.println("0");
+			return;
+		}
+		if(sessionID == null || sessionID.equals(""))	{
+			System.out.println("sessionID가 null입니다.");
+			out.println("0");
+			return;
 		}
 		UserDTO dto = new UserDTO();
-		ArrayList<UserVO> list = dto.FriendCheck(id);
+		ArrayList<UserVO> list = dto.FriendCheck(id, sessionID);
 		if(list.size() == 0)	{
 			return;
 		}
