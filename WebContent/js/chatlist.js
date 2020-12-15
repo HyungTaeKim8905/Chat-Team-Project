@@ -10,7 +10,6 @@ function friendfn() {
   document.getElementById("friendfm").classList.toggle("show");
   document.getElementById("searchfm").classList.remove("show");
    //친구 목록 버튼을 눌렀을때 실행되는 ajax
-  $("#div2").html("");
   $.ajax({
 		url:"PrintFriend",
 		type:"POST",
@@ -109,7 +108,7 @@ function FriendList(ID, pictureRealName, statusmessage)	{
 	output += 		"<tr>";
 	output +=			"<td><a href='#' style='padding-top:0px; padding-bottom:0px;'><img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'></a></td>";
 	output +=			"<td style='width:72%;'><h4>" + statusmessage + "</h4></td>";
-	output +=			"<td><button type='button' id='btnMr_"+i+"' style='width:55px;'>1:1 메세지 보내기</button></td>";
+	output +=			"<td><button type='button' id='btnMr_"+j+"' style='width:55px;'>1:1 메세지 보내기</button></td>";
 	output += 		"</tr>";
 	output += 		"<tr>";
 	output +=			"<td>&nbsp&nbsp&nbsp&nbsp" + ID + "</td>";
