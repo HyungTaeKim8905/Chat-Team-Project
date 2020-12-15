@@ -3,7 +3,23 @@
 function searchfn() {
   document.getElementById("searchfm").classList.toggle("show");
   document.getElementById("friendfm").classList.remove("show");
+  
+  $.ajax({ 
+		url:"AddFriend",
+		type:"POST",
+		success:function(result){
+			var json = JSON.parse(result);
+			if(json.length == 0)	{
+				alert("친구 리스트가 없습니다.");
+			}
+			for(var i = 0; i <json.length; i++)	{
+				FriendList(json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"]);
+			}
+		}
+	});
 }
+
+
 function friendfn() {
   document.getElementById("friendfm").classList.toggle("show");
   document.getElementById("searchfm").classList.remove("show");
@@ -40,7 +56,7 @@ function SuccessFriend(ID, pictureRealName, statusmessage)	{
 	output +=			"<td><button type='button' id='btnFr_"+i+"' style='width:55px;'>친구추가</button></td>";
 	output += 		"</tr>";
 	output += 		"<tr>";
-	output +=			"<td>&nbsp&nbsp&nbsp" + ID + "</td>";
+	output +=			"<td>&nbsp&nbsp&nbsp&nbsp&nbsp" + ID + "</td>";
 	output += 		"</tr>";
 	output += "</table>";
 	output == "<hr>";
@@ -66,15 +82,41 @@ function AddFriend(AddID)	{
 		alert("취소 버튼 눌렀다.");
 		return false;
 	}
+	
 	$.ajax({ 
 		url:"AddFriend",
 		type:"POST",
 		data:{AddID:AddID},
 		success:function(result){
 			var json = JSON.parse(result);
+			if(json[0]["result"] == 1)	{
+				alert(AddID + "님을 친구로 추가하셨습니다.");
+			}
+			else if(json[0]["result"] == -1)	{
+				alert(AddID + "님을 친구로 추가하지 못했습니다.");
+			}
 		}
 	});
 }
 
+
+
+var j = 0;
+function FriendList(ID, pictureRealName, statusmessage)	{
+	var output = "";
+	output += "<table>";
+	output += 		"<tr>";
+	output +=			"<td><a href='#' style='padding-top:0px; padding-bottom:0px;'><img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'></a></td>";
+	output +=			"<td style='width:72%;'><h4>" + statusmessage + "</h4></td>";
+	output +=			"<td><button type='button' id='btnMr_"+i+"' style='width:55px;'>1:1 메세지 보내기</button></td>";
+	output += 		"</tr>";
+	output += 		"<tr>";
+	output +=			"<td>&nbsp&nbsp&nbsp&nbsp&nbsp" + ID + "</td>";
+	output += 		"</tr>";
+	output += "</table>";
+	output == "<hr>";
+	$("#div2").append(output);
+	j++;
+}
 
 

@@ -183,20 +183,56 @@ public class UserDTO extends DBManager {
 		return list;
 	}
 	
-	//친구 추가해주는 함수 작성중...
-	public ArrayList<UserVO> AddFriend(String AddID, String sessionID) {
+	//친구 추가해주는 함수
+	public ArrayList<UserVO> PrintFriend(String sessionID) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
 		String sql = "";
 		try	{
-			sql = "insert into friend (id, friendid) values (?, ?)";
 			DBOpen();
+			//아이디 이미지 상태메세지 가져와서 출력 			//친구추가한 사람의 id가 들어가야한다.			sessionid  
+			sql = "select * from user where id = any (select friendid from friend where id = ?)";
 			OpenQuery(sql);
-			
+			getM_SelectStatment().setString(1, sessionID);
+			ExecuteQuery();
+			while (ResultNext()) {
+				UserVO vo = new UserVO();
+				vo.setNick(getM_ResultSet().getString("nick"));
+				vo.setStatusmessage(getM_ResultSet().getString("statusmessage"));
+				vo.setPictureRealName(getM_ResultSet().getString("pictureRealName"));
+				System.out.println("시작!!!!!!!!!!!!!!!!!!");
+				System.out.println("닉네임 :::: "+getString("nick"));
+				System.out.println("상태메세지 ::::"+getString("statusmessage"));
+				System.out.println("사진이름 :::: "+getString("pictureRealName"));
+				list.add(vo);
+			}
+			CloseResultSet();
+			CloseQuery();
+			DBClose();
 		} catch(Exception e)	{
 			System.out.println("AddFriend() 오류");
 			System.out.println("ERROR : " + e.getMessage());
+			return null;
 		}
 		return list;
+	}
+	
+	public int AddFriend(String AddID, String sessionID)	{
+		String sql = "";
+		try	{
+			DBOpen();
+			sql = "insert into friend (id, friendid) values (?, ?)";
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, sessionID);
+			getM_SelectStatment().setString(2, AddID);
+			ExcuteUpdate();
+			CloseQuery();
+			DBClose();
+		} catch(Exception e)	{
+			System.out.println("AddFriend() 오류");
+			System.out.println("ERROR : " + e.getMessage());
+			return -1;
+		}
+		return 1;		//잘되면 1
 	}
 
 	// DB에서 가져온 비밀번호와 클라이언트가 입력한 비밀번호를 비교하는 부분(로그인)

@@ -21,14 +21,14 @@ import VO.UserVO;
 /**
  * Servlet implementation class AddFriend
  */
-@WebServlet("/PrintFriend")
-public class PrintFriend extends HttpServlet {
+@WebServlet("/AddFriend")
+public class AddFriend extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PrintFriend() {
+    public AddFriend() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -48,33 +48,19 @@ public class PrintFriend extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
+		String AddID = request.getParameter("AddID");
 		HttpSession session = request.getSession();
 		String sessionID = (String)session.getAttribute("id");
 		UserDTO dto = new UserDTO();
-		ArrayList<UserVO> list = dto.PrintFriend(sessionID);
-		if(list == null) {
-			System.out.println("친구 목록을 가져오는데 null 입니다.");
-			return;
-		}
-		for(int i = 0; i < list.size(); i++)	{
-			System.out.println("어레이 잘 들어왔나 확인");
-			System.out.println(list.get(i).getNick());
-			System.out.println(list.get(i).getStatusmessage());
-			System.out.println(list.get(i).getPictureRealName());
-		}
-		//제이슨으로 뿌려준다.
+		int result = dto.AddFriend(AddID, sessionID);
 		JSONArray jsonArrList = new JSONArray();
 		try	{
-			for(int i = 0; i < list.size(); i++)	{
-				JSONObject jsonList = new JSONObject();
-				jsonList.put("ID", list.get(i).getId());
-				jsonList.put("pictureRealName", list.get(i).getPictureRealName());
-				jsonList.put("statusmessage", list.get(i).getStatusmessage());
-				jsonArrList.add(jsonList);
-			}	
-		} catch(Exception e) {
+			JSONObject jsonList = new JSONObject();
+			jsonList.put("result", result);
+			jsonArrList.add(jsonList);
+		} catch(Exception e)	{
 			System.out.println("AddFriend 서블릿 doPost() 오류");
-			System.out.println("ERROR : " + e.getMessage());
+			System.out.println("ERROR :"  + e.getMessage());
 		}
 		out.println(jsonArrList);
 	}

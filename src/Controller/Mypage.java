@@ -50,7 +50,7 @@ public class Mypage extends HttpServlet {
 		ServletContext context = this.getServletContext();
 		String uploadPath = context.getRealPath("/image");		//파일을 업로드할 서버상의 폴더명을 지정
 		/* getRealPath()메서드는 현재 웹 서버의 상대경로를 웹 경로(uploadTest/upload)가 아닌 실제 서버 시스템상의 디렉토리 경로(c:\\uploadTest\\upload\)를 반환한다. */
-		int size 			= 1024*1024*15;						// 15메가로 지정함. 15메가를 넘을 경우 예외 발생
+		int size 			= 1024*1024*5;						// 5메가로 지정함. 15메가를 넘을 경우 예외 발생
 		//한 번의 요청으로 업로드할 수 있는 업로드 파일의 최대 크기를 지정한다.
 		String filename	    = "";								// 폼에서 선택한 원본 파일명
 		String filerealname = "";								// 서버에 실제로 저장된 파일의 이름

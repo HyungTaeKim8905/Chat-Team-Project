@@ -55,6 +55,7 @@ public class FindFriend extends HttpServlet {
 		if (id == null || id.equals("")) {
 			System.out.println("id가 공백으로 넘어왔습니다.");
 			out.println("0");
+			return;
 		}
 		UserDTO dto = new UserDTO();
 		ArrayList<UserVO> list = dto.FriendCheck(id);
