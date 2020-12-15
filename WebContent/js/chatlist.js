@@ -127,6 +127,7 @@ function FriendList(ID, pictureRealName, statusmessage, i)	{
 
 // 친구 끊기 버튼 누르면 실행되는 함수.
 function DeleteFriend(DeleteID, i)	{
+	alert("i:::::" + i);
 	var check = confirm(DeleteID + "님을 삭제 하시겠습니까?");
 	if(check == true)	{
 		alert("확인 버튼 눌렀다.");
@@ -136,6 +137,7 @@ function DeleteFriend(DeleteID, i)	{
 		alert("취소 버튼 눌렀다.");
 		return false;
 	}
+	$("#divDn_" + i).remove();
 	$.ajax({ 
 		url:"DeleteFriend",
 		type:"POST",
