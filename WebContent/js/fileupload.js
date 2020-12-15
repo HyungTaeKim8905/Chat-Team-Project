@@ -1,6 +1,7 @@
 // 파일 체크
     function filecheck(frm){
         var maxfilesize = 5*1024*1024; //5MB 제한
+        var filename = []; 
         for(var i=0; i<frm.files.length; i++){
             //파일 개수 제한
             if(i>4){
@@ -15,5 +16,8 @@
                 frm.outerHTML = frm.outerHTML;
                 return false;
             }
+            filename[i]=frm.files[i].name;
         }
+        
+        
     }
