@@ -2,6 +2,8 @@
     function filecheck(frm){
         var maxfilesize = 5*1024*1024; //5MB 제한
         var filename = []; 
+        var con = "다음 파일을 업로드합니다.\n\n"
+        
         for(var i=0; i<frm.files.length; i++){
             //파일 개수 제한
             if(i>4){
@@ -16,8 +18,14 @@
                 frm.outerHTML = frm.outerHTML;
                 return false;
             }
-            filename[i]=frm.files[i].name;
+            con += frm.files[i].name + "\n";
         }
         
-        
+        if (confirm(con) == true){    //확인
+            //파일 업로드 나중에 추가
+        }else{   //취소
+            return;
+        }
+
+
     }
