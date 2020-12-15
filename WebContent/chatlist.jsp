@@ -236,12 +236,12 @@
   <!-- 채팅방 목록 -->
   <div class="left" style="width:25%; float: left; ">
   <div class="chatlist">
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="location.href='#'" style="float:bottom;">
       <img src="./image/man.jpg" alt="사용자">
       <p>내용이 들어가야되는 부분입니다.</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="location.href='#'">
+    <div class="chatlist other" onclick="location.href='#'" style="float:bottom;">
       <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
       <p>2번 채팅방</p>
       <span class="time-right">11:00</span>
@@ -330,7 +330,7 @@
   <!-- 파일 업로드 -->
   <div class="fileupload">
   <form enctype="multipart/form-data" method="post" id="fileuploadform">
-  	  <input type="file" id="fileuld" accept=".gif, .jpg, .png, .bmp, .jpeg" maxlength="5" onchange="filecheck(this)" multiple style='display: none;'>
+  	  <input type="file" id="fileuld" maxlength="5" onchange="filecheck(this)" multiple style='display: none;'>
   <abbr title="파일 업로드">
   <a href="javascript:void(0)">
    <label for="fileuld">
