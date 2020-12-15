@@ -9,7 +9,8 @@
 	}
 	UserVO vo = (UserVO)request.getAttribute("vo");
 	if(vo == null){
-		%> <script>alert("vo가 널입니다.");</script><%
+		System.out.println("mypage.jsp => vo가 null입니다.");
+		return;
 	}
 %>
 <!DOCTPYE html lang="ko">

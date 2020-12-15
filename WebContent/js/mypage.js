@@ -16,7 +16,7 @@ function readInputFile(input) {
 //이미지 확장자가 아니면 실행되는 함수
 function fileCheck()	{
 	var fileName = $("#file").val();
-	var maxsize = 400000;
+	var maxsize = 4000000;
 	var filesize = 0;
 	//5 * 1024 * 1024 30mb
 	var browser = navigator.appName;	//브라우저 확인

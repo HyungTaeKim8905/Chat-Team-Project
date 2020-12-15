@@ -12,14 +12,26 @@ select 쿼리를 날릴 때는	executeQuery() 함수를 사용한다.왜냐하�
 public class DBManager {		//타임을 인식하지 못하기 때문에 serverTimezone=UTC 써준다.
 	protected String m_DBMS = "jdbc:mysql://127.0.0.1/project02?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";
 	protected String m_UserID = "root";
-	protected String m_UserPass = "8905love";
+	protected String m_UserPass = "mySQL1234";
 	// Statement 객체는 SQL문을 데이터베이스로 전송하는데 사용한다.
 	protected Connection m_Connection;
 	protected PreparedStatement m_SelectStatment; // Statement로 부터 상속받음  동적인 쿼리에 사용되며 하나의 객체로 여러번의 쿼리를 실행할 수 있다.
 	protected ResultSet m_ResultSet;
-	
-	public PreparedStatement ps() {
+
+	public PreparedStatement getM_SelectStatment() {
 		return m_SelectStatment;
+	}
+
+	public void setM_SelectStatment(PreparedStatement m_SelectStatment) {
+		this.m_SelectStatment = m_SelectStatment;
+	}
+	
+	public ResultSet getM_ResultSet() {
+		return m_ResultSet;
+	}
+
+	public void setM_ResultSet(ResultSet m_ResultSet) {
+		this.m_ResultSet = m_ResultSet;
 	}
 
 	public String getVersion() {
@@ -93,7 +105,7 @@ public class DBManager {		//타임을 인식하지 못하기 때문에 serverTim
 	
 
 	// Insert, Delete, Update 처리용 함수
-	public boolean ExcuteUpdate(String pSQL) // 불린 타입의 값을 반환
+	public boolean ExcuteUpdate() // 불린 타입의 값을 반환
 	{
 		try {
 			this.m_SelectStatment.executeUpdate(); // 쿼리실행하면 실행 결과를 java.sql.ResultSet형으로 리턴한다
