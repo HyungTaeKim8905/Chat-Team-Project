@@ -20,7 +20,7 @@ function friendfn() {
 			}
 			$("#div2").html("");
 			for(var i = 0; i <json.length; i++)	{
-				FriendList(json[i]["Nick"], json[i]["pictureRealName"], json[i]["statusmessage"]);
+				FriendList(json[i]["Nick"], json[i]["pictureRealName"], json[i]["statusmessage"], i);
 			}
 		}
 	});
@@ -101,27 +101,65 @@ function AddFriend(AddID, i)	{
 }
 
 
-
-var j = 0;
-function FriendList(ID, pictureRealName, statusmessage)	{
+//친구 리스트를 뿌려주는 함수.
+function FriendList(ID, pictureRealName, statusmessage, i)	{
 	var output = "";
+	output += "<div id='divDn_" + i + "'>";
 	output += "<table>";
 	output += 		"<tr>";
 	output +=			"<td><a href='#' style='padding-top:0px; padding-bottom:0px;'><img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'></a></td>";
 	output +=			"<td style='width:72%;'><h4>" + statusmessage + "</h4></td>";
-	output +=			"<td><button type='button' id='btnMr_"+j+"' style='width:60px;'>메세지 보내기</button></td>";
+	output +=			"<td><button type='button' id='btnMr_"+i+"' style='width:60px;'>메세지 보내기</button></td>";
 	output += 		"</tr>";
 	output += 		"<tr>";
 	output +=			"<td>&nbsp&nbsp&nbsp&nbsp" + ID + "</td>";
 	output +=			"<td></td>";
-	output +=			"<td style='text-align:right;'><button type='button' onclick='DeleteFriend()' style='width:60px; height:42px;'>친구<br>끊기</button></td>";
+	output +=			"<td style='text-align:right;'><button type='button' id='btnDn_" + i + "' style='width:60px; height:42px;'>친구<br>끊기</button></td>";
 	output += 		"</tr>";
 	output += "</table>";
 	output += "<hr>";
+	output += "</div>";
 	$("#div2").append(output);
-	j++;
+	$("#btnDn_" + i).click(function()	{
+		DeleteFriend(ID, i);
+	});
 }
 
-function DeleteFriend()	{
-	alert("123");
+// 친구 끊기 버튼 누르면 실행되는 함수.
+function DeleteFriend(DeleteID, i)	{
+	var check = confirm(DeleteID + "님을 삭제 하시겠습니까?");
+	if(check == true)	{
+		alert("확인 버튼 눌렀다.");
+	}
+	
+	if(check == false)	{
+		alert("취소 버튼 눌렀다.");
+		return false;
+	}
+	$.ajax({ 
+		url:"DeleteFriend",
+		type:"POST",
+		data:{DeleteID:DeleteID},
+		success:function(result){
+			var json = JSON.parse(result);
+			if(json[0]["Num"] == 1)	{
+				alert("삭제하였습니다.");
+			}
+			else if(json[0]["Num"] == -1)	{
+				alert("삭제를 못헀다.");
+			}
+		}
+	});
 }
+
+
+
+
+
+
+
+
+
+
+
+
