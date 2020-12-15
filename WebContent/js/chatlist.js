@@ -20,7 +20,7 @@ function friendfn() {
 			}
 			$("#div2").html("");
 			for(var i = 0; i <json.length; i++)	{
-				FriendList(json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"]);
+				FriendList(json[i]["Nick"], json[i]["pictureRealName"], json[i]["statusmessage"]);
 			}
 		}
 	});
@@ -46,7 +46,7 @@ function FindTest()	{
 	});
 }
 
-function SuccessFriend(ID, pictureRealName, statusmessage, i)	{
+function SuccessFriend(Nick, pictureRealName, statusmessage, i)	{
 	var output = "";
 	output += "<div id='Sdiv_" + i + "'>";
 	output += "<table>";
@@ -56,7 +56,7 @@ function SuccessFriend(ID, pictureRealName, statusmessage, i)	{
 	output +=			"<td><button type='button' id='btnFr_"+i+"' style='width:55px;'>친구추가</button></td>";
 	output += 		"</tr>";
 	output += 		"<tr>";
-	output +=			"<td>&nbsp&nbsp&nbsp&nbsp&nbsp" + ID + "</td>";
+	output +=			"<td>&nbsp&nbsp&nbsp&nbsp&nbsp" + Nick + "</td>";
 	output += 		"</tr>";
 	output += "</table>";
 	output += "<hr>";
@@ -65,7 +65,7 @@ function SuccessFriend(ID, pictureRealName, statusmessage, i)	{
 	//onclick 속성에 문자열을 값으로 넘기기 위해서는 onclick="test('asd')" 형식으로 만들어줘야 하는데 '가 겹치기 때문에 전자의 형식으로
 	//만들지 못한다 그래서 제이쿼리를 이용하여 버튼이 실행되게 함.
 	$("#btnFr_"+i).click(function()	{
-		AddFriend(ID,i);
+		AddFriend(Nick,i);
 	});
 }
 
@@ -109,10 +109,12 @@ function FriendList(ID, pictureRealName, statusmessage)	{
 	output += 		"<tr>";
 	output +=			"<td><a href='#' style='padding-top:0px; padding-bottom:0px;'><img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'></a></td>";
 	output +=			"<td style='width:72%;'><h4>" + statusmessage + "</h4></td>";
-	output +=			"<td><button type='button' id='btnMr_"+j+"' style='width:55px;'>1:1 메세지 보내기</button></td>";
+	output +=			"<td><button type='button' id='btnMr_"+j+"' style='width:60px;'>메세지 보내기</button></td>";
 	output += 		"</tr>";
 	output += 		"<tr>";
 	output +=			"<td>&nbsp&nbsp&nbsp&nbsp" + ID + "</td>";
+	output +=			"<td></td>";
+	output +=			"<td style='text-align:right;'><button type='button' onclick='DeleteFriend()' style='width:60px; height:42px;'>친구<br>끊기</button></td>";
 	output += 		"</tr>";
 	output += "</table>";
 	output += "<hr>";
@@ -120,4 +122,6 @@ function FriendList(ID, pictureRealName, statusmessage)	{
 	j++;
 }
 
-
+function DeleteFriend()	{
+	alert("123");
+}

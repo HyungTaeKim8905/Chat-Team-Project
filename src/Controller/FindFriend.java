@@ -67,7 +67,7 @@ public class FindFriend extends HttpServlet {
 		UserDTO dto = new UserDTO();
 		ArrayList<UserVO> list = dto.FriendCheck(id, sessionID);
 		if(list.size() == 0)	{
-			return;
+			return; 
 		}
 		JSONArray jsonArrList = new JSONArray();
 		try {

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -67,7 +66,7 @@ public class PrintFriend extends HttpServlet {
 		try	{
 			for(int i = 0; i < list.size(); i++)	{
 				JSONObject jsonList = new JSONObject();
-				jsonList.put("ID", list.get(i).getNick());
+				jsonList.put("Nick", list.get(i).getNick());
 				jsonList.put("pictureRealName", list.get(i).getPictureRealName());
 				jsonList.put("statusmessage", list.get(i).getStatusmessage());
 				jsonArrList.add(jsonList);
