@@ -55,8 +55,8 @@
 	    
     	
 	    for(var i = 0; i<mcount; i++){
-		   	var mctail = "</p><span class='time-left'>"+ myObj.comment[i].time +"</span>";
-		    var octail = "</p><span class='time-right'>"+ myObj.comment[i].time +"</span>"
+		   	var mctail = "</p><span class=\'time-left\'>"+ myObj.comment[i].time +"</span>";
+		    var octail = "</p><span class=\'time-right\'>"+ myObj.comment[i].time +"</span>"
 		    
 		    var chatid = "<b>" + myObj.comment[i].id.substring(0, 6) + "</b><br>";
 		    var chat = myObj.comment[i].content;

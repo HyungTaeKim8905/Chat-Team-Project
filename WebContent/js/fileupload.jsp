@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    
+<script>
 // 파일 체크
     function filecheck(frm){
         var maxfilesize = 5*1024*1024; //5MB 제한
@@ -22,13 +26,10 @@
         }
         
         if (confirm(con) == true){    //확인
-            //파일 업로드 나중에 추가
+
+
         }else{   //취소
             return;
         }
-        
-        function drop(event){
-        	event.preventDefault();
-        }
-
     }
+</script>
