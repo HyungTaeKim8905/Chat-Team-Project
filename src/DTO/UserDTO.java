@@ -53,21 +53,19 @@ public class UserDTO extends DBManager {
 			// 회원가입페이지(join.jsp)에서 파라미터로 전송된 데이터들을 user테이블의 새로운 레코드로 삽입하는 부분이다.
 			String sql = "insert into user (id, password, nick, email, address, phone, pictureOriginName, pictureRealName, statusmessage) values (?,md5(md5(md5(md5(md5(md5(?)))))),?,?,?,?,?,?,?)";
 			DBOpen();
-			//pictureOriginName    | pictureRealName       | statusmessage
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, id);
-			m_SelectStatment.setString(2, password);
-			m_SelectStatment.setString(3, nick);
-			m_SelectStatment.setString(4, email);
-			m_SelectStatment.setString(5, address);
-			m_SelectStatment.setString(6, phone);
-			m_SelectStatment.setString(7, "./image/man.jpg");///////////
-			m_SelectStatment.setString(8, "./image/man.jpg");
-			m_SelectStatment.setString(9, "");
-			m_SelectStatment.executeUpdate(); // 쿼리실행하면 실행 결과를 java.sql.ResultSet형으로 리턴한다.
-			// m_SelectStatment 를 닫는다.
-			m_SelectStatment.close();
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, id);
+			getM_SelectStatment().setString(2, password);
+			getM_SelectStatment().setString(3, nick);
+			getM_SelectStatment().setString(4, email);
+			getM_SelectStatment().setString(5, address);
+			getM_SelectStatment().setString(6, phone);
+			getM_SelectStatment().setString(7, "./image/man.jpg");
+			getM_SelectStatment().setString(8, "./image/man.jpg");
+			getM_SelectStatment().setString(9, "");
+			// 새로 회원가입하는 사용자들의 프로필 사진과 상태메세지를 각각 기본이미지와 공백으로 저장.
+			ExcuteUpdate();
+			CloseQuery();
 			DBClose();
 			return 1; // 회원가입 성공하면 1 반환
 		} catch (Exception e) {
@@ -82,49 +80,44 @@ public class UserDTO extends DBManager {
 		UserVO vo = new UserVO();
 		String sql = "";
 		try {
-			
-			DBOpen();
-			if (filename == null || filerealname == null) {
-				// 두개다 널이라면 사용자가 프로필을 설정하지 않고 닉네임이나 상태메세지만 바꿧다면
-				sql = "select pictureOriginName, pictureRealName from user where id = ?";
-				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-						ResultSet.CONCUR_UPDATABLE);
-				m_SelectStatment.setString(1, id);
-				m_ResultSet = m_SelectStatment.executeQuery();
-				while(m_ResultSet.next())	{
-					filename = m_ResultSet.getString("pictureOriginName");
-					filerealname = m_ResultSet.getString("pictureRealName");
-					System.out.println("MyPageModify ====> filename");
-					System.out.println("MyPageModify ====> filerealname");
+			// 두개다 널이라면 사용자가 프로필을 설정하지 않고 닉네임이나 상태메세지만 바꿧다면
+			// filename과 filerealname이 null값으로 들어오기 때문에 저장되어있는 사진이름을 먼저 가져온다.
+			sql = "select pictureOriginName, pictureRealName from user where id = ?";
+			if(filename == null || filerealname == null)	{
+				DBOpen();
+				OpenQuery(sql);
+				getM_SelectStatment().setString(1, id);
+				ExecuteQuery();
+				while(ResultNext())	{
+					filename = getM_ResultSet().getString("pictureOriginName");
+					filerealname = getM_ResultSet().getString("pictureRealName");
 				}
-				m_ResultSet.close();
-				m_SelectStatment.close();
+				CloseResultSet();
+				CloseQuery();
 			}
-
+			
 			sql = "update user set nick = ?, statusmessage = ?, pictureOriginName = ?, pictureRealName = ? where id = ?";
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, nick);
-			m_SelectStatment.setString(2, statusmessage);
-			m_SelectStatment.setString(3, filename);
-			m_SelectStatment.setString(4, filerealname);
-			m_SelectStatment.setString(5, id);
-			m_SelectStatment.executeUpdate();
-			m_SelectStatment.close();
-
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, nick);
+			getM_SelectStatment().setString(2, statusmessage);
+			getM_SelectStatment().setString(3, filename);
+			getM_SelectStatment().setString(4, filerealname);
+			getM_SelectStatment().setString(5, id);
+			ExcuteUpdate();
+			CloseQuery();
+			
 			sql = "select nick, statusmessage, pictureOriginName, pictureRealName from user where id = ?";
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, id);
-			m_ResultSet = m_SelectStatment.executeQuery();
-			while (m_ResultSet.next()) {
-				vo.setNick(m_ResultSet.getString("nick"));
-				vo.setStatusmessage(m_ResultSet.getString("statusmessage"));
-				vo.setPictureOriginName(m_ResultSet.getString("pictureOriginName"));
-				vo.setPictureRealName(m_ResultSet.getString("pictureRealName"));
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, id);
+			ExecuteQuery();
+			while (ResultNext()) {
+				vo.setNick(getM_ResultSet().getString("nick"));
+				vo.setStatusmessage(getM_ResultSet().getString("statusmessage"));
+				vo.setPictureOriginName(getM_ResultSet().getString("pictureOriginName"));
+				vo.setPictureRealName(getM_ResultSet().getString("pictureRealName"));
 			}
-			m_ResultSet.close();
-			m_SelectStatment.close();
+			CloseResultSet();
+			CloseQuery();
 			DBClose();
 		} catch (Exception e) {
 			System.out.println("MyPageModify() 오류");
@@ -132,16 +125,16 @@ public class UserDTO extends DBManager {
 		}
 		return vo;
 	}
-	
-	///마이페이지 뿌려주는 함수
-	public UserVO MyPagePrint(String ID)	{
+
+	/// 마이페이지 뿌려주는 함수
+	public UserVO MyPagePrint(String ID) {
 		String sql = "select nick, statusmessage, pictureRealName from user where id = '" + ID + "'";
 		UserVO vo = new UserVO();
-		try	{
+		try {
 			DBOpen();
 			OpenQuery(sql);
 			ExecuteQuery();
-			while(ResultNext())	{
+			while (ResultNext()) {
 				vo.setNick(getString("nick"));
 				vo.setPictureRealName(getString("pictureRealName"));
 				vo.setStatusmessage(getString("statusmessage"));
@@ -149,56 +142,63 @@ public class UserDTO extends DBManager {
 			CloseResultSet();
 			CloseQuery();
 			DBClose();
-		} catch(Exception e)	{
+		} catch (Exception e) {
 			System.out.println("ERROR : " + e.getMessage());
 			System.out.println("MyPagePrint() 오류");
 		}
 		/*
-		if(statusmessage == null)	{
-			statusmessage = "";
-		}
-		if(img == "null" || img == "NULL" || img == null)	{
-			//신규 회원가입이라면 기본 사진을 뽀려준다.
-			img = "./image/man.jpg";
-		}
-		*/
+		 * if(statusmessage == null) { statusmessage = ""; } if(img == "null" || img ==
+		 * "NULL" || img == null) { //신규 회원가입이라면 기본 사진을 뽀려준다. img = "./image/man.jpg"; }
+		 */
 		return vo;
 	}
-	public ArrayList<UserVO> FriendCheck(String text)	{
-		//아이디 프로필 사진, 상태메세지를 가져와 뽀려줘야한다.
+
+	public ArrayList<UserVO> FriendCheck(String text) {
+		// 아이디 프로필 사진, 상태메세지를 가져와 뽀려줘야한다.
 		String sql = "";
-		ArrayList<UserVO> list = new ArrayList<UserVO>();				//	'%" + text + "%'
+		ArrayList<UserVO> list = new ArrayList<UserVO>(); // '%" + text + "%'
 		sql = "select id, pictureRealName, statusmessage from user where id like '%" + text + "%'";
-		try	{
+		try {
 			DBOpen();
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-//			m_SelectStatment.setString(1, id);
-			m_ResultSet = m_SelectStatment.executeQuery();
-			while(m_ResultSet.next())	{
+			OpenQuery(sql);
+			//m_SelectStatment.setString(1, id);
+			ExecuteQuery();
+			while (ResultNext()) {
 				UserVO vo = new UserVO();
-				vo.setId(m_ResultSet.getString("id"));
-				vo.setPictureRealName(m_ResultSet.getString("pictureRealName"));
-				vo.setStatusmessage(m_ResultSet.getString("statusmessage"));
+				vo.setId(getM_ResultSet().getString("id"));
+				vo.setPictureRealName(getM_ResultSet().getString("pictureRealName"));
+				vo.setStatusmessage(getM_ResultSet().getString("statusmessage"));
 				list.add(vo);
 			}
-			m_ResultSet.close();
-			m_SelectStatment.close();
+			CloseResultSet();
+			CloseQuery();
 			DBClose();
-			if(list.size() == 0)	{
+			if (list.size() == 0) {
 				return null;
 			}
-		} catch(Exception e)	{
+		} catch (Exception e) {
 			System.out.println("FriendCheck() 오류");
 			System.out.println("ERROR : " + e.getMessage());
 		}
-		return list; 
+		return list;
 	}
 	
-	public ArrayList<UserVO> AddFriend(String AddID, String sessionID){
-		return new ArrayList<UserVO>();
-		
+	//친구 추가해주는 함수 작성중...
+	public ArrayList<UserVO> AddFriend(String AddID, String sessionID) {
+		ArrayList<UserVO> list = new ArrayList<UserVO>();
+		String sql = "";
+		try	{
+			sql = "insert into friend (id, friendid) values (?, ?)";
+			DBOpen();
+			OpenQuery(sql);
+			
+		} catch(Exception e)	{
+			System.out.println("AddFriend() 오류");
+			System.out.println("ERROR : " + e.getMessage());
+		}
+		return list;
 	}
+
 	// DB에서 가져온 비밀번호와 클라이언트가 입력한 비밀번호를 비교하는 부분(로그인)
 	public int LoginCheck(String id, String password) {
 		try {
