@@ -10,6 +10,7 @@ function friendfn() {
   document.getElementById("friendfm").classList.toggle("show");
   document.getElementById("searchfm").classList.remove("show");
   //친구 목록 버튼을 눌렀을때 실행되는 ajax
+  alert(":::");
   $.ajax({
 		url:"PrintFriend",
 		type:"POST",
@@ -21,7 +22,7 @@ function friendfn() {
 			$("#div2").html("");
 			for(var i = 0; i <json.length; i++)	{
 				FriendList(json[i]["Nick"], json[i]["pictureRealName"], json[i]["statusmessage"], i);
-			}
+			}   
 		}
 	});
 }
@@ -156,9 +157,9 @@ function DeleteFriend(DeleteID, i)	{
 	});
 }
 
-
+/*
 //친구목록 검색을하면 실행되는 메서드
-function SerachFriend()	{	//서블릿 만들어야함.
+function SerachFriend()	{	
 	var SearchID = $("#friend").val();
 	alert(SearchID);
 	$.ajax({ 
@@ -172,16 +173,36 @@ function SerachFriend()	{	//서블릿 만들어야함.
 			}
 			$("#div2").html("");
 			for(var i = 0; json.length; i++)	{
-				FriendList(json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"],i);
+				FriendList(json[i]["Nick"], json[i]["pictureRealName"], json[i]["statusmessage"],i);
 			}
 		}
 	});
+}*/
+
+/*
+function FriendList(ID, pictureRealName, statusmessage, i)	{
+	var output = "";
+	output += "<div id='divDn_" + i + "'>";
+	output += "<table>";
+	output += 		"<tr>";
+	output +=			"<td><a href='#' style='padding-top:0px; padding-bottom:0px;'><img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'></a></td>";
+	output +=			"<td style='width:72%;'><h4>" + statusmessage + "</h4></td>";
+	output +=			"<td><button type='button' id='btnMr_"+i+"' style='width:60px;'>메세지 보내기</button></td>";
+	output += 		"</tr>";
+	output += 		"<tr>";
+	output +=			"<td>&nbsp&nbsp&nbsp&nbsp" + ID + "</td>";
+	output +=			"<td></td>";
+	output +=			"<td style='text-align:right;'><button type='button' id='btnDn_" + i + "' style='width:60px; height:42px;'>친구<br>끊기</button></td>";
+	output += 		"</tr>";
+	output += "</table>";
+	output += "<hr>";
+	output += "</div>";
+	$("#div2").append(output);
+	$("#btnDn_" + i).click(function()	{
+		DeleteFriend(ID, i);
+	});
 }
-
-
-
-
-
+*/
 
 
 
