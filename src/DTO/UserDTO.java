@@ -257,6 +257,40 @@ public class UserDTO extends DBManager {
 		return 1;
 	}
 	
+	//친구목록 검색하면 실행되는 함수.
+	public ArrayList<UserVO> SearchFriend(String text, String sessionID){
+		//친구의 닉네임, 사진, 상태메세지
+		String sql = "";
+		ArrayList<UserVO> list = new ArrayList<UserVO>(); // sql = "select * from tab col like ?";
+														  //pstmt.setString(1, "%"+keyword+"%");						세션아이디				 검색어
+		sql = "select nick, pictureRealName, statusmessage from user where id in (select friendid from friend where (id = ?) and (friendid like ?))";
+		try	{
+			DBOpen();
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, sessionID);
+			getM_SelectStatment().setString(2, "%" + text + "%");
+			ExecuteQuery();
+			while (ResultNext()) {
+				UserVO vo = new UserVO();
+				vo.setNick(getM_ResultSet().getString("nick"));
+				vo.setStatusmessage(getM_ResultSet().getString("statusmessage"));
+				vo.setPictureRealName(getM_ResultSet().getString("pictureRealName"));
+				System.out.println("*********************** SearchFriend() 시작***********************");
+				System.out.println("닉네임 :::: "+getString("nick"));
+				System.out.println("상태메세지 ::::"+getString("statusmessage"));
+				System.out.println("사진이름 :::: "+getString("pictureRealName"));
+				list.add(vo);
+			}
+			CloseResultSet();
+			CloseQuery();
+			DBClose();
+		} catch(Exception e) {
+			System.out.println("SearchFriend() 오류");
+			System.out.println("ERROR : " + e.getMessage());
+			return null;
+		}
+		return list;
+	}
 	
 	
 	// DB에서 가져온 비밀번호와 클라이언트가 입력한 비밀번호를 비교하는 부분(로그인)
