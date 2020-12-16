@@ -78,7 +78,7 @@
   
 }
   <!-- 채팅 1초마다 새로고침 -->
-window.onload = setInterval(update, 1000);
+window.onload = setInterval(update, 2000);
 
 <!-- 엔터키 눌렀을 때 입력 -->
 window.onload=function(){
