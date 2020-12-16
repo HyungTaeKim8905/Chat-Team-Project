@@ -5,6 +5,10 @@
 <% 
 	String chatno = request.getParameter("chatno");
 	String connectiontime = request.getParameter("connectiontime"); 
+	
+	String id = "";
+	String content = "";
+	String time = "";
 %>
 {
 "comment" : 
@@ -40,9 +44,9 @@
 		rs = pstmt.executeQuery();
 		if(rs.next()){
 		do {
-			String id = rs.getString(1);
-			String content = rs.getString(2);
-			String time = rs.getString(3);
+			id = rs.getString(1);
+			content = rs.getString(2);
+			time = rs.getString(3);
 %>
  	{
 	"id" : "<%=id%>", 
