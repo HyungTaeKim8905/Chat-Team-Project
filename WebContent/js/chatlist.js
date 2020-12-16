@@ -10,7 +10,6 @@ function friendfn() {
   document.getElementById("friendfm").classList.toggle("show");
   document.getElementById("searchfm").classList.remove("show");
   //친구 목록 버튼을 눌렀을때 실행되는 ajax
-  alert(":::");
   $.ajax({
 		url:"PrintFriend",
 		type:"POST",
