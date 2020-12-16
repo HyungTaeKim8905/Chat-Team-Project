@@ -36,10 +36,7 @@
   <script src="./js/jquery-3.5.1.min.js"></script>
   
   <!-- 자바스크립트문 -->
-  <script src="./js/chatlist.js"></script> 
-  
-  <!-- 자바스크립트문 -->
-  <script src="./js/chatlist.jsp"></script> 
+  <script src="./js/chatlist.js"></script>  
 
   <!-- 파일 업로드 자바스크립트 -->
   <%@ include file="./js/fileupload.jsp" %>
