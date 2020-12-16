@@ -112,7 +112,7 @@ function FriendList(ID, pictureRealName, statusmessage, i)	{
 	output += 		"<tr>";
 	output +=			"<td><a href='#' style='padding-top:0px; padding-bottom:0px;'><img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'></a></td>";
 	output +=			"<td style='width:72%;'><h4>" + statusmessage + "</h4></td>";
-	output +=			"<td><button type='button' id='btnMr_"+i+"' style='width:60px;'>메세지 보내기</button></td>";
+	output +=			"<td><button type='button' id='btnMr_"+i+"' style='width:60px;' onclick='invite()'>메세지 보내기</button></td>";
 	output += 		"</tr>";
 	output += 		"<tr>";
 	output +=			"<td>&nbsp&nbsp&nbsp&nbsp" + ID + "</td>";
