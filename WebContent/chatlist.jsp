@@ -37,6 +37,7 @@
   
   <!-- 자바스크립트문 -->
   <script src="./js/chatlist.js"></script>  
+  <script src="./js/chat.jsp"></script>
 
   
 
@@ -234,21 +235,31 @@
   <!-- 채팅방 목록 -->
   <div class="left" style="width:25%; float: left; ">
   <div class="chatlist">
-    <div class="chatlist other" onclick="location.href='#'" style="float:bottom;">
-      <img src="./image/man.jpg" alt="사용자">
-      <p>내용이 들어가야되는 부분입니다.</p>
+    <div class="chatlist other" onclick="chno(1)">
+      <p>1번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="location.href='#'" style="float:bottom;">
-      <img src="man-avatar-profile-on-round-icon_24640-14046.jpg" alt="Avatar">
+    <div class="chatlist other" onclick="chno(2)">
       <p>2번 채팅방</p>
+      <span class="time-right">11:00</span>
+    </div>
+    <div class="chatlist other" onclick="chno(3)">
+      <p>3번 채팅방</p>
+      <span class="time-right">11:00</span>
+    </div>
+    <div class="chatlist other" onclick="chno(4)">
+      <p>4번 채팅방</p>
+      <span class="time-right">11:00</span>
+    </div>
+    <div class="chatlist other" onclick="chno(5)">
+      <p>5번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
   </div>
   </div>
   <!-- 채팅창 -->
-  <div class="center" style="width:66%; height: 85%; float: left;">
-  <div class="chat" id="div1">
+  <div class="center" id="center" style="width:66%; height: 85%; float: left;">
+  <div class="chat" id="chat" style="width: 105%;height: 80%; overflow-y : auto;">
   
  <!-- ***************************************************************** -->   
  <!-- ***************************************************************** -->
@@ -258,20 +269,19 @@
   
   
   <!-- 채팅입력창 -->
-  <div class="inputchat" style="width:100%; height: 30%;">
+  <div class="inputchat" style="width: 100%; height: 30%;">
     <hr>
-    <form>
+    <form name="inme">
       <table width="100%">
-        <tr><!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@22 -->
-          <td width="86%"><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
+        <tr>
+          <td width="86%" ><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
           <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td><button type="button" id="messagebutton" class="messagebutton" onclick="test()">
+          <td ><button type="button" class="messagebutton" id= "messagebutton" onclick="messageinput()">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
             </svg>
           </button></td>
         </tr>
-
       </table>
     </form>
   </div>

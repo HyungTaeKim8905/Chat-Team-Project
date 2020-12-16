@@ -26,9 +26,9 @@
    var chatnum = "chatno="+chatno;
    <!-- encodeURIComponent : 한글 인코딩 -->
    var message = "message=" + encodeURIComponent(document.inme.inputmessage.value);
-   var sessionid = "sessionid=<%=session.getId()%>";
+   var sessionid = "sessionid=<%=session.getAttribute("id")%>";
    
-   xmlhttp.open("POST", "inputjson.jsp", true);
+   xmlhttp.open("POST", "chatinputjson.jsp", true);
    xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
    xmlhttp.send(chatnum+"&"+message+"&"+sessionid);
    document.getElementById("inputmessage").value = "";
@@ -51,7 +51,7 @@
 	    var ochead = "<div class='chat other'><p style='margin:5px; word-break:break-all;'>";
 	    
 	    
-    	document.getElementById("anchat").innerHTML = "";
+    	document.getElementById("chat").innerHTML = "";
 	    
     	
 	    for(var i = 0; i<mcount; i++){
@@ -62,12 +62,12 @@
 		    var chat = myObj.comment[i].content;
 		    
 		    <!-- 내 채팅 -->
-		    if("<%=session.getId()%>" == myObj.comment[i].id){
-		   	document.getElementById("anchat").innerHTML += mchead + chatid + chat + mctail ;
+		    if("<%=session.getAttribute("id")%>" == myObj.comment[i].id){
+		   	document.getElementById("chat").innerHTML += mchead + chatid + chat + mctail ;
 		    }
 		    <!-- 다른사람 채팅 -->
 		    if("<%=session.getId()%>" != myObj.comment[i].id){
-		    document.getElementById("anchat").innerHTML += ochead + chatid + chat + octail ;
+		    document.getElementById("chat").innerHTML += ochead + chatid + chat + octail ;
 		    }
 	    }
 	  }
@@ -91,5 +91,5 @@ document.getElementById('inputmessage').addEventListener('keydown',function(even
 
 //스크롤 제일 아래로
 function scrolldown(){
-	document.getElementById('anchat').scrollTop = document.getElementById('anchat').scrollHeight;
+	document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
 }
