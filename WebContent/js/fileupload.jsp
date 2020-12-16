@@ -24,38 +24,39 @@
             }
             con += frm.files[i].name + "\n";
         }
-        
-        if (confirm(con) == true){    //확인
-        	var sendsize = 1024;
-        	var pos = 0;
-			for(var i=0; i<frm.files.length; i++){
-				$.ajax({
-					type : 'POST',
-					dataType : 'json',
-					data : {
-					filename : frm.files[i].name,
-					filelength : frm.files[i].length,
-					},
-					url : '/Upload',
-					success : function(data) {
-					// 전체가 전송될 때까지
-					if (pos < filelength) {
-					// 재귀
-					setTimeout(upload, 1);
-					}
-					pos = pos + sendsize;
-					if (pos > filelength) {
-					pos = filelength;
-					}
-					},
-					error : function(jqXHR, textStatus, errorThrown) {
-					},
-					complete : function(jqXHR, textStatus) {
-					}
-					});
-			}
-        }else{   //취소
-            return;
-        }
+        if(frm.files.length>0){
+	        if (confirm(con) == true){    //확인
+	        	var sendsize = 1024;
+	        	var pos = 0;
+				for(var i=0; i<frm.files.length; i++){
+					$.ajax({
+						type : 'POST',
+						dataType : 'json',
+						data : {
+						filename : frm.files[i].name,
+						filelength : frm.files[i].length,
+						},
+						url : '/Upload',
+						success : function(data) {
+						// 전체가 전송될 때까지
+						if (pos < filelength) {
+						// 재귀
+						setTimeout(upload, 1);
+						}
+						pos = pos + sendsize;
+						if (pos > filelength) {
+						pos = filelength;
+						}
+						},
+						error : function(jqXHR, textStatus, errorThrown) {
+						},
+						complete : function(jqXHR, textStatus) {
+						}
+						});
+				}
+	        }else{   //취소
+	            return;
+	        }
+	     }
     }
 </script>
