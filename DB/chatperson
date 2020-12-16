@@ -1,0 +1,5 @@
+create table chatperson
+(
+	id varchar(20),
+	no int
+);

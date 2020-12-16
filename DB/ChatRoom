@@ -1,9 +1,7 @@
 create table chatroom (
-	no int auto_increment default 0,			(pk)
-	chatNo int default 0,
-	fromID varchar(20),
-	toID varchar(20),
+	no int,	
+	chatNo int auto_increment  primary key,
+	ID varchar(20),
 	content text,
-	date datetime,
-	primary key(no)
+	date datetime
 	) DEFAULT CHARSET=utf8 COLLATE utf8_general_ci; 

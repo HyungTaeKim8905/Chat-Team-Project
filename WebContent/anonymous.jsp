@@ -112,7 +112,7 @@
   <!-- 채팅창 -->
   <div class="center" id="center" style="width:66%; height: 100%; float: left; ">
   
-  <div class="anchat" id="anchat" style="width: 105%;height: 70%; overflow-y : auto;">
+  <div class="anchat" id="anchat" style="width: 105%;height: 80%; overflow-y : auto;">
   </div>
   <!-- 채팅입력창 -->
   <div class="inputchat" style="width: 100%; height: 30%;">
