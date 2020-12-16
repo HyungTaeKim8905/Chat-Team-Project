@@ -50,7 +50,7 @@ public class PrintFriend extends HttpServlet {
 		HttpSession session = request.getSession();
 		String sessionID = (String)session.getAttribute("id");
 		UserDTO dto = new UserDTO();
-		ArrayList<UserVO> list = dto.PrintFriend(sessionID);
+		ArrayList<VO.UserVO> list = dto.PrintFriend(sessionID);
 		if(list == null) {
 			System.out.println("친구 목록을 가져오는데 null 입니다.");
 			return;
