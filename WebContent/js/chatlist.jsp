@@ -1,5 +1,12 @@
-  
+<% 
+  String myID = null;
+	if (session.getAttribute("id") != null) {
+		myID = (String) session.getAttribute("id");
+	}
+%>
+<script>
   function test()	{
+  			alert(<%= myID %>);
 			var fromID = '<%= myID %>';
 			var toID = "123";
 			var inputmessage = $("#inputmessage").val();
@@ -114,3 +121,4 @@
 			ChattingList("0"); 
 			Reload();
 		});
+</script>
