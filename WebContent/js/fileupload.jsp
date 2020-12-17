@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
     
 <script>
+//수정
 // 파일 체크
+
     function filecheck(frm){
         var maxfilesize = 5*1024*1024; //5MB 제한
         var filename = []; 
