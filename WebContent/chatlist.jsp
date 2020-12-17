@@ -38,7 +38,7 @@
   <!-- 자바스크립트문 -->
   <script src="./js/chatlist.js"></script>  
  <!--  <script src="./js/chat.jsp"></script> -->
-  <script src="./js/fileupload.jsp"></script>  
+  <script src="./js/test.js"></script>  
   
 
   <title>채팅</title>
@@ -47,7 +47,7 @@
   <script>
   function test()	{
 		var fromID = '<%= myID %>';
-		var toID = "ljk8905";
+		var toID = "123";
 		var inputmessage = $("#inputmessage").val();
 	//	alert(inputmessage);
 		$.ajax({
@@ -76,7 +76,7 @@
 	var lastNo1 = ""; //*******************
 	function ChattingList(num){
 		var fromID = '<%= myID %>';
-		var toID = "ljk8905";
+		var toID = "123";
 		//alert("listNo1 ::::" + lastNo1);
 		$.ajax({
 			type : "POST",
@@ -113,6 +113,7 @@
 					ListCount(json[i]["fromID"], json[i]["content"], json[i]["date"]);
 				} //*******************
 				lastNo1 = list[list.length - 1];
+				
 			}
 		});
 	}
