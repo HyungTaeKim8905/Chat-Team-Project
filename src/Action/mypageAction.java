@@ -39,7 +39,7 @@ public class mypageAction extends HttpServlet {
 		HttpSession session = request.getSession();
 		String sessionID = (String)session.getAttribute("id");
 		if(sessionID == null)	{
-			System.out.println("세션값이 null 이니다. ::" + sessionID);
+			System.out.println("세션값이 null 이다. ::" + sessionID);
 			return;
 		}
 		UserDTO dto = new UserDTO();
