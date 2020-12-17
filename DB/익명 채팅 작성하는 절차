@@ -1,0 +1,7 @@
+anonymous.jsp에서 messagebutton을 누르면
+js/anonymous.jsp의 messageinput()이 실행됨
+messageinput()에서 ajax로 inputjson.jsp를 실행시켜
+DB의 anonymous 테이블에 저장시킴
+이때 저장시키기 위해 넘기는 인자는 ID와 chatnum(채팅방 번호)임
+
+inputjson.jsp는 서블릿이나 beans로 뺄 수 있음

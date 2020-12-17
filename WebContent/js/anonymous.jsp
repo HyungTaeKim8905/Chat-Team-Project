@@ -36,9 +36,10 @@
    //입력하면 스크롤 내림
    scrolldown();
  }
+ 
+ <!-- 익명채팅 출력 -->
   function update() {
-
-  <!-- json 출력 -->
+  
   var xmlhttp = new XMLHttpRequest();
   
   xmlhttp.onreadystatechange = function() {
