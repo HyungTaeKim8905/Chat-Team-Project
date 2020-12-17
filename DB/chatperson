@@ -1,5 +1,5 @@
 create table chatperson
 (
-	id varchar(20),
-	no int
+	no int,
+	id varchar(20)
 );
