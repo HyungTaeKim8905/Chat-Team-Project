@@ -64,7 +64,7 @@ public class Mypage extends HttpServlet {
 			String statusmessage = multipart.getParameter("statusmessage");
 			Enumeration files = multipart.getFileNames();		//폼에서 전송되어온 파일 타입의 입력상자의 이름을 반환한다.
 			//getFileNames()메서드는 파일을 여러개 업로드할 경우 타입이 file인 파라미터 이름들을 Enumeration 타입으로 반환한다.
-			
+		
 			String file = (String)files.nextElement();		//파일을 업로드 했을 때 입력상자의 이름을 얻어온다.
 			filerealname = multipart.getFilesystemName(file);	//업로드된 파일의 서버 상에 업로드된 실제 파일명을 얻어온다.
 			//서버에 실제로 업로드된 파일의 이름을 반환한다.

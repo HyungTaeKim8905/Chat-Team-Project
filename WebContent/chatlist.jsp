@@ -37,8 +37,8 @@
   
   <!-- 자바스크립트문 -->
   <script src="./js/chatlist.js"></script>  
-  <script src="./js/chat.jsp"></script>
-
+ <!--  <script src="./js/chat.jsp"></script> -->
+  <script src="./js/fileupload.jsp"></script>  
   
 
   <title>채팅</title>
@@ -47,7 +47,7 @@
   <script>
   function test()	{
 		var fromID = '<%= myID %>';
-		var toID = "123";
+		var toID = "ljk8905";
 		var inputmessage = $("#inputmessage").val();
 	//	alert(inputmessage);
 		$.ajax({
@@ -76,7 +76,7 @@
 	var lastNo1 = ""; //*******************
 	function ChattingList(num){
 		var fromID = '<%= myID %>';
-		var toID = "123";
+		var toID = "ljk8905";
 		//alert("listNo1 ::::" + lastNo1);
 		$.ajax({
 			type : "POST",
@@ -259,7 +259,7 @@
   </div>
   <!-- 채팅창 -->
   <div class="center" id="center" style="width:66%; height: 85%; float: left;">
-  <div class="chat" id="chat" style="width: 105%;height: 80%; overflow-y : auto;">
+  <div class="chat" id="div1" style="width: 105%;height: 80%; overflow-y : auto;">
   
  <!-- ***************************************************************** -->   
  <!-- ***************************************************************** -->
@@ -276,7 +276,7 @@
         <tr>
           <td width="86%" ><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
           <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td ><button type="button" class="messagebutton" id= "messagebutton" onclick="messageinput()">
+          <td ><button type="button" class="messagebutton" id= "messagebutton" onclick="test()">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
             </svg>
@@ -338,10 +338,10 @@
 
   <!-- 파일 업로드 -->
   <div class="fileupload">
-    <form enctype="multipart/form-data" method="post" id="fileuploadform">
+    <form enctype="multipart/form-data" method="post" id="fileuploadform" name="fileuploadform">
     <a href="javascript:filecheck(this);">
      <label for="fileuld">
-  	  <input type="file" id="fileuld" maxlength="5" onchange="filecheck(this)" multiple style='display: none;'>
+  	  <input type="file" id="fileuld" name="fileuld" maxlength="5" onchange="filecheck(this)" multiple style='display: none;'>
        <abbr title="파일 업로드">
         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-box-arrow-up" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
          <path fill-rule="evenodd" d="M3.5 6a.5.5 0 0 0-.5.5v8a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5v-8a.5.5 0 0 0-.5-.5h-2a.5.5 0 0 1 0-1h2A1.5 1.5 0 0 1 14 6.5v8a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 14.5v-8A1.5 1.5 0 0 1 3.5 5h2a.5.5 0 0 1 0 1h-2z"/>
