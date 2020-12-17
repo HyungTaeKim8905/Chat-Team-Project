@@ -11,7 +11,7 @@ function friendfn() {
   document.getElementById("searchfm").classList.remove("show");
   //친구 목록 버튼을 눌렀을때 실행되는 ajax
   $.ajax({
-		url:"PrintFriend",
+		url:"PrintFriend.bo",
 		type:"POST",
 		success:function(result){
 			var json = JSON.parse(result);
@@ -31,7 +31,7 @@ function FindTest()	{
 	var ID = $("#friendid").val();
 	alert(ID);
 	$.ajax({ 
-		url:"FindFriend",
+		url:"FindFriend.bo",
 		type:"POST",
 		data:{ID:ID},
 		success:function(result){

@@ -20,7 +20,7 @@ import VO.UserVO;
 /**
  * Servlet implementation class AddFriend
  */
-@WebServlet("/PrintFriend")
+@WebServlet("/PrintFriend.bo")
 public class PrintFriend extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

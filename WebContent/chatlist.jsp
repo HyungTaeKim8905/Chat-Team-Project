@@ -37,18 +37,13 @@
   
   <!-- 자바스크립트문 -->
   <script src="./js/chatlist.js"></script>  
-<<<<<<< HEAD
- <!--  <script src="./js/chat.jsp"></script> -->
+
   <script src="./js/test.js"></script>  
-=======
-  <script src="./js/chat.jsp"></script>
-  <script src="./js/fileupload.jsp"></script>  
->>>>>>> c845c4aab548fb9453fa64d366a515a8211375b8
-  
+
+  <!-- <script src="./js/chat.jsp"></script> -->
 
   <title>채팅</title>
   
-<<<<<<< HEAD
   <!-- 채팅 기능 script -->
   <script>
   function test()	{
@@ -119,7 +114,6 @@
 					ListCount(json[i]["fromID"], json[i]["content"], json[i]["date"]);
 				} //*******************
 				lastNo1 = list[list.length - 1];
-				
 			}
 		});
 	}
@@ -143,7 +137,6 @@
 		output += "<hr>";
 		$("#div1").append(output);
 		$("#div1").scrollTop($("#div1")[0].scrollHeight);
-		
 	}
 	
 	
@@ -168,8 +161,6 @@
 		Reload();
 	});
   </script>
-=======
->>>>>>> c845c4aab548fb9453fa64d366a515a8211375b8
 </head>
 <body>
   <!-- 상단 네비바 -->
@@ -269,7 +260,9 @@
   <!-- 채팅창 -->
   <div class="center" id="center" style="width:66%; height: 95%; float: left;">
   <div class="chat" id="chat" style="width: 105%;height: 80%; overflow-y : auto;">
+  <div id="div1">
   
+  </div>
  <!-- ***************************************************************** -->   
  <!-- ***************************************************************** -->
  <!-- ***************************************************************** -->
