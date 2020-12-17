@@ -36,9 +36,9 @@
    //입력하면 스크롤 내림
    scrolldown();
  }
+ 
+ <!-- json 출력 -->
   function update() {
-
-  <!-- json 출력 -->
   var xmlhttp = new XMLHttpRequest();
   
   xmlhttp.onreadystatechange = function() {

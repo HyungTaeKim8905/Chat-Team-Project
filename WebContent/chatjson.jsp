@@ -25,7 +25,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection( DBURL, DBID ,DBPass );
 		
-		//마지막 객체 이전에 쉼표 찍을 수 있도록 쿼리 갯수를 구함  
+		//마지막 객체 이전에만 쉼표 찍을 수 있도록 쿼리 갯수를 구함  
 		String query = "select count(*) from chatcontent where roomid='"+chatno+ "'";
 		
 		pstmt = conn.prepareStatement(query);
