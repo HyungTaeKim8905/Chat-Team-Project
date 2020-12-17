@@ -25,6 +25,7 @@
             //확인창에 파일 이름 추가 
             con += "\n" + frm.files[i].name ;
         }
+        //파일 업로드 취소시 알림창 안뜨게
         if(frm.files.length>0){
         	//확인
 	        if (confirm(con) == true){  
