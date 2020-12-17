@@ -93,3 +93,34 @@ document.getElementById('inputmessage').addEventListener('keydown',function(even
 function scrolldown(){
 	document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
 }
+
+
+<!-- 채팅방 목록 불러오기 -->
+<!-- json 출력 -->
+  function chatlistupdate() {
+  var xmlhttp = new XMLHttpRequest();
+  
+  xmlhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+	    var myObj = JSON.parse(this.responseText);
+	    var mcount = Object.keys(myObj.chatlist).length;
+	    
+    	document.getElementById("chatlist").innerHTML = "";
+	    var header = "<div class='chatlist other' onclick='chno(";
+	    var mid = ")'><p>";
+	    var tail = "</p></div>";
+	    
+	    for(var i = 0; i<mcount; i++){
+	    
+	    document.getElementById("chatlist").innerHTML += header + myObj.chatlist[i].chatno;
+	    document.getElementById("chatlist").innerHTML += mid + myObj.chatlist[i].otherid;
+	    document.getElementById("chatlist").innerHTML += tail;
+	    }
+    	
+	  }
+	};
+  xmlhttp.open("POST", "chatlistgetjson.jsp", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlhttp.send(id=<%=session.getAttribute("id")%>");
+}
+window.onload = setInterval(chatlistupdate, 2000);
