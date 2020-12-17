@@ -83,8 +83,8 @@ public class UserDTO extends DBManager {
 			// 두개다 널이라면 사용자가 프로필을 설정하지 않고 닉네임이나 상태메세지만 바꿧다면
 			// filename과 filerealname이 null값으로 들어오기 때문에 저장되어있는 사진이름을 먼저 가져온다.
 			sql = "select pictureOriginName, pictureRealName from user where id = ?";
+			DBOpen();
 			if(filename == null || filerealname == null)	{
-				DBOpen();
 				OpenQuery(sql);
 				getM_SelectStatment().setString(1, id);
 				ExecuteQuery();
