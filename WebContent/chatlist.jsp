@@ -141,7 +141,7 @@
   </div>
   <!-- 채팅창 -->
   <div class="center" id="center" style="width:66%; height: 95%; float: left;">
-  <div class="chat" id="chat" style="width: 105%;height: 80%; overflow-y : auto;">
+  <div class="chat" id="chat" style="width: 100%;height: 80%; overflow-y : auto;">
   
  <!-- ***************************************************************** -->   
  <!-- ***************************************************************** -->
