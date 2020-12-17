@@ -66,13 +66,13 @@
 		   	document.getElementById("chat").innerHTML += mchead + chatid + chat + mctail ;
 		    }
 		    <!-- 다른사람 채팅 -->
-		    if("<%=session.getAttribute("id")%>" != myObj.comment[i].id){
+		    if("<%=session.getId()%>" != myObj.comment[i].id){
 		    document.getElementById("chat").innerHTML += ochead + chatid + chat + octail ;
 		    }
 	    }
 	  }
 	};
-  xmlhttp.open("POST", "chatjson.jsp", true);
+  xmlhttp.open("POST", "json.jsp", true);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send("chatno="+chatno+"&connectiontime="+connectedDate);
 }

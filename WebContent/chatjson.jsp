@@ -26,7 +26,7 @@
 		conn = DriverManager.getConnection( DBURL, DBID ,DBPass );
 		
 		//마지막 객체 이전에 쉼표 찍을 수 있도록 쿼리 갯수를 구함  
-		String query = "select count(*) from chatcontent where roomid='"+chatno+ "'";
+		String query = "select count(*) from anonymous where roomid='"+chatno;
 		
 		pstmt = conn.prepareStatement(query);
 		rs = pstmt.executeQuery(); 
@@ -36,7 +36,7 @@
 		}
 		
 		// n번 채팅방에 있는 채팅 목록 가져옴
-		query = "select id, content, time from chatcontent where roomid='"+chatno+ "'";
+		query = "select sessionid, content, time from anonymous where roomid='"+chatno;
 		pstmt = conn.prepareStatement(query);
 		
 		rs = pstmt.executeQuery();
@@ -45,10 +45,6 @@
 			id = rs.getString(1);
 			content = rs.getString(2);
 			time = rs.getString(3);
-			
-			content=content.replace("<", "&lt;");
-			content=content.replace(">", "&gt;");
-			content=content.replace("\n", "<br>");
 %>
  	{
 	"id" : "<%=id%>", 
