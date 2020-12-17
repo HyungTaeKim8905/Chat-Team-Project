@@ -146,10 +146,6 @@ public class UserDTO extends DBManager {
 			System.out.println("ERROR : " + e.getMessage());
 			System.out.println("MyPagePrint() 오류");
 		}
-		/*
-		 * if(statusmessage == null) { statusmessage = ""; } if(img == "null" || img ==
-		 * "NULL" || img == null) { //신규 회원가입이라면 기본 사진을 뽀려준다. img = "./image/man.jpg"; }
-		 */
 		return vo;
 	}
 

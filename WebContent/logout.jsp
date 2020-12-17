@@ -30,7 +30,6 @@
 		}
 	}
 		session.invalidate();
-	
 	%>
 	<form name="form" id="form" method="post" action="Main.jsp">
 		<input type="hidden" id="num" name="num" value="1">
