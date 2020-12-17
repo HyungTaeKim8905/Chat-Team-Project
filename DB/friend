@@ -1,0 +1,4 @@
+create table friend(
+	id varchar(20)
+	friendid varchar(20)
+); 

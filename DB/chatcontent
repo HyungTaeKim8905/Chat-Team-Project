@@ -1,0 +1,8 @@
+create table chatcontent
+(
+	chatno int auto_increment primary key,
+	roomid int,
+	id varchar(20),
+	content text,
+	time datetime
+);

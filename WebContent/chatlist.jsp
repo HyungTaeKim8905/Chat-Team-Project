@@ -37,12 +37,18 @@
   
   <!-- 자바스크립트문 -->
   <script src="./js/chatlist.js"></script>  
+<<<<<<< HEAD
  <!--  <script src="./js/chat.jsp"></script> -->
   <script src="./js/test.js"></script>  
+=======
+  <script src="./js/chat.jsp"></script>
+  <script src="./js/fileupload.jsp"></script>  
+>>>>>>> c845c4aab548fb9453fa64d366a515a8211375b8
   
 
   <title>채팅</title>
   
+<<<<<<< HEAD
   <!-- 채팅 기능 script -->
   <script>
   function test()	{
@@ -162,6 +168,8 @@
 		Reload();
 	});
   </script>
+=======
+>>>>>>> c845c4aab548fb9453fa64d366a515a8211375b8
 </head>
 <body>
   <!-- 상단 네비바 -->
@@ -259,8 +267,8 @@
   </div>
   </div>
   <!-- 채팅창 -->
-  <div class="center" id="center" style="width:66%; height: 85%; float: left;">
-  <div class="chat" id="div1" style="width: 105%;height: 80%; overflow-y : auto;">
+  <div class="center" id="center" style="width:66%; height: 95%; float: left;">
+  <div class="chat" id="chat" style="width: 105%;height: 80%; overflow-y : auto;">
   
  <!-- ***************************************************************** -->   
  <!-- ***************************************************************** -->
@@ -277,7 +285,7 @@
         <tr>
           <td width="86%" ><textarea name="inputmessage" id="inputmessage" class="inputmessage"></textarea></td>
           <td> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
-          <td ><button type="button" class="messagebutton" id= "messagebutton" onclick="test()">
+          <td ><button type="button" class="messagebutton" id= "messagebutton" onclick="messageinput()">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-reply-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path d="M9.079 11.9l4.568-3.281a.719.719 0 0 0 0-1.238L9.079 4.1A.716.716 0 0 0 8 4.719V6c-1.5 0-6 0-7 8 2.5-4.5 7-4 7-4v1.281c0 .56.606.898 1.079.62z"/>
             </svg>
