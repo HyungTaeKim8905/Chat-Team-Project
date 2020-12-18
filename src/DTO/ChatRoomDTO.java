@@ -8,6 +8,15 @@ import VO.ChatRoomVO;
 
 public class ChatRoomDTO extends DBManager {
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	/*
 	//특정한 아이디에 따라서 채팅 내역을 가져오는 함수
 	public ArrayList<ChatRoomVO> ChttingListID(int no, String fromID, String toID){
 		ArrayList<ChatRoomVO> list = null;
@@ -158,4 +167,5 @@ public class ChatRoomDTO extends DBManager {
 			}
 			return -1;	//DB 에러
 		}
+		*/
 }

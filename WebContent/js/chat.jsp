@@ -129,7 +129,6 @@ function scrolldown(){
 	   var xmlhttp = new XMLHttpRequest();
 	    
 	   var otherid = "otherid="+id;
-	   var sessionid = "sessionid=<%=session.getAttribute("id")%>";
 	   
 	   xmlhttp.open("POST", "chatlistinputjson.jsp", true);
 	   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");

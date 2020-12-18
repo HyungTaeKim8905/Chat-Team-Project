@@ -32,6 +32,7 @@
 		rs = pstmt.executeQuery(); 
 		
 		String lastno = "";
+		
 		while(rs.next()){
 		lastno = rs.getString(1);
 		}
