@@ -20,7 +20,7 @@ function friendfn() {
 			}
 			$("#div2").html("");
 			for(var i = 0; i <json.length; i++)	{
-				FriendList(json[i]["Nick"], json[i]["pictureRealName"], json[i]["statusmessage"], i);
+				FriendList(json[i]["Nick"], json[i]["ID"], json[i]["pictureRealName"], json[i]["statusmessage"], i);
 			}   
 		}
 	});
@@ -104,17 +104,17 @@ function AddFriend(AddID, i)	{
 
 
 //친구 리스트를 뿌려주는 함수.
-function FriendList(ID, pictureRealName, statusmessage, i)	{
+function FriendList(Nick, ID, pictureRealName, statusmessage, i)	{
 	var output = "";
 	output += "<div id='divDn_" + i + "'>";
 	output += "<table>";
 	output += 		"<tr>";
 	output +=			"<td><a href='#' style='padding-top:0px; padding-bottom:0px;'><img src='" + pictureRealName + "' style='width:55px; height:50px; float:left;'></a></td>";
 	output +=			"<td style='width:72%;'><h4>" + statusmessage + "</h4></td>";
-	output +=			"<td><button type='button' id='btnMr_"+i+"' style='width:60px;' onclick='invite()'>메세지 보내기</button></td>";
+	output +=			"<td><button type='button' id='btnMr_"+i+"' style='width:60px;'>메세지 보내기</button></td>";
 	output += 		"</tr>";
 	output += 		"<tr>";
-	output +=			"<td>&nbsp&nbsp&nbsp&nbsp" + ID + "</td>";
+	output +=			"<td>&nbsp&nbsp&nbsp&nbsp" + Nick + "</td>";
 	output +=			"<td></td>";
 	output +=			"<td style='text-align:right;'><button type='button' id='btnDn_" + i + "' style='width:60px; height:42px;'>친구<br>끊기</button></td>";
 	output += 		"</tr>";
@@ -125,6 +125,11 @@ function FriendList(ID, pictureRealName, statusmessage, i)	{
 	$("#btnDn_" + i).click(function()	{
 		DeleteFriend(ID, i);
 	});
+	
+	$("#btnMr_" + i).click(function()	{
+		invite(ID);
+	});
+	
 }
 
 // 친구 끊기 버튼 누르면 실행되는 함수.
