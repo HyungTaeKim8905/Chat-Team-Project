@@ -30,11 +30,9 @@
 		}
 	}
 		session.invalidate();
-	
 	%>
 	<form name="form" id="form" method="post" action="Main.jsp">
-		<input type="hidden" id="n" name="n" value="1">
-		<input type="hidden" id="test" name="n" value="1">
+		<input type="hidden" id="num" name="num" value="1">
 	</form>
 	 <script>
 		alert("로그아웃 되었습니다.");

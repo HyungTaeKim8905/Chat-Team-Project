@@ -20,7 +20,7 @@
 
   <!-- 상단 네비바 -->
   <div class="topnav" id="myTopnav">
-    <%if((String)session.getAttribute("id")!=null){ %>
+<%if((String)session.getAttribute("id")!=null){ %>
     <abbr title="회원 채팅">
       <a href="chatlist.jsp">
         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chat-left-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@
           </svg>
     </a>
     </abbr>
-<%} %>
+<%}%>
     <abbr title="비회원 채팅">
       <a href="anonymous.jsp" class="active">
     <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chat-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -68,7 +68,7 @@
       </a>
       </abbr>
       <abbr title="마이페이지">
-        <a href="mypage.jsp" style="float: right;">
+        <a href="mypageAction" style="float: right;">
           <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
             <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>

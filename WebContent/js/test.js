@@ -1,11 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<script>
-//수정
-// 파일 체크
 
-    
 
  function filecheck(frm){
         var maxfilesize = 5*1024*1024; //5MB 제한
@@ -63,6 +56,3 @@
     //그 후 통신 성공하면 배열로 파일이름을 받아오고 다시 함수 실행..... 반복
     //마지막 filecheck2() 함수에서 출력시켜줌.
     }
-
-    
-</script>
