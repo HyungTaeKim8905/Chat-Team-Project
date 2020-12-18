@@ -14,7 +14,7 @@
 <%
 	String  DBURL     = "jdbc:mysql://127.0.0.1/project02?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";	
 	String  DBID   = "root";
-	String  DBPass = "mySQL1234";
+	String  DBPass = "8905love";
 	
 	Connection        conn;
 	PreparedStatement pstmt;

@@ -18,14 +18,14 @@
  function messageinput(){
 	<!-- 공백 제거 -->
    if(!document.getElementById("inputmessage").value.replace(/(^\s*)|(\s*$)/gi, "")){
-	   return;
+	   return;		//공백이 들어왔다면 리턴
    }
 	 
    var xmlhttp = new XMLHttpRequest();
     
-   var chatnum = "chatno="+chatno;
+   var chatnum = "chatno="+chatno;		//채팅방의 번호
    <!-- encodeURIComponent : 한글 인코딩 -->
-   var message = "message=" + encodeURIComponent(document.inme.inputmessage.value);
+   var message = "message=" + encodeURIComponent(document.inme.inputmessage.value);	//사용자가 쓴 채팅 내용
    var sessionid = "sessionid=<%=session.getAttribute("id")%>";
    
    xmlhttp.open("POST", "chatinputjson.jsp", true);
@@ -74,7 +74,7 @@
 	};
   xmlhttp.open("POST", "chatjson.jsp", true);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xmlhttp.send("chatno="+chatno+"&connectiontime="+connectedDate);
+  xmlhttp.send("chatno="+chatno);
 }
   <!-- 채팅 1초마다 새로고침 -->
 window.onload = setInterval(interval, 2000);
@@ -106,13 +106,12 @@ function scrolldown(){
   
   xmlhttp.onreadystatechange = function() {
 	  if (this.readyState == 4 && this.status == 200) {
-	    var myObj = JSON.parse(this.responseText);
-	    var mcount = Object.keys(myObj.chatlist).length;
+	    var myObj = JSON.parse(this.responseText);			//넘어온 제이슨 데이터 파싱
+	    var mcount = Object.keys(myObj.chatlist).length;	//객체의  길이
 	    
+    	document.getElementById("chatlist").innerHTML = ""; 
 	    
-    	document.getElementById("chatlist").innerHTML = "";
-	    
-	    for(var i = 0; i<mcount; i++){
+	    for(var i = 0; i<mcount; i++){	//객체의 길이만큼 반복
     	
     	document.getElementById("chatlist").innerHTML += "<div class='chatlist other' onclick=chno("+ 
     			myObj.chatlist[i].chatno +")><p>"+ myObj.chatlist[i].otherid + "</p>";
