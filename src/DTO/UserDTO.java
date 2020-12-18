@@ -156,13 +156,12 @@ public class UserDTO extends DBManager {
 	public ArrayList<UserVO> FriendCheck(String text, String sessionID) {
 		// 아이디 프로필 사진, 상태메세지를 가져와 뽀려줘야한다.
 		String sql = "";
-		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		sql = "select * from user where id not in (select friendid from friend where friendid like '%" + text
-				+ "%') and id != '" + sessionID + "' and id like '%" + text + "%'";
+		ArrayList<UserVO> list = new ArrayList<UserVO>(); 
+		sql = "select * from user where id not in (select friendid from friend where friendid like '%" + text + "%') and id != '" + sessionID + "' and id like '%" + text + "%'";
 		try {
 			DBOpen();
 			OpenQuery(sql);
-			// m_SelectStatment.setString(1, id);
+			//m_SelectStatment.setString(1, id);
 			ExecuteQuery();
 			while (ResultNext()) {
 				UserVO vo = new UserVO();
