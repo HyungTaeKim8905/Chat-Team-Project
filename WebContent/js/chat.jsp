@@ -124,16 +124,18 @@ function scrolldown(){
   xmlhttp.send("id=<%=session.getAttribute("id")%>");
 }
   <!-- 채팅방 생성 -->
-	 function invite(id){
+	 function invite(){
 		 
 	   var xmlhttp = new XMLHttpRequest();
 	    
-	   var otherid = "otherid="+id;
+	   var chatnum = "chatno="+chatno;
+	   <!-- encodeURIComponent : 한글 인코딩 -->
+	   var message = "message=" + encodeURIComponent(document.inme.inputmessage.value);
 	   var sessionid = "sessionid=<%=session.getAttribute("id")%>";
 	   
-	   xmlhttp.open("POST", "chatlistinputjson.jsp", true);
+	   xmlhttp.open("POST", "chatinputjson.jsp", true);
 	   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
-	   xmlhttp.send(otherid+"&"+"myid=<%=session.getAttribute("id")%>");
+	   xmlhttp.send(chatnum+"&"+message+"&"+sessionid);
 	   document.getElementById("inputmessage").value = "";
 	   
 	   //입력하면 스크롤 내림
