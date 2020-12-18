@@ -71,26 +71,13 @@ public class Mypage extends HttpServlet {
 			
 			filename = multipart.getOriginalFileName(file);	//업로드된 파일의 처음에 폼에서 선택한 원본 파일명을 얻어온다.
 			//클라이언트가 업로드한 파일의 원본 이름을 반환한다.
-			System.out.println("id : "+id);
-			System.out.println("nick : "+nick);
-			System.out.println("statusmessage : "+statusmessage);
-			System.out.println("filename원본 파일 명 : "+filename);
-			System.out.println("filerealname서버에 저장되는 파일 명 : "+filename);
-			System.out.println("파일을 업로드 했을 때 입력상자의 이름을 얻어온다. : "+file);
-			String Str1 = "";
-			String Str2 = "";
-			if(filename == null || filerealname == null)	{
-				Str1 = null;
-				Str2 = null;
-			}
-			else	{
-				Str1 = "./image/" + filename;
-				Str2 = "./image/" + filerealname;
+			if(filename != null || filerealname != null)	{
+				filename = "./image/" + filename;
+				filerealname = "./image/" + filerealname;
 			}
 			UserDTO dto = new UserDTO();
-			UserVO vo = dto.MyPageModify(id, nick, statusmessage, Str1, Str2);
+			UserVO vo = dto.MyPageModify(id, nick, statusmessage, filename, filerealname);
 			if(vo == null)	{
-				System.out.println("doPost() ==>  vo가 null 입니다.");
 				return ;
 			}
 			jsonArrList = new JSONArray();

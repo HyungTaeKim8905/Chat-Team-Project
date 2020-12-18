@@ -59,7 +59,6 @@ public class fileuploadtest extends HttpServlet {
 				String uploadFileName = getUploadFileName(contentDisposition);
 				list.add(uploadFileName);
 				part.write(uploadFileName);	//Part객체의 파일을 인자로 지정된 파일 이름으로 디스크 상에 출력한다.
-				
 			}
 		}
 		ChatRoomDTO dto = new ChatRoomDTO();

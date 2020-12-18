@@ -133,12 +133,10 @@ public class ChatRoomDTO extends DBManager {
 		}
 		return -1; // DB 에러
 	}
-
-	public int FileSubmit(String fromID, String toID, ArrayList<String> content) {
+	
+	//파일을 올렸을때 실행되는 함수.
+	public int FileSubmit(String fromID, String toID, ArrayList<? super String> content) {
 		String sql = "";
-		System.out.println("submit() =>" + fromID);
-		System.out.println("submit() =>" + toID);
-		System.out.println("submit() =>" + content);
 		// 보낸 사람이든간에 받은 사람이든 간에 전부다 가져올수 있도록 함.
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
 		sql += "insert into chatroom values (NULL, ?, ?, ?, NOW())";

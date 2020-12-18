@@ -71,7 +71,7 @@
 			}
 		});
 	}
-		
+	
 	//이메일 인증 버튼을 누르면 실행되는 함수
 	var check = false;
 	function EmailCheck()	{
@@ -100,8 +100,8 @@
 				alert(json[0]["numStr"]);
 				var output = "";
 				output += "<input type='text' id='output' name='output'>";
-				output += "<button type='button' onclick='Good(" + json[0]["numStr"] + ")'>인증</button>";
-				$("#div1").append(output);
+				output += "<button type='button' style='width:200px;' class='registerbtn' onclick='Good(" + json[0]["numStr"] + ")'>인증</button>";
+				$("#div1").html(output);
 			}
 		});
 	}
@@ -120,8 +120,9 @@
 			alert("인증번호가 다릅니다."); 
 		 }
 	}
-		
-		
+
+
+
 	// 비밀번호를 입력하는데 있어서 특수문자를 입력하라거나 공백없이 입력하라는 문구를 무시하고 회원가입을 할 수 있기 때문에 이를 막아주는 로직
 	var pwCheckYn = false;		//비밀번호 체크를 하기 위한 변수 선언
 	
@@ -149,6 +150,13 @@
 			}
 		});
 		
+		$("#id").click(function()	{
+			IDKimCheck = false;
+		});
+		
+		$("#email").click(function()	{
+			check = false;
+		});
 		
 		$("form").submit(function(){
 		/*
@@ -206,7 +214,11 @@
 			else if(IDKimCheck == false)	{
 				alert("아이디 중복확인을 해주세요.");
 				return false;	
-			}else{
+			}
+			else if(check == false)	{
+				alert("이메일 인증을 다시 해주세요.");
+				return false;	
+			} else{
 				var postcode = $("#sample6_postcode").val();
 				var address = $("#sample6_address").val();
 				var detailAddress = $("#sample6_detailAddress").val();

@@ -84,18 +84,18 @@ public class UserDTO extends DBManager {
 			// filename과 filerealname이 null값으로 들어오기 때문에 저장되어있는 사진이름을 먼저 가져온다.
 			sql = "select pictureOriginName, pictureRealName from user where id = ?";
 			DBOpen();
-			if(filename == null || filerealname == null)	{
+			if (filename == null || filerealname == null) {
 				OpenQuery(sql);
 				getM_SelectStatment().setString(1, id);
 				ExecuteQuery();
-				while(ResultNext())	{
+				while (ResultNext()) {
 					filename = getM_ResultSet().getString("pictureOriginName");
 					filerealname = getM_ResultSet().getString("pictureRealName");
 				}
 				CloseResultSet();
 				CloseQuery();
 			}
-			
+
 			sql = "update user set nick = ?, statusmessage = ?, pictureOriginName = ?, pictureRealName = ? where id = ?";
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, nick);
@@ -105,7 +105,7 @@ public class UserDTO extends DBManager {
 			getM_SelectStatment().setString(5, id);
 			ExcuteUpdate();
 			CloseQuery();
-			
+
 			sql = "select nick, statusmessage, pictureOriginName, pictureRealName from user where id = ?";
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, id);
@@ -152,12 +152,13 @@ public class UserDTO extends DBManager {
 	public ArrayList<UserVO> FriendCheck(String text, String sessionID) {
 		// 아이디 프로필 사진, 상태메세지를 가져와 뽀려줘야한다.
 		String sql = "";
-		ArrayList<UserVO> list = new ArrayList<UserVO>(); 
-		sql = "select * from user where id not in (select friendid from friend where friendid like '%" + text + "%') and id != '" + sessionID + "' and id like '%" + text + "%'";
+		ArrayList<UserVO> list = new ArrayList<UserVO>();
+		sql = "select * from user where id not in (select friendid from friend where friendid like '%" + text
+				+ "%') and id != '" + sessionID + "' and id like '%" + text + "%'";
 		try {
 			DBOpen();
 			OpenQuery(sql);
-			//m_SelectStatment.setString(1, id);
+			// m_SelectStatment.setString(1, id);
 			ExecuteQuery();
 			while (ResultNext()) {
 				UserVO vo = new UserVO();
@@ -178,14 +179,14 @@ public class UserDTO extends DBManager {
 		}
 		return list;
 	}
-	
-	//친구리스트를 가져오는 함수
+
+	// 친구리스트를 가져오는 함수
 	public ArrayList<UserVO> PrintFriend(String sessionID) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
 		String sql = "";
-		try	{
+		try {
 			DBOpen();
-			//아이디 이미지 상태메세지 가져와서 출력 			//친구추가한 사람의 id가 들어가야한다.			sessionid  
+			// 아이디 이미지 상태메세지 가져와서 출력 //친구추가한 사람의 id가 들어가야한다. sessionid
 			sql = "select * from user where id = any (select friendid from friend where id = ?)";
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, sessionID);
@@ -196,29 +197,28 @@ public class UserDTO extends DBManager {
 				vo.setStatusmessage(getM_ResultSet().getString("statusmessage"));
 				vo.setPictureRealName(getM_ResultSet().getString("pictureRealName"));
 				/*
-				System.out.println("시작!!!!!!!!!!!!!!!!!!");
-				System.out.println("닉네임 :::: "+getString("nick"));
-				System.out.println("상태메세지 ::::"+getString("statusmessage"));
-				System.out.println("사진이름 :::: "+getString("pictureRealName"));
-				*/
+				 * System.out.println("시작!!!!!!!!!!!!!!!!!!");
+				 * System.out.println("닉네임 :::: "+getString("nick"));
+				 * System.out.println("상태메세지 ::::"+getString("statusmessage"));
+				 * System.out.println("사진이름 :::: "+getString("pictureRealName"));
+				 */
 				list.add(vo);
 			}
 			CloseResultSet();
 			CloseQuery();
 			DBClose();
-		} catch(Exception e)	{
+		} catch (Exception e) {
 			System.out.println("AddFriend() 오류");
 			System.out.println("ERROR : " + e.getMessage());
 			return null;
 		}
 		return list;
 	}
-	
-	
-	//친구 추가해주는 함수
-	public int AddFriend(String AddID, String sessionID)	{
+
+	// 친구 추가해주는 함수
+	public int AddFriend(String AddID, String sessionID) {
 		String sql = "";
-		try	{
+		try {
 			DBOpen();
 			sql = "insert into friend (id, friendid) values (?, ?)";
 			OpenQuery(sql);
@@ -227,42 +227,42 @@ public class UserDTO extends DBManager {
 			ExcuteUpdate();
 			CloseQuery();
 			DBClose();
-		} catch(Exception e)	{
+		} catch (Exception e) {
 			System.out.println("AddFriend() 오류");
 			System.out.println("ERROR : " + e.getMessage());
 			return -1;
 		}
-		return 1;		//잘되면 1
+		return 1; // 잘되면 1
 	}
-	
-	//친구 삭제해주는 함수
-	public int DeleteFriend(String nick, String sessionID)	{
+
+	// 친구 삭제해주는 함수
+	public int DeleteFriend(String nick, String sessionID) {
 		String sql = "";
 		sql = "delete from friend where friendid = (select id from user where nick = ?) and id = ?";
-		try	{  
+		try {
 			DBOpen();
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, nick);
-			getM_SelectStatment().setString(2, sessionID);//아이디가 아니고 닉네임이 들어간다.
+			getM_SelectStatment().setString(2, sessionID);// 아이디가 아니고 닉네임이 들어간다.
 			ExcuteUpdate();
 			CloseQuery();
 			DBClose();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("DeleteFriend() 오류");
 			System.out.println("ERROR : " + e.getMessage());
 			return -1;
 		}
 		return 1;
 	}
-	
-	//친구목록 검색하면 실행되는 함수.
-	public ArrayList<UserVO> SearchFriend(String text, String sessionID){
-		//친구의 닉네임, 사진, 상태메세지
+
+	// 친구목록 검색하면 실행되는 함수.
+	public ArrayList<UserVO> SearchFriend(String text, String sessionID) {
+		// 친구의 닉네임, 사진, 상태메세지
 		String sql = "";
 		ArrayList<UserVO> list = new ArrayList<UserVO>(); // sql = "select * from tab col like ?";
-														  //pstmt.setString(1, "%"+keyword+"%");						세션아이디				 검색어
+															// pstmt.setString(1, "%"+keyword+"%"); 세션아이디 검색어
 		sql = "select nick, pictureRealName, statusmessage from user where id in (select friendid from friend where (id = ?) and (friendid like ?))";
-		try	{
+		try {
 			DBOpen();
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, sessionID);
@@ -273,62 +273,53 @@ public class UserDTO extends DBManager {
 				vo.setNick(getM_ResultSet().getString("nick"));
 				vo.setStatusmessage(getM_ResultSet().getString("statusmessage"));
 				vo.setPictureRealName(getM_ResultSet().getString("pictureRealName"));
-				System.out.println("*********************** SearchFriend() 시작***********************");
-				System.out.println("닉네임 :::: "+getString("nick"));
-				System.out.println("상태메세지 ::::"+getString("statusmessage"));
-				System.out.println("사진이름 :::: "+getString("pictureRealName"));
 				list.add(vo);
 			}
 			CloseResultSet();
 			CloseQuery();
 			DBClose();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			System.out.println("SearchFriend() 오류");
 			System.out.println("ERROR : " + e.getMessage());
 			return null;
 		}
 		return list;
 	}
-	
-	
+
 	// DB에서 가져온 비밀번호와 클라이언트가 입력한 비밀번호를 비교하는 부분(로그인)
 	public int LoginCheck(String id, String password) {
 		try {
 			DBOpen();
 			String sql = "";
-			sql = "select md5(md5(md5(md5(md5(md5(?))))))";
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, password);
-			m_ResultSet = m_SelectStatment.executeQuery(); // 결과값 리턴
+			sql = "select md5(md5(md5(md5(md5(md5(?)))))) as 'password' , md5(md5(md5(md5(md5(md5(?))))))";
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, password);
+			getM_SelectStatment().setString(2, password);
+			ExecuteQuery();
 			while (ResultNext()) {
-				password = m_ResultSet.getString("md5(md5(md5(md5(md5(md5('" + password + "'))))))");
+				password = getM_ResultSet().getString("password");
 			}
 			sql = "select * from user where id = ?";// 클라이언트가 입력한 아이디를 가지고 있는 회원의 정보를 조회하는 sql문
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, id);
-			m_ResultSet = m_SelectStatment.executeQuery(); // 결과값 리턴
-			if (ResultNext()) { // DB에 저장되어있는 비밀번호
-				if (password.equals(m_ResultSet.getString("password"))) {// getString함수는 해당 순서의 열에있는 데이터를 String형으로 받아온단
-																			// 뜻이다.
-					m_ResultSet.close();
-					m_SelectStatment.close();
-					m_Connection.close();
-					return 1; // 예를들어 mResultSet.getString(2)를 하게되면 2번째 열에있는 데이터를 가져오게 된다. 즉 컬럼이 name 과 num만
-								// 있다고 가정하면
-				} // 로그인 성공 // ㅣ--------consol------------------ㅣ
-				else { // ㅣ김형태 111000 ㅣ
-					m_ResultSet.close(); // ㅣ김형태 111000 ㅣ
-					m_SelectStatment.close(); // ㅣ--------------------------------ㅣ
-					m_Connection.close();
-					return 0; // 비밀번호 틀림
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, id);
+			ExecuteQuery();
+			if (ResultNext()) {
+				if (password.equals(getM_ResultSet().getString("password"))) {
+					CloseResultSet(); // 로그인 성공 //
+					CloseQuery();
+					DBClose();
+					return 1;
+				} else { // 비밀번호 틀림 //
+					CloseResultSet();
+					CloseQuery();
+					DBClose();
+					return 0;
 				}
-			} else {
-				m_ResultSet.close();
-				m_SelectStatment.close();
-				m_Connection.close();
-				return -1; // 존재하지 않는 아이디
+			} else { // 존재하지 않는 아이디 //
+				CloseResultSet();
+				CloseQuery();
+				DBClose();
+				return -1;
 			}
 		} catch (Exception e) {
 			System.out.println("ERROR:" + e.getMessage());
@@ -336,28 +327,24 @@ public class UserDTO extends DBManager {
 		}
 	}
 
-	// *************************************************************************************************************************************
-
-	// ****************************************아이디 중복확인 검사
-	// 메서드************************************************************************
-
+	
+	//아이디 중복검사 함수
 	public boolean CheckID(String id) {
 		try {
 			String sql = "select * from user where id=?";
 			DBOpen();
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, id);
-			m_ResultSet = m_SelectStatment.executeQuery(); // 결과값 리턴
-			if (ResultNext()) { // id가 있으면 1
-				m_ResultSet.close();
-				m_SelectStatment.close();
-				m_Connection.close();
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, id);
+			ExecuteQuery();
+			if (ResultNext()) { 
+				CloseResultSet();
+				CloseQuery();
+				DBClose();
 				return false;
-			} else { // id가 없으면 0
-				m_ResultSet.close();
-				m_SelectStatment.close();
-				m_Connection.close();
+			} else {
+				CloseResultSet();
+				CloseQuery();
+				DBClose();
 				return true;
 			}
 
@@ -423,39 +410,30 @@ public class UserDTO extends DBManager {
 
 	// **********************첨부파일을 다운로드 할 때마다 다운로드 횟수를 증가시켜주는
 	// 메서드********************************************
-	
+
 	/*
-	public void downloadcount(String filedownload) {
-		String sql = "update board set downloadcount = downloadcount + 1 where filerealname='" + filedownload + "'";
-		try {
-			DBOpen();
-			ExcuteUpdate(sql);
-			DBClose();
-		} catch (Exception e) {
-			System.out.println("첨부파일 카운트를 증가하는데 있어 오류");
-			System.out.println("ERROR:" + e.getMessage());
-		}
-	}
-
-	// *******************************************************************************************************************
-
-	// *************************************댓글 등록 해주는
-	// 메서드*****************************************************************
-
-	public boolean commentok(String no, String id, String note) {
-		String sql = "insert into comment (no, id, Reply, Rdate) values ('" + no + "', '" + id + "', '" + note
-				+ "', now())";
-		try { // 작성자, 내용, 작성일
-			DBOpen();
-			ExcuteUpdate(sql);
-			DBClose();
-			return true; // 댓글을 등록하면 true 반환
-		} catch (Exception e) {
-			System.out.println("ERROR : " + e.getMessage()); // 실패하면 false
-			return false;
-		}
-	}
-
-	// *******************************************************************************************************************
-*/
+	 * public void downloadcount(String filedownload) { String sql =
+	 * "update board set downloadcount = downloadcount + 1 where filerealname='" +
+	 * filedownload + "'"; try { DBOpen(); ExcuteUpdate(sql); DBClose(); } catch
+	 * (Exception e) { System.out.println("첨부파일 카운트를 증가하는데 있어 오류");
+	 * System.out.println("ERROR:" + e.getMessage()); } }
+	 * 
+	 * //
+	 * *****************************************************************************
+	 * **************************************
+	 * 
+	 * // *************************************댓글 등록 해주는 //
+	 * 메서드*****************************************************************
+	 * 
+	 * public boolean commentok(String no, String id, String note) { String sql =
+	 * "insert into comment (no, id, Reply, Rdate) values ('" + no + "', '" + id +
+	 * "', '" + note + "', now())"; try { // 작성자, 내용, 작성일 DBOpen();
+	 * ExcuteUpdate(sql); DBClose(); return true; // 댓글을 등록하면 true 반환 } catch
+	 * (Exception e) { System.out.println("ERROR : " + e.getMessage()); // 실패하면
+	 * false return false; } }
+	 * 
+	 * //
+	 * *****************************************************************************
+	 * **************************************
+	 */
 }

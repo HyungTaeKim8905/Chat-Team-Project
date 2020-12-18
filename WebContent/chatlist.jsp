@@ -247,14 +247,6 @@
       <p>3번 채팅방</p>
       <span class="time-right">11:00</span>
     </div>
-    <div class="chatlist other" onclick="chno(4)">
-      <p>4번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="chno(5)">
-      <p>5번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
   </div>
   </div>
   <!-- 채팅창 -->
