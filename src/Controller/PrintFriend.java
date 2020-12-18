@@ -67,6 +67,7 @@ public class PrintFriend extends HttpServlet {
 			for(int i = 0; i < list.size(); i++)	{
 				JSONObject jsonList = new JSONObject();
 				jsonList.put("Nick", list.get(i).getNick());
+				jsonList.put("ID", list.get(i).getId());
 				jsonList.put("pictureRealName", list.get(i).getPictureRealName());
 				jsonList.put("statusmessage", list.get(i).getStatusmessage());
 				jsonArrList.add(jsonList);

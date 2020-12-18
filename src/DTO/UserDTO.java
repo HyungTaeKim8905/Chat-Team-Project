@@ -197,6 +197,7 @@ public class UserDTO extends DBManager {
 			while (ResultNext()) {
 				UserVO vo = new UserVO();
 				vo.setNick(getM_ResultSet().getString("nick"));
+				vo.setId(getM_ResultSet().getString("id"));
 				vo.setStatusmessage(getM_ResultSet().getString("statusmessage"));
 				vo.setPictureRealName(getM_ResultSet().getString("pictureRealName"));
 				System.out.println("시작!!!!!!!!!!!!!!!!!!");
