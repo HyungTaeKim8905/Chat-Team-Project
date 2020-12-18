@@ -37,8 +37,10 @@
   
   <!-- 자바스크립트문 -->
   <script src="./js/chatlist.js"></script>  
-  <script src="./js/chat.jsp"></script>
   <script src="./js/fileupload.jsp"></script>  
+
+
+
   
 
   <title>채팅</title>
@@ -116,27 +118,8 @@
   <div class="container">
   <!-- 채팅방 목록 -->
   <div class="left" style="width:25%; float: left; ">
-  <div class="chatlist">
-    <div class="chatlist other" onclick="chno(1)">
-      <p>1번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="chno(2)">
-      <p>2번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="chno(3)">
-      <p>3번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="chno(4)">
-      <p>4번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
-    <div class="chatlist other" onclick="chno(5)">
-      <p>5번 채팅방</p>
-      <span class="time-right">11:00</span>
-    </div>
+  <div class="chatlist" id="chatlist">
+  
   </div>
   </div>
   <!-- 채팅창 -->
@@ -236,5 +219,7 @@
   </div>
 </div>
 </div>
+
+<%@ include file="./js/chat.jsp" %>
 </body>
 </html>

@@ -1,4 +1,4 @@
-
+<script>
 <!-- 페이지 접속 시간 -->
   var connectedDate = new Date();
   connectedDate = connectedDate.getFullYear() + '-' +
@@ -9,7 +9,7 @@
   ('00' + connectedDate.getSeconds()).slice(-2);
   
   <!-- 채팅방 번호 -->
-  var chatno = 1; 
+  var chatno = ""; 
   
   function chno(ch){
 	  chatno = ch;
@@ -77,7 +77,12 @@
   xmlhttp.send("chatno="+chatno+"&connectiontime="+connectedDate);
 }
   <!-- 채팅 1초마다 새로고침 -->
-window.onload = setInterval(update, 2000);
+window.onload = setInterval(interval, 2000);
+
+function interval(){
+	update();
+	chatlistupdate();
+}
 
 <!-- 엔터키 눌렀을 때 입력 -->
 window.onload=function(){
@@ -96,7 +101,6 @@ function scrolldown(){
 
 
 <!-- 채팅방 목록 불러오기 -->
-<!-- json 출력 -->
   function chatlistupdate() {
   var xmlhttp = new XMLHttpRequest();
   
@@ -105,22 +109,19 @@ function scrolldown(){
 	    var myObj = JSON.parse(this.responseText);
 	    var mcount = Object.keys(myObj.chatlist).length;
 	    
+	    
     	document.getElementById("chatlist").innerHTML = "";
-	    var header = "<div class='chatlist other' onclick='chno(";
-	    var mid = ")'><p>";
-	    var tail = "</p></div>";
 	    
 	    for(var i = 0; i<mcount; i++){
-	    
-	    document.getElementById("chatlist").innerHTML += header + myObj.chatlist[i].chatno;
-	    document.getElementById("chatlist").innerHTML += mid + myObj.chatlist[i].otherid;
-	    document.getElementById("chatlist").innerHTML += tail;
-	    }
     	
+    	document.getElementById("chatlist").innerHTML += "<div class='chatlist other' onclick=chno("+ 
+    			myObj.chatlist[i].chatno +")><p>"+ myObj.chatlist[i].otherid + "</p>";
+	    }
 	  }
 	};
   xmlhttp.open("POST", "chatlistgetjson.jsp", true);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-  xmlhttp.send(id=<%=session.getAttribute("id")%>");
+  xmlhttp.send("id=<%=session.getAttribute("id")%>");
 }
-window.onload = setInterval(chatlistupdate, 2000);
+
+</script>
