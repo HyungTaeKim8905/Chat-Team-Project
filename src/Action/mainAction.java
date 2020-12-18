@@ -45,7 +45,6 @@ public class mainAction extends HttpServlet {
 		if(num == null) {
 			num = "";
 		}
-		System.out.println(num);
 		String check = request.getHeader("cookie");
 		Cookie cookies[] = null;
 		if(check != null)	{
@@ -55,9 +54,6 @@ public class mainAction extends HttpServlet {
 		if(session.getAttribute("id") != null)	{
 			return;
 		}
-		for(int i = 0; i < cookies.length; i++)	{
-			System.out.println(":::::::::::1  "+cookies[i].getName());
-		}
 		if(!(num.equals("1")))	{
 			for(int i = 0; i < cookies.length; i++) {
 				if(cookies[i].getName().equals("autologincheckbox")) {
@@ -65,7 +61,6 @@ public class mainAction extends HttpServlet {
 				}
 			}
 		}
-		//처음에 들어가면 자동로그인 상태가 안되있는데 mainAction을 다시 들어가면 자동로그인이 된다.
 		response.sendRedirect("Main.jsp");
 	}
 }

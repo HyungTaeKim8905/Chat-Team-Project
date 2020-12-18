@@ -1,0 +1,4 @@
+로그인 한 id가 속한 채팅방의 번호를 불러와서
+로그인 한 id가 속하지 않은 행을 불러와서 상대 id만 가져옴
+
+select * from chatperson where id!='id' and no in(select no from chatperson where id='id');

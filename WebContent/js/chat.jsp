@@ -1,4 +1,4 @@
-
+<script>
 <!-- 페이지 접속 시간 -->
   var connectedDate = new Date();
   connectedDate = connectedDate.getFullYear() + '-' +
@@ -9,7 +9,7 @@
   ('00' + connectedDate.getSeconds()).slice(-2);
   
   <!-- 채팅방 번호 -->
-  var chatno = 1; 
+  var chatno = ""; 
   
   function chno(ch){
 	  chatno = ch;
@@ -36,9 +36,9 @@
    //입력하면 스크롤 내림
    scrolldown();
  }
+ 
+ <!-- json 출력 -->
   function update() {
-
-  <!-- json 출력 -->
   var xmlhttp = new XMLHttpRequest();
   
   xmlhttp.onreadystatechange = function() {
@@ -66,18 +66,23 @@
 		   	document.getElementById("chat").innerHTML += mchead + chatid + chat + mctail ;
 		    }
 		    <!-- 다른사람 채팅 -->
-		    if("<%=session.getId()%>" != myObj.comment[i].id){
+		    if("<%=session.getAttribute("id")%>" != myObj.comment[i].id){
 		    document.getElementById("chat").innerHTML += ochead + chatid + chat + octail ;
 		    }
 	    }
 	  }
 	};
-  xmlhttp.open("POST", "json.jsp", true);
+  xmlhttp.open("POST", "chatjson.jsp", true);
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send("chatno="+chatno+"&connectiontime="+connectedDate);
 }
   <!-- 채팅 1초마다 새로고침 -->
-window.onload = setInterval(update, 2000);
+window.onload = setInterval(interval, 2000);
+
+function interval(){
+	update();
+	chatlistupdate();
+}
 
 <!-- 엔터키 눌렀을 때 입력 -->
 window.onload=function(){
@@ -93,3 +98,46 @@ document.getElementById('inputmessage').addEventListener('keydown',function(even
 function scrolldown(){
 	document.getElementById('chat').scrollTop = document.getElementById('chat').scrollHeight;
 }
+
+
+<!-- 채팅방 목록 불러오기 -->
+  function chatlistupdate() {
+  var xmlhttp = new XMLHttpRequest();
+  
+  xmlhttp.onreadystatechange = function() {
+	  if (this.readyState == 4 && this.status == 200) {
+	    var myObj = JSON.parse(this.responseText);
+	    var mcount = Object.keys(myObj.chatlist).length;
+	    
+	    
+    	document.getElementById("chatlist").innerHTML = "";
+	    
+	    for(var i = 0; i<mcount; i++){
+    	
+    	document.getElementById("chatlist").innerHTML += "<div class='chatlist other' onclick=chno("+ 
+    			myObj.chatlist[i].chatno +")><p>"+ myObj.chatlist[i].otherid + "</p>";
+	    }
+	  }
+	};
+  xmlhttp.open("POST", "chatlistgetjson.jsp", true);
+  xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+  xmlhttp.send("id=<%=session.getAttribute("id")%>");
+}
+  <!-- 채팅방 생성 -->
+	 function invite(id){
+		 
+	   var xmlhttp = new XMLHttpRequest();
+	    
+	   var otherid = "otherid="+id;
+	   var sessionid = "sessionid=<%=session.getAttribute("id")%>";
+	   
+	   xmlhttp.open("POST", "chatlistinputjson.jsp", true);
+	   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	   xmlhttp.send(otherid+"&"+"myid=<%=session.getAttribute("id")%>");
+	   document.getElementById("inputmessage").value = "";
+	   
+	   //입력하면 스크롤 내림
+	   scrolldown();
+	 }
+  
+</script>

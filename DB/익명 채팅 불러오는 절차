@@ -1,0 +1,7 @@
+브라우저가 실행되면 js/anonymous.jsp의
+window.onload = setInterval(update, 2000)가 실행돼
+2초마다 update 함수가 실행됨
+update 함수는 json.jsp에서 json 형식의 ajax 자료를 받아서
+태그와 함께 출력시킴
+
+이 때 자료를 받기위해 넘기는 인자는 chatno(채팅방 번호)와 connectiontime(접속 시간)임

@@ -4,11 +4,8 @@
 <%@ page import="util.Util" %>
 
 <% 
-	String chatno = request.getParameter("chatno"); 
-	String message = request.getParameter("message");
-	out.print(message);
-	//message = Util.toJS(message);
-	String sessionid = request.getParameter("sessionid");
+	String myid = request.getParameter("myid"); 
+	String otherid = request.getParameter("otherid");
 
 	String  DBURL  = "jdbc:mysql://127.0.0.1/project02?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC";	
 	String  DBID   = "root";
@@ -22,21 +19,42 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection( DBURL, DBID ,DBPass );
 		
-		String query = "insert into chatcontent(roomid, id, content, time) values(?,?,?,now()) ;";
+		String query = "insert into chatroom values() ;";
 		
 		
 		pstmt = conn.prepareStatement(query);
-		pstmt.setString(1, chatno);
-		pstmt.setString(2, sessionid);
-		pstmt.setString(3, message);
+		pstmt.executeUpdate();
+		pstmt.close();
+		
+		query = "select roomid from chatroom order by roomid desc limit 1; ";
+		
+		pstmt = conn.prepareStatement(query);
+		rs = pstmt.executeQuery(); 
+		
+		String lastno = "";
+		while(rs.next()){
+		lastno = rs.getString(1);
+		}
+		
+		rs.close();
+		pstmt.close();
+		
+		query = "insert into chatperson(no, id, lasttime) values(?,?,now()) ;";
+		
+		
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, lastno);
+		pstmt.setString(2, myid);
 		
 		pstmt.executeUpdate();
 		pstmt.close();
 		
-		query = "update chatperson set lasttime = now() where no = (?) ;";
-		pstmt = conn.prepareStatement(query);
+		query = "insert into chatperson(no, id, lasttime) values(?,?,now()) ;";
 		
-		pstmt.setString(1, chatno);
+		
+		pstmt = conn.prepareStatement(query);
+		pstmt.setString(1, lastno);
+		pstmt.setString(2, otherid);
 		
 		pstmt.executeUpdate();
 		pstmt.close();

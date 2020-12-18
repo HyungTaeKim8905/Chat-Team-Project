@@ -2,6 +2,8 @@ insert into chatroom values();
 
 select roomid from chatroom order by roomid desc limit 1;
 
+roomid값 저장
+
 insert into chatperson values(roomid, 보낸사람id);
 
 insert into chatperson values(roomid, 받는사람id);

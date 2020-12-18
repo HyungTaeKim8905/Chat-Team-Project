@@ -1,3 +1,3 @@
 create table chatroom (
-	roomid int primary key auto_increament
+	roomid int primary key auto_increment
 	) DEFAULT CHARSET=utf8 COLLATE utf8_general_ci; 
