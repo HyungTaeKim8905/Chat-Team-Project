@@ -20,7 +20,7 @@ import VO.UserVO;
 /**
  * Servlet implementation class FindFriend
  */
-@WebServlet("/FindFriend.bo")
+@WebServlet("/FindFriend")
 public class FindFriend extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

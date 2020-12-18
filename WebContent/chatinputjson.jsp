@@ -22,7 +22,7 @@
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		conn = DriverManager.getConnection( DBURL, DBID ,DBPass );
 		
-		String query = "insert into chatcontent(roomid, id, content, time) values(?,?,?,now()) ";
+		String query = "insert into chatroom(roomid, sessionid, content, time) values(?,?,?,now()) ";
 		
 		pstmt = conn.prepareStatement(query);
 		pstmt.setString(1, chatno);

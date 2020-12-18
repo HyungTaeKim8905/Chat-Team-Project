@@ -146,6 +146,10 @@ public class UserDTO extends DBManager {
 			System.out.println("ERROR : " + e.getMessage());
 			System.out.println("MyPagePrint() 오류");
 		}
+		/*
+		 * if(statusmessage == null) { statusmessage = ""; } if(img == "null" || img ==
+		 * "NULL" || img == null) { //신규 회원가입이라면 기본 사진을 뽀려준다. img = "./image/man.jpg"; }
+		 */
 		return vo;
 	}
 
@@ -196,12 +200,10 @@ public class UserDTO extends DBManager {
 				vo.setNick(getM_ResultSet().getString("nick"));
 				vo.setStatusmessage(getM_ResultSet().getString("statusmessage"));
 				vo.setPictureRealName(getM_ResultSet().getString("pictureRealName"));
-				/*
-				 * System.out.println("시작!!!!!!!!!!!!!!!!!!");
-				 * System.out.println("닉네임 :::: "+getString("nick"));
-				 * System.out.println("상태메세지 ::::"+getString("statusmessage"));
-				 * System.out.println("사진이름 :::: "+getString("pictureRealName"));
-				 */
+				System.out.println("시작!!!!!!!!!!!!!!!!!!");
+				System.out.println("닉네임 :::: "+getString("nick"));
+				System.out.println("상태메세지 ::::"+getString("statusmessage"));
+				System.out.println("사진이름 :::: "+getString("pictureRealName"));
 				list.add(vo);
 			}
 			CloseResultSet();
@@ -411,29 +413,4 @@ public class UserDTO extends DBManager {
 	// **********************첨부파일을 다운로드 할 때마다 다운로드 횟수를 증가시켜주는
 	// 메서드********************************************
 
-	/*
-	 * public void downloadcount(String filedownload) { String sql =
-	 * "update board set downloadcount = downloadcount + 1 where filerealname='" +
-	 * filedownload + "'"; try { DBOpen(); ExcuteUpdate(sql); DBClose(); } catch
-	 * (Exception e) { System.out.println("첨부파일 카운트를 증가하는데 있어 오류");
-	 * System.out.println("ERROR:" + e.getMessage()); } }
-	 * 
-	 * //
-	 * *****************************************************************************
-	 * **************************************
-	 * 
-	 * // *************************************댓글 등록 해주는 //
-	 * 메서드*****************************************************************
-	 * 
-	 * public boolean commentok(String no, String id, String note) { String sql =
-	 * "insert into comment (no, id, Reply, Rdate) values ('" + no + "', '" + id +
-	 * "', '" + note + "', now())"; try { // 작성자, 내용, 작성일 DBOpen();
-	 * ExcuteUpdate(sql); DBClose(); return true; // 댓글을 등록하면 true 반환 } catch
-	 * (Exception e) { System.out.println("ERROR : " + e.getMessage()); // 실패하면
-	 * false return false; } }
-	 * 
-	 * //
-	 * *****************************************************************************
-	 * **************************************
-	 */
 }
