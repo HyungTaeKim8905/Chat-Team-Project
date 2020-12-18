@@ -123,5 +123,23 @@ function scrolldown(){
   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
   xmlhttp.send("id=<%=session.getAttribute("id")%>");
 }
-
+  <!-- 채팅방 생성 -->
+	 function invite(){
+		 
+	   var xmlhttp = new XMLHttpRequest();
+	    
+	   var chatnum = "chatno="+chatno;
+	   <!-- encodeURIComponent : 한글 인코딩 -->
+	   var message = "message=" + encodeURIComponent(document.inme.inputmessage.value);
+	   var sessionid = "sessionid=<%=session.getAttribute("id")%>";
+	   
+	   xmlhttp.open("POST", "chatinputjson.jsp", true);
+	   xmlhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+	   xmlhttp.send(chatnum+"&"+message+"&"+sessionid);
+	   document.getElementById("inputmessage").value = "";
+	   
+	   //입력하면 스크롤 내림
+	   scrolldown();
+	 }
+  
 </script>

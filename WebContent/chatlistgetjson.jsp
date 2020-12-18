@@ -37,8 +37,12 @@
 		
 		//채팅참여 테이블에 있는 id와 현재 접속 id가 같은 채팅방 번호를 불러와서 채팅방 목록으로 뿌려주고
 		//채팅방에 접속하면 채팅내용 테이블의 채팅방 번호와 해당 채팅방 번호가 일치하는 채팅방을 불러옴 
-		
-		query = "select * from chatperson where id!='"+ id +"' and no in (select no from chatperson where id='"+ id +"')";
+		query = "select no, nick, lasttime ";
+		query += "from user inner join chatperson ";
+		query += "on user.id = chatperson.id ";
+		query += "where chatperson.id != '" + id;
+		query += "' and no in(select no from chatperson where chatperson.id='"+ id + "') ";
+		query += "order by lasttime desc;";
 		pstmt = conn.prepareStatement(query);
 		
 		rs = pstmt.executeQuery();
