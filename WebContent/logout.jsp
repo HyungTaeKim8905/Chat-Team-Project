@@ -8,12 +8,9 @@
 	 <script src="./js/jquery-3.5.1.min.js"></script>
 </head>
 <body>
-	<%
-	
-	//String sessionID = (String)session.getAttribute("id");
+<%
 	String cookie = "";
 	String check = request.getHeader("cookie");
-	// out.println("getHeader : " + check);
 	Cookie[] cookies = null;
 	
 	

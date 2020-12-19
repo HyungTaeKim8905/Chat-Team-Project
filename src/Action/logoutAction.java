@@ -3,6 +3,7 @@ package Action;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -12,16 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class mainAction
+ * Servlet implementation class logoutAction
  */
-@WebServlet("/mainAction")
-public class mainAction extends HttpServlet {
+@WebServlet("/logoutAction")
+public class logoutAction extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public mainAction() {
+    public logoutAction() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -40,27 +41,29 @@ public class mainAction extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		
-		String num = request.getParameter("num");
-		if(num == null) {
-			num = "";
-		}
 		String check = request.getHeader("cookie");
-		Cookie cookies[] = null;
-		if(check != null)	{
-			cookies =request.getCookies();
-		}
 		HttpSession session = request.getSession();
-		if(session.getAttribute("id") != null)	{
-			return;
+		Cookie cookies[] = null;
+		String cookie = "";
+		if(check != null) {
+			cookies = request.getCookies();
 		}
-		if(!(num.equals("1")))	{	//로그아웃을 하지 않았다면 
+		if((cookies != null) && (cookies.length > 0))	{
 			for(int i = 0; i < cookies.length; i++) {
-				if(cookies[i].getName().equals("autologincheckbox")) {
-					session.setAttribute("id", cookies[i].getValue());
+				if(cookies[i].getName().equals("autologincheckbox"))	{
+					cookies[i].setMaxAge(0);
+					response.addCookie(cookies[i]);
 				}
 			}
 		}
-		response.sendRedirect("Main.jsp");
+		session.invalidate();
+		out.println("<script>");
+		out.println("alert('로그아웃 되었습니다.')");
+		out.println("</script>");
+		int num = 1;
+		RequestDispatcher dispatcher = request.getRequestDispatcher("mainAction");
+		request.setAttribute("num", num);
+		dispatcher.forward(request, response);
 	}
+
 }
