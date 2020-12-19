@@ -83,8 +83,8 @@ public class UserDTO extends DBManager {
 			// 두개다 널이라면 사용자가 프로필을 설정하지 않고 닉네임이나 상태메세지만 바꿧다면
 			// filename과 filerealname이 null값으로 들어오기 때문에 저장되어있는 사진이름을 먼저 가져온다.
 			sql = "select pictureOriginName, pictureRealName from user where id = ?";
+			DBOpen();
 			if(filename == null || filerealname == null)	{
-				DBOpen();
 				OpenQuery(sql);
 				getM_SelectStatment().setString(1, id);
 				ExecuteQuery();
@@ -157,6 +157,7 @@ public class UserDTO extends DBManager {
 		// 아이디 프로필 사진, 상태메세지를 가져와 뽀려줘야한다.
 		String sql = "";
 		ArrayList<UserVO> list = new ArrayList<UserVO>(); 
+		// 즉 친구목록에 있는 친구들과 로그인한 사람의 아이디를 뺀 나머지 친구목록을 가져옴
 		sql = "select * from user where id not in (select friendid from friend where friendid like '%" + text + "%') and id != '" + sessionID + "' and id like '%" + text + "%'";
 		try {
 			DBOpen();

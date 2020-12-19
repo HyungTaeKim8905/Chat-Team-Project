@@ -71,6 +71,8 @@ public class Mypage extends HttpServlet {
 			
 			filename = multipart.getOriginalFileName(file);	//업로드된 파일의 처음에 폼에서 선택한 원본 파일명을 얻어온다.
 			//클라이언트가 업로드한 파일의 원본 이름을 반환한다.
+			System.out.println(filename);
+			System.out.println(filerealname);
 			if(filename != null || filerealname != null)	{
 				filename = "./image/" + filename;
 				filerealname = "./image/" + filerealname;

@@ -58,7 +58,7 @@ public class FindFriend extends HttpServlet {
 			out.println("0");
 			return;
 		}
-		if(sessionID == null || sessionID.equals(""))	{
+		if(sessionID == null)	{
 			System.out.println("sessionID가 null입니다.");
 			out.println("0");
 			return;

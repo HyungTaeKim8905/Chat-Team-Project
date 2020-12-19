@@ -56,11 +56,11 @@ public class logoutAction extends HttpServlet {
 				}
 			}
 		}
+		int num = 1;
 		session.invalidate();
 		out.println("<script>");
 		out.println("alert('로그아웃 되었습니다.')");
 		out.println("</script>");
-		int num = 1;
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mainAction");
 		request.setAttribute("num", num);
 		dispatcher.forward(request, response);

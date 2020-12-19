@@ -38,13 +38,11 @@ public class mypageAction extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
 		String sessionID = (String)session.getAttribute("id");
-		if(sessionID == null || sessionID.equals(""))	{
-			System.out.println(sessionID);
+		if(sessionID == null)	{
+			System.out.println("id가 null입니다.");
 			return;
 		}
 		UserDTO dto = new UserDTO();
-		System.out.println(sessionID);
-		System.out.println("print 함수 실행");
 		UserVO vo = dto.MyPagePrint(sessionID);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("mypage.jsp");
