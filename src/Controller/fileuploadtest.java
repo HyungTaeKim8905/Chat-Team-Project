@@ -49,7 +49,7 @@ public class fileuploadtest extends HttpServlet {
 		String uploadFileNameList = "";	//파일 이름을 받기 위해 선언
 		String chatno = request.getParameter("chatno");
 		System.out.println("chatno :::: "+chatno);
-		System.out.println("zzzzzzzzzzzzzzzzz");
+		System.out.println("--------------");
 		for(Part part: request.getParts()){
 			System.out.println(part.getName());	// file속성의 name값 찍어본다.
 			if(part.getName().equals("fileuld")){
@@ -60,7 +60,7 @@ public class fileuploadtest extends HttpServlet {
 				String uploadFileName = getUploadFileName(contentDisposition);
 				list.add(uploadFileName);
 				part.write(uploadFileName);	//Part객체의 파일을 인자로 지정된 파일 이름으로 디스크 상에 출력한다.
-			}
+			} 
 		}
 		ChatRoomDTO dto = new ChatRoomDTO();
 		HttpSession session = request.getSession();

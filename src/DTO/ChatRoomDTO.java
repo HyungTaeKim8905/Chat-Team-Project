@@ -127,26 +127,46 @@ public class ChatRoomDTO extends DBManager {
 	}
 
 	// 파일을 올렸을때 실행되는 함수.
-	public int FileSubmit(String sessionID, ArrayList<? super String> content, String chatno) {
-		String sql = "";
+	public int FileSubmit(String sessionID, ArrayList<String> content, String roomid) {
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		sql = "insert into chatcontent(roomid, id, content, time) values(?,?,?,now())";
-		//sql = "insert into file (roomid, chatno, fileID, fileName, FOriginName, id, time) values (NULL, ?, ?, ?, NOW())";
+		String sql = "";
+		String lastNo = "";
 		try {
+			DBOpen();
 			for (int i = 0; i < content.size(); i++) {
+				sql = "insert into chatcontent(roomid, id, content, time) values(?,?,?,now())";
 				String file = "<a href='file_down.jsp?file_name=" + content.get(i) + "'>" + content.get(i) + "</a>";
-				DBOpen();
 				OpenQuery(sql);
-				m_SelectStatment.setString(1, sessionID);
-				m_SelectStatment.setString(3, file);
-				m_SelectStatment.executeUpdate();
-				m_SelectStatment.close();
-				m_Connection.close(); // db 연결 종료
+				getM_SelectStatment().setString(1, roomid);
+				getM_SelectStatment().setString(2, sessionID);
+				getM_SelectStatment().setString(3, file);
+				ExcuteUpdate();
+				CloseQuery();
+				sql = "select max(chatno) as count from chatcontent where roomid = ?";
+				OpenQuery(sql);
+				getM_SelectStatment().setString(1, roomid);
+				ExcuteUpdate();
+				while(ResultNext()) {
+					lastNo = getM_ResultSet().getString("count");
+				}
+				CloseResultSet();
+				CloseQuery();
+				sql = "insert into file (roomid, chatno, fileName, FOriginName, id, time) values (?, ?, ?, ?, ?, NOW())";
+				OpenQuery(sql);
+				getM_SelectStatment().setString(1, roomid);
+				getM_SelectStatment().setString(2, lastNo);
+				getM_SelectStatment().setString(3, content.get(i));
+				getM_SelectStatment().setString(4, content.get(i));
+				getM_SelectStatment().setString(5, sessionID);
+				ExcuteUpdate();
+				CloseQuery();
 			}
+			DBClose();
 		} catch (Exception e) {
 			System.out.println("submit() 오류");
 			System.out.println("ERROR: " + e.getMessage());
+			return -1;
 		}
-		return -1; // DB 에러
+		return 1; // DB 에러
 	}
 }
