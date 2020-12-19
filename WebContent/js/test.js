@@ -44,7 +44,7 @@
 		enctype: "multipart/form-data",
 		contentType : false,
 		processData : false,
-		data:formData,
+		data:formData+"&chatno="+chatno,
 		success:function(result)	{
 			var json = JSON.parse(result);
 			if(json.length == 0)	{

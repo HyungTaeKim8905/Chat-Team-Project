@@ -14,13 +14,12 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 
 import DTO.ChatRoomDTO;
-import VO.UserVO;
 
 /**
  * Servlet implementation class fileuploadtest
  */
 @WebServlet("/fileuploadtest")
-@MultipartConfig(fileSizeThreshold=0, location="D:\\KHT\\Chat-Team-Project\\WebContent\\file")
+@MultipartConfig(fileSizeThreshold=0, location="D:\\KHT\\Chat-Team-Project\\WebContent\\upload")
 public class fileuploadtest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,8 +35,7 @@ public class fileuploadtest extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		doPost(request, response);
 	}
 
 	/**
@@ -49,6 +47,9 @@ public class fileuploadtest extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		ArrayList<String> list = new ArrayList<String>();
 		String uploadFileNameList = "";	//파일 이름을 받기 위해 선언
+		String chatno = request.getParameter("chatno");
+		System.out.println("chatno :::: "+chatno);
+		System.out.println("zzzzzzzzzzzzzzzzz");
 		for(Part part: request.getParts()){
 			System.out.println(part.getName());	// file속성의 name값 찍어본다.
 			if(part.getName().equals("fileuld")){
@@ -64,7 +65,7 @@ public class fileuploadtest extends HttpServlet {
 		ChatRoomDTO dto = new ChatRoomDTO();
 		HttpSession session = request.getSession();
 		String sessionID = (String)session.getAttribute("id");
-		int result = dto.FileSubmit(sessionID, "123", list);
+		int result = dto.FileSubmit(sessionID, list, chatno);
 		
 	}
 	

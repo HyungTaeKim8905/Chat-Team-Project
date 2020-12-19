@@ -37,12 +37,8 @@
   
   <!-- 자바스크립트문 -->
   <script src="./js/chatlist.js"></script>  
-  <script src="./js/fileupload.jsp"></script>  
-
-
-
-  
-
+  <%@ include file="./js/chat.jsp" %>
+   <!--  <script src="./js/test.js"></script>   -->
   <title>채팅</title>
   
 </head>
@@ -219,7 +215,5 @@
   </div>
 </div>
 </div>
-
-<%@ include file="./js/chat.jsp" %>
 </body>
 </html>

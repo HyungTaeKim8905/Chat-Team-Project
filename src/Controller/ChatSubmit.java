@@ -44,24 +44,14 @@ public class ChatSubmit extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String fromID = request.getParameter("fromID");
 		String toID = request.getParameter("toID");
-		String content = request.getParameter("content");	//ajax로 넘어온 파라미터값들을 받아옴
-		System.out.println("::::::::::::::."+fromID);
-		System.out.println("::::::::::::::."+toID);
-		System.out.println("::::::::::::::."+content);
+		String content = request.getParameter("content");
 		PrintWriter out = response.getWriter();
 		if(fromID == null || fromID.equals("") || toID == null || toID.equals("") || content == null || content.equals("")) {
 			out.write("1111111111:::::::::::::");
 		}
 		else {
-			//fromID = URLDecoder.decode(fromID, "UTF-8");
-			//toID = URLDecoder.decode(toID, "UTF-8");
-			//content = URLDecoder.decode(content, "UTF-8");
-			System.out.println(":::::::::::::11111" + fromID);
-			System.out.println(":::::::::::::11111" + toID);
-			System.out.println(":::::::::::::11111" + content);
 			ChatRoomDTO dto = new ChatRoomDTO();
 			int result = dto.Submit(fromID, toID, content);
-			// JSON 형식
 			JSONArray jsonArrList = new JSONArray();
 			JSONObject jsonList = new JSONObject();
 			jsonList.put("result", result);

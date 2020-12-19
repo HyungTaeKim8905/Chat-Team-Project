@@ -45,14 +45,6 @@ public class ChatRoomDTO extends DBManager {
 			m_ResultSet.close();
 			m_SelectStatment.close();
 			m_Connection.close(); // db 연결 종료
-			for (int i = 0; i < list.size(); i++) {
-				System.out.println("getChatListByID() ====>" + list.get(i).getNo());
-				System.out.println("getChatListByID() ====>" + list.get(i).getFromID());
-				System.out.println("getChatListByID() ====>" + list.get(i).getToID());
-				System.out.println("getChatListByID() ====>" + list.get(i).getContent());
-				System.out.println("getChatListByID() ====>" + list.get(i).getDate());
-				System.out.println("----------------------------------------------------");
-			}
 		} catch (Exception e) {
 			System.out.println("ChttingListID() 에러");
 			System.out.println("ERROR: " + e.getMessage());
@@ -135,20 +127,17 @@ public class ChatRoomDTO extends DBManager {
 	}
 
 	// 파일을 올렸을때 실행되는 함수.
-	public int FileSubmit(String fromID, String toID, ArrayList<? super String> content) {
+	public int FileSubmit(String sessionID, ArrayList<? super String> content, String chatno) {
 		String sql = "";
-		// 보낸 사람이든간에 받은 사람이든 간에 전부다 가져올수 있도록 함.
 		ArrayList<UserVO> list = new ArrayList<UserVO>();
-		sql += "insert into chatroom values (NULL, ?, ?, ?, NOW())";
-		// null값을 넣음으로써 no가 +1 자동으로 증가
+		sql = "insert into chatcontent(roomid, id, content, time) values(?,?,?,now())";
+		//sql = "insert into file (roomid, chatno, fileID, fileName, FOriginName, id, time) values (NULL, ?, ?, ?, NOW())";
 		try {
 			for (int i = 0; i < content.size(); i++) {
 				String file = "<a href='file_down.jsp?file_name=" + content.get(i) + "'>" + content.get(i) + "</a>";
 				DBOpen();
-				m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-						ResultSet.CONCUR_UPDATABLE);
-				m_SelectStatment.setString(1, fromID);
-				m_SelectStatment.setString(2, toID);
+				OpenQuery(sql);
+				m_SelectStatment.setString(1, sessionID);
 				m_SelectStatment.setString(3, file);
 				m_SelectStatment.executeUpdate();
 				m_SelectStatment.close();
