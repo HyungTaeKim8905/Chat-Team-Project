@@ -5,7 +5,6 @@ import java.util.ArrayList;
 
 import DB.DBManager;
 import VO.ChatRoomVO;
-import VO.UserVO;
 
 public class ChatRoomDTO extends DBManager {
 
@@ -128,7 +127,6 @@ public class ChatRoomDTO extends DBManager {
 
 	// 파일을 올렸을때 실행되는 함수.
 	public int FileSubmit(String sessionID, ArrayList<String> content, String roomid) {
-		ArrayList<UserVO> list = new ArrayList<UserVO>();
 		String sql = "";
 		String lastNo = "";
 		try {

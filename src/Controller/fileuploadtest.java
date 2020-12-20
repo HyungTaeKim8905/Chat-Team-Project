@@ -66,7 +66,6 @@ public class fileuploadtest extends HttpServlet {
 		HttpSession session = request.getSession();
 		String sessionID = (String)session.getAttribute("id");
 		int result = dto.FileSubmit(sessionID, list, chatno);
-		
 	}
 	
 	
