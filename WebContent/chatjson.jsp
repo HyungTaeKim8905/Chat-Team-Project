@@ -7,6 +7,7 @@
 	String id = "";
 	String content = "";
 	String time = "";
+	String filecheck = "";
 %>
 {
 "comment" : 
@@ -36,7 +37,7 @@
 		}
 		
 		// n번 채팅방에 있는 채팅 목록 가져옴
-		query = "select id, content, time from chatcontent where roomid='"+chatno+ "'";
+		query = "select id, content, time, filecheck from chatcontent where roomid='"+chatno+ "'";
 		pstmt = conn.prepareStatement(query);
 		
 		rs = pstmt.executeQuery();
@@ -45,10 +46,13 @@
 			id = rs.getString(1);
 			content = rs.getString(2);
 			time = rs.getString(3);
-			
-			content=content.replace("<", "&lt;");
-			content=content.replace(">", "&gt;");
-			content=content.replace("\n", "<br>");
+			filecheck = rs.getString(4);
+			if(!(filecheck.equals("1")))	{
+				content=content.replace("<", "&lt;");
+				content=content.replace(">", "&gt;");
+				content=content.replace("\n", "<br>");
+			}
+
 %>
  	{
 	"id" : "<%=id%>", 

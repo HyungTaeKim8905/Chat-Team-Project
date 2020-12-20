@@ -41,7 +41,7 @@ public class mainAction extends HttpServlet {
 		response.setContentType("text/html;charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		
-		String num = request.getParameter("num");
+		String num = (String)request.getAttribute("num");
 		if(num == null) {
 			num = "";
 		}

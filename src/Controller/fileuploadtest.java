@@ -19,7 +19,7 @@ import DTO.ChatRoomDTO;
  * Servlet implementation class fileuploadtest
  */
 @WebServlet("/fileuploadtest")
-@MultipartConfig(fileSizeThreshold=0, location="D:\\KHT\\Chat-Team-Project\\WebContent\\upload")
+@MultipartConfig(fileSizeThreshold=0, location="D:\\JAVA\\Chat-Team-Project\\WebContent\\upload")
 public class fileuploadtest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -60,15 +60,15 @@ public class fileuploadtest extends HttpServlet {
 				String uploadFileName = getUploadFileName(contentDisposition);
 				list.add(uploadFileName);
 				part.write(uploadFileName);	//Part객체의 파일을 인자로 지정된 파일 이름으로 디스크 상에 출력한다.
-			} 
+			}
 		}
 		ChatRoomDTO dto = new ChatRoomDTO();
 		HttpSession session = request.getSession();
 		String sessionID = (String)session.getAttribute("id");
 		int result = dto.FileSubmit(sessionID, list, chatno);
-	}
+	} 
 	
-	
+	 
 	//사용브라우저가 Chrome인 경우
 		private String getUploadFileName(String contentDisposition) {
 				String uploadFileName = null;
@@ -79,7 +79,7 @@ public class fileuploadtest extends HttpServlet {
 				//*******************
 				System.out.println("getUploadFileName() ===>" + uploadFileName);
 				return uploadFileName;
-			}
+		}
 	
 	
 	//사용 브라우저가 IE인 경우

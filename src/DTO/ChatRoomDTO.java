@@ -132,18 +132,19 @@ public class ChatRoomDTO extends DBManager {
 		try {
 			DBOpen();
 			for (int i = 0; i < content.size(); i++) {
-				sql = "insert into chatcontent(roomid, id, content, time) values(?,?,?,now())";
+				sql = "insert into chatcontent(roomid, id, content, time, filecheck) values(?,?,?,now(),?)";
 				String file = "<a href='file_down.jsp?file_name=" + content.get(i) + "'>" + content.get(i) + "</a>";
 				OpenQuery(sql);
 				getM_SelectStatment().setString(1, roomid);
 				getM_SelectStatment().setString(2, sessionID);
 				getM_SelectStatment().setString(3, file);
+				getM_SelectStatment().setString(4, "1");
 				ExcuteUpdate();
 				CloseQuery();
 				sql = "select max(chatno) as count from chatcontent where roomid = ?";
 				OpenQuery(sql);
 				getM_SelectStatment().setString(1, roomid);
-				ExcuteUpdate();
+				ExecuteQuery();
 				while(ResultNext()) {
 					lastNo = getM_ResultSet().getString("count");
 				}
