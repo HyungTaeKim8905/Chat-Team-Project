@@ -276,37 +276,35 @@ public class UserDTO extends DBManager {
 			DBOpen();
 			String sql = "";
 			sql = "select md5(md5(md5(md5(md5(md5(?))))))";
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, password);
-			m_ResultSet = m_SelectStatment.executeQuery(); // 결과값 리턴
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, password);
+			ExecuteQuery();
 			while (ResultNext()) {
-				password = m_ResultSet.getString("md5(md5(md5(md5(md5(md5('" + password + "'))))))");
+				password = getM_ResultSet().getString("md5(md5(md5(md5(md5(md5('" + password + "'))))))");
 			}
 			sql = "select * from user where id = ?";// 클라이언트가 입력한 아이디를 가지고 있는 회원의 정보를 조회하는 sql문
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, id);
-			m_ResultSet = m_SelectStatment.executeQuery(); // 결과값 리턴
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, id);
+			ExecuteQuery(); // 결과값 리턴
 			if (ResultNext()) { // DB에 저장되어있는 비밀번호
-				if (password.equals(m_ResultSet.getString("password"))) {// getString함수는 해당 순서의 열에있는 데이터를 String형으로 받아온단
+				if (password.equals(getM_ResultSet().getString("password"))) {// getString함수는 해당 순서의 열에있는 데이터를 String형으로 받아온단
 																			// 뜻이다.
-					m_ResultSet.close();
-					m_SelectStatment.close();
-					m_Connection.close();
+					CloseResultSet();
+					CloseQuery();
+					DBClose();
 					return 1; // 예를들어 mResultSet.getString(2)를 하게되면 2번째 열에있는 데이터를 가져오게 된다. 즉 컬럼이 name 과 num만
 								// 있다고 가정하면
 				} // 로그인 성공 // ㅣ--------consol------------------ㅣ
 				else { // ㅣ김형태 111000 ㅣ
-					m_ResultSet.close(); // ㅣ김형태 111000 ㅣ
-					m_SelectStatment.close(); // ㅣ--------------------------------ㅣ
-					m_Connection.close();
+					CloseResultSet(); // ㅣ김형태 111000 ㅣ
+					CloseQuery(); // ㅣ--------------------------------ㅣ
+					DBClose();
 					return 0; // 비밀번호 틀림
 				}
 			} else {
-				m_ResultSet.close();
-				m_SelectStatment.close();
-				m_Connection.close();
+				CloseResultSet();
+				CloseQuery();
+				DBClose();
 				return -1; // 존재하지 않는 아이디
 			}
 		} catch (Exception e) {
@@ -324,19 +322,18 @@ public class UserDTO extends DBManager {
 		try {
 			String sql = "select * from user where id=?";
 			DBOpen();
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, id);
-			m_ResultSet = m_SelectStatment.executeQuery(); // 결과값 리턴
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, id);
+			ExecuteQuery(); // 결과값 리턴
 			if (ResultNext()) { // id가 있으면 1
-				m_ResultSet.close();
-				m_SelectStatment.close();
-				m_Connection.close();
+				CloseResultSet();
+				CloseQuery();
+				DBClose();
 				return false;
 			} else { // id가 없으면 0
-				m_ResultSet.close();
-				m_SelectStatment.close();
-				m_Connection.close();
+				CloseResultSet();
+				CloseQuery();
+				DBClose();
 				return true;
 			}
 
