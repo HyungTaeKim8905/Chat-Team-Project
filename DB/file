@@ -1,0 +1,10 @@
+create table file (
+	fileID int not null auto_increment,
+	roomid int not null,
+    chatno int not null,
+    fileName varchar(255),
+    FOriginName varchar(255),
+    id varchar(20),
+    time datetime,
+    primary key (fileID)
+)  DEFAULT CHARSET=utf8 COLLATE utf8_general_ci;
