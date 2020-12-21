@@ -4,5 +4,6 @@ create table chatcontent
 	roomid int,
 	id varchar(20),
 	content text,
-	time datetime
+	time datetime,
+	filecheck int
 );
