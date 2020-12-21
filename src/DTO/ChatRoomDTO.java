@@ -125,10 +125,10 @@ public class ChatRoomDTO extends DBManager {
 		return -1; // DB 에러
 	}
 
-	// 파일을 올렸을때 실행되는 함수.
+	// 파일을 올렸을때 실행되는 함수. synchronized
 	public int FileSubmit(String sessionID, ArrayList<String> content, String roomid) {
 		String sql = "";
-		String lastNo = "";
+		String lastNo = ""; 
 		try {
 			DBOpen();
 			for (int i = 0; i < content.size(); i++) {

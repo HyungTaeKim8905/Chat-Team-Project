@@ -22,10 +22,10 @@
 		<link rel="stylesheet" type="text/css" href="./css/nav.css" />
 		<!-- 마이페이지 css -->
 		<link rel="stylesheet" type="text/css" href="./css/mypage.css" />
-		<!-- 마이페이지 js -->
-		<script src="./js/mypage.js"></script>
 		<!-- jQuery -->
 		<script src="./js/jquery-3.5.1.min.js"></script>
+		<!-- 마이페이지 js -->
+		<script src="./js/mypage.js"></script>
 		<title>마이 페이지</title>
 	</head>
 	<body>

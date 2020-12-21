@@ -8,46 +8,25 @@ import VO.UserVO;
 
 public class UserDTO extends DBManager {
 
-	// ***************************아이디 및 비밀번호 찾기 및 비밀번호 재설정
-	// 메서드************************************************************
-
-	// 아이디 찾기 메서드
-	public boolean FindID(String phone) {
+	// 비밀번호 변경하면 실행되는 메서드
+	public int ChangePassWord(String id, String password) {
 		try {
-			String sql = "select id from user where phone = ?";
+			String sql = "update user set password = md5(md5(md5(md5(md5(md5(?)))))) where id = ?";
 			DBOpen();
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, phone);
-			m_ResultSet = m_SelectStatment.executeQuery();
-			return true;
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, password);
+			getM_SelectStatment().setString(2, id);
+			ExcuteUpdate();
+			CloseQuery();
+			DBClose();
 		} catch (Exception e) {
 			System.out.println("ERROR:" + e.getMessage());
-			return false;
+			return -1;
 		}
+		return 1;
 	}
 
-	// 비밀번호 찾기 메서드
-	public boolean FindPassWord(String id) {
-		try {
-			String sql = "select password from user where id = ?";
-			DBOpen();
-			m_SelectStatment = m_Connection.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE,
-					ResultSet.CONCUR_UPDATABLE);
-			m_SelectStatment.setString(1, id);
-			m_ResultSet = m_SelectStatment.executeQuery();
-			return true;
-		} catch (Exception e) {
-			System.out.println("ERROR:" + e.getMessage());
-			return false;
-		}
-	}
-
-	// *************************************************************************************************************************************
-
-	// ***************************회원가입
-	// 메서드******************************************************************************************************
-
+	// 회원가입하면 실행되는 메서드
 	public int Join(String id, String password, String nick, String email, String address, String phone) {
 		try {
 			// 회원가입페이지(join.jsp)에서 파라미터로 전송된 데이터들을 user테이블의 새로운 레코드로 삽입하는 부분이다.
@@ -289,7 +268,7 @@ public class UserDTO extends DBManager {
 		}
 		return list;
 	}
-	
+	 
 	
 	// DB에서 가져온 비밀번호와 클라이언트가 입력한 비밀번호를 비교하는 부분(로그인)
 	public int LoginCheck(String id, String password) {
@@ -364,6 +343,36 @@ public class UserDTO extends DBManager {
 		} catch (Exception e) {
 			System.out.println("ERROR:" + e.getMessage());
 			return false; // db 오류
+		}
+	}
+	
+	//회원탈퇴하면 실행되는 메서드
+	public int WithDrawal(String sessionID) {
+		String sql = "";
+		try	{
+			sql = "delete from chatperson where id = ?";
+			DBOpen();
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, sessionID);
+			ExcuteUpdate();
+			CloseQuery();
+			sql = "delete from friend where (id = ?) and (friendid = id)";
+			DBOpen();
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, sessionID);
+			ExcuteUpdate();
+			CloseQuery();
+			sql = "delete from user where id = ?";
+			OpenQuery(sql);
+			getM_SelectStatment().setString(1, sessionID);
+			ExcuteUpdate();
+			CloseQuery();
+			DBClose();
+			return 1;
+		} catch(Exception e) {
+			System.out.println("WithDrawal() 오류");
+			System.out.println("ERROR : " + e.getMessage());
+			return -1;
 		}
 	}
 }
