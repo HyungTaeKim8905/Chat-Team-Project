@@ -28,6 +28,7 @@ public class UserDTO extends DBManager {
 
 	// 회원가입하면 실행되는 메서드
 	public int Join(String id, String password, String nick, String email, String address, String phone) {
+		int result = 1;
 		try {
 			// 회원가입페이지(join.jsp)에서 파라미터로 전송된 데이터들을 user테이블의 새로운 레코드로 삽입하는 부분이다.
 			String sql = "insert into user (id, password, nick, email, address, phone, pictureOriginName, pictureRealName, statusmessage) values (?,md5(md5(md5(md5(md5(md5(?)))))),?,?,?,?,?,?,?)";
@@ -46,11 +47,12 @@ public class UserDTO extends DBManager {
 			ExcuteUpdate();
 			CloseQuery();
 			DBClose();
-			return 1; // 회원가입 성공하면 1 반환
+			// 회원가입 성공하면 1 반환
 		} catch (Exception e) {
 			System.out.println("ERROR:" + e.getMessage());
-			return 0; // 실패하면 0 반환
+			result =  0; // 실패하면 0 반환
 		}
+		return result;
 	}
 
 	// ***********************************************************************************************************************************
@@ -252,10 +254,12 @@ public class UserDTO extends DBManager {
 				vo.setNick(getM_ResultSet().getString("nick"));
 				vo.setStatusmessage(getM_ResultSet().getString("statusmessage"));
 				vo.setPictureRealName(getM_ResultSet().getString("pictureRealName"));
+				/*
 				System.out.println("*********************** SearchFriend() 시작***********************");
 				System.out.println("닉네임 :::: "+getString("nick"));
 				System.out.println("상태메세지 ::::"+getString("statusmessage"));
 				System.out.println("사진이름 :::: "+getString("pictureRealName"));
+				*/
 				list.add(vo);
 			}
 			CloseResultSet();
@@ -272,9 +276,9 @@ public class UserDTO extends DBManager {
 	
 	// DB에서 가져온 비밀번호와 클라이언트가 입력한 비밀번호를 비교하는 부분(로그인)
 	public int LoginCheck(String id, String password) {
+		String sql = "";
+		DBOpen();
 		try {
-			DBOpen();
-			String sql = "";
 			sql = "select md5(md5(md5(md5(md5(md5(?))))))";
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, password);
@@ -282,22 +286,24 @@ public class UserDTO extends DBManager {
 			while (ResultNext()) {
 				password = getM_ResultSet().getString("md5(md5(md5(md5(md5(md5('" + password + "'))))))");
 			}
-			sql = "select * from user where id = ?";// 클라이언트가 입력한 아이디를 가지고 있는 회원의 정보를 조회하는 sql문
+			// 클라이언트가 입력한 아이디를 가지고 있는 회원의 정보를 조회하는 sql문
+			sql = "select * from user where id = ?";
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, id);
 			ExecuteQuery(); // 결과값 리턴
-			if (ResultNext()) { // DB에 저장되어있는 비밀번호
-				if (password.equals(getM_ResultSet().getString("password"))) {// getString함수는 해당 순서의 열에있는 데이터를 String형으로 받아온단
-																			// 뜻이다.
+			if (ResultNext()) { 
+				// DB에 저장되어있는 비밀번호
+				// getString함수는 해당 순서의 열에있는 데이터를 String형으로 받아온단 뜻이다.
+				if (password.equals(getM_ResultSet().getString("password"))) {
 					CloseResultSet();
 					CloseQuery();
 					DBClose();
 					return 1; // 예를들어 mResultSet.getString(2)를 하게되면 2번째 열에있는 데이터를 가져오게 된다. 즉 컬럼이 name 과 num만
 								// 있다고 가정하면
-				} // 로그인 성공 // ㅣ--------consol------------------ㅣ
-				else { // ㅣ김형태 111000 ㅣ
-					CloseResultSet(); // ㅣ김형태 111000 ㅣ
-					CloseQuery(); // ㅣ--------------------------------ㅣ
+				} // 로그인 성공 					// ㅣ--------consol------------------ㅣ
+				else {						    // ㅣ김형태 111000                     ㅣ
+					CloseResultSet(); 		    // ㅣ김형태 111000                     ㅣ
+					CloseQuery(); 				// ㅣ--------------------------------ㅣ
 					DBClose();
 					return 0; // 비밀번호 틀림
 				}
@@ -313,63 +319,62 @@ public class UserDTO extends DBManager {
 		}
 	}
 
-	// *************************************************************************************************************************************
-
-	// ****************************************아이디 중복확인 검사
-	// 메서드************************************************************************
-
+	// 아이디 중복확인 검사
 	public boolean CheckID(String id) {
+		boolean check = true;
+		
+		DBOpen();
+		
 		try {
 			String sql = "select * from user where id=?";
-			DBOpen();
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, id);
-			ExecuteQuery(); // 결과값 리턴
-			if (ResultNext()) { // id가 있으면 1
-				CloseResultSet();
-				CloseQuery();
-				DBClose();
-				return false;
-			} else { // id가 없으면 0
-				CloseResultSet();
-				CloseQuery();
-				DBClose();
-				return true;
+			ExecuteQuery(); 
+			if (ResultNext()) {
+				check = false;
 			}
-
+			CloseResultSet();
+			CloseQuery();
 		} catch (Exception e) {
 			System.out.println("ERROR:" + e.getMessage());
-			return false; // db 오류
+			check = false; // db 오류
 		}
+		
+		DBClose();
+		return check;
 	}
 	
 	//회원탈퇴하면 실행되는 메서드
 	public int WithDrawal(String sessionID) {
+		int    check = 1;
 		String sql = "";
+		DBOpen();
+		
 		try	{
 			sql = "delete from chatperson where id = ?";
-			DBOpen();
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, sessionID);
 			ExcuteUpdate();
 			CloseQuery();
+			
 			sql = "delete from friend where (id = ?) and (friendid = id)";
-			DBOpen();
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, sessionID);
 			ExcuteUpdate();
 			CloseQuery();
+			
 			sql = "delete from user where id = ?";
 			OpenQuery(sql);
 			getM_SelectStatment().setString(1, sessionID);
 			ExcuteUpdate();
 			CloseQuery();
-			DBClose();
-			return 1;
 		} catch(Exception e) {
 			System.out.println("WithDrawal() 오류");
 			System.out.println("ERROR : " + e.getMessage());
-			return -1;
-		}
+			check = -1;
+		}		
+		
+		DBClose();
+		return check;
 	}
 }

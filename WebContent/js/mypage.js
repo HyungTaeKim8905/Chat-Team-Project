@@ -62,6 +62,10 @@ function Withdrawal()	{
 	if(check == true)	{
 		alert("확인 버튼 눌렀다.");
 	}
+	else	{
+		alert("취소 버튼 눌렀다.");	
+		return;
+	}
 	$.ajax({
 		url:"withdrawal",
 		type:"POST",
