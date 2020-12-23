@@ -36,7 +36,7 @@
   <script src="./js/jquery-3.5.1.min.js"></script>
   
   <!-- 자바스크립트문 -->
-  <script src="./js/chatlist.js"></script>  
+  <script src="./js/chatlist.js" charset="utf-8"></script>  
   <%@ include file="./js/chat.jsp" %>
    <!--  <script src="./js/test.js"></script>   -->
   <title>채팅</title>
