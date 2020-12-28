@@ -1,53 +1,54 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%
-//*************** ÄíÅ°°ª °¡Á®¿À±â **********************************************************************************
+//*************** ì¿ í‚¤ê°’ ê°€ì ¸ì˜¤ê¸° **********************************************************************************
 String sessionID = (String)session.getAttribute("id");
 if(sessionID != null){
-	%> <script>alert("Àß¸øµÈ Á¢±ÙÀÔ´Ï´Ù."); location.href="Main.jsp"; </script> <%
+	%> <script>alert("ìž˜ëª»ëœ ì ‘ê·¼ìž…ë‹ˆë‹¤."); location.href="Main.jsp"; </script> <%
 }
 String cookie = "";
 String check = request.getHeader("cookie"); 
 // out.println("getHeader : " + check);
 Cookie[] cookies = null;
 if(check != null){	
-	cookies = request.getCookies();	// getCookies() ¸Þ¼­µå¸¦ »ç¿ëÇØ¼­ ÄíÅ° Á¤º¸¸¦ ¹è¿­¿¡ ÀúÀåÇÑ´Ù.(HTTP ¿äÃ» ¸Þ¼¼ÁöÀÇ Çì´õ¿¡ Æ÷ÇÔµÈ ÄíÅ°¸¦ javax.servlet.http.Cookie ¹è¿­·Î ¸®ÅÏ)		
+	cookies = request.getCookies();	// getCookies() ë©”ì„œë“œë¥¼ ì‚¬ìš©í•´ì„œ ì¿ í‚¤ ì •ë³´ë¥¼ ë°°ì—´ì— ì €ìž¥í•œë‹¤.(HTTP ìš”ì²­ ë©”ì„¸ì§€ì˜ í—¤ë”ì— í¬í•¨ëœ ì¿ í‚¤ë¥¼ javax.servlet.http.Cookie ë°°ì—´ë¡œ ë¦¬í„´)		
 }
 
-if((cookies != null) && (cookies.length > 0))	{	// cookies == null ÀÌ¸é ÄíÅ°°¡ Á¸ÀçÇÏÁö ¾Ê´Â´Ù.
+if((cookies != null) && (cookies.length > 0))	{	// cookies == null ì´ë©´ ì¿ í‚¤ê°€ ì¡´ìž¬í•˜ì§€ ì•ŠëŠ”ë‹¤.
 	for(int i = 0; i < cookies.length; i++)		{
-		if(cookies[i].getName().equals("id"))	{	// getName()¸Þ¼­µå¸¦ ÀÌ¿ëÇÏ¿© ÄíÅ° ÀÌ¸§À» °¡Á®¿Í id¿Í ºñ±³ ÀÏÄ¡ÇÑ´Ù¸é
-			cookie = cookies[i].getValue();			// getValue()¸Þ¼­µå¸¦ ÀÌ¿ëÇÏ¿© ÄíÅ° °ªÀ» cookie¿¡ ÀúÀå.
+		if(cookies[i].getName().equals("id"))	{	// getName()ë©”ì„œë“œë¥¼ ì´ìš©í•˜ì—¬ ì¿ í‚¤ ì´ë¦„ì„ ê°€ì ¸ì™€ idì™€ ë¹„êµ ì¼ì¹˜í•œë‹¤ë©´
+			cookie = cookies[i].getValue();			// getValue()ë©”ì„œë“œë¥¼ ì´ìš©í•˜ì—¬ ì¿ í‚¤ ê°’ì„ cookieì— ì €ìž¥.
 			//session.setAttribute("id", cookies[i].getValue());
 		}
 	}
 }
 /*
-ÀÌ¿Í °°ÀÌ ÅèÄÏÀº »ç¿ëÀÚ°¡ ·Î±×ÀÎÀ» ÇÏÁö ¾Ê¾Æµµ ÃÖÃÊ Á¢¼Ó ½Ã JSESSIONID ÄíÅ° °ªÀ» ºê¶ó¿ìÀú¿¡ ³»·ÁÁÖ´Â °ÍÀ» ¾Ë ¼ö ÀÖ´Ù.
-±×·³ ¿Ö ÄíÅ° °ªÀ» ³»·ÁÁÖ´Â °É±î? HTTP ÇÁ·ÎÅäÄÝÀº statelessÀÇ Æ¯Â¡À» °¡Áö°í ÀÖ±â ¶§¹®¿¡ »ç¿ëÀÚ¿Í ¼­¹ö´Â ´Ü ÇÑ¹øÀÇ 
-¿äÃ»°ú ÀÀ´äÀ¸·Î ¿¬°áÀÌ ²÷¾îÁø´Ù. ±×·¸±â ¶§¹®¿¡ ¼­¹ö¿¡¼­´Â »ç¿ëÀÚÀÇ ·Î±×ÀÎ ÀÎÁõ ¿©ºÎ¸¦ È®ÀÎÇÒ ¼ö ÀÖµµ·Ï key °ª 
-Ã³·³ »ç¿ëÇÒ ¼ö ÀÖ´Â JSESSIONID °ªÀ» Å¬¶óÀÌ¾ðÆ®·Î ³»·ÁÁÜÀ¸·Î½á ÀÌ¸¦ ÀÌ¿ëÇÏ¿© ·Î±×ÀÎ Ã³¸®¸¦ ÇÒ ¼ö ÀÖ´Â °ÍÀÌ´Ù.
+ì´ì™€ ê°™ì´ í†°ì¼“ì€ ì‚¬ìš©ìžê°€ ë¡œê·¸ì¸ì„ í•˜ì§€ ì•Šì•„ë„ ìµœì´ˆ ì ‘ì† ì‹œ JSESSIONID ì¿ í‚¤ ê°’ì„ ë¸Œë¼ìš°ì €ì— ë‚´ë ¤ì£¼ëŠ” ê²ƒì„ ì•Œ ìˆ˜ ìžˆë‹¤.
+ê·¸ëŸ¼ ì™œ ì¿ í‚¤ ê°’ì„ ë‚´ë ¤ì£¼ëŠ” ê±¸ê¹Œ? HTTP í”„ë¡œí† ì½œì€ statelessì˜ íŠ¹ì§•ì„ ê°€ì§€ê³  ìžˆê¸° ë•Œë¬¸ì— ì‚¬ìš©ìžì™€ ì„œë²„ëŠ” ë‹¨ í•œë²ˆì˜ 
+ìš”ì²­ê³¼ ì‘ë‹µìœ¼ë¡œ ì—°ê²°ì´ ëŠì–´ì§„ë‹¤. ê·¸ë ‡ê¸° ë•Œë¬¸ì— ì„œë²„ì—ì„œëŠ” ì‚¬ìš©ìžì˜ ë¡œê·¸ì¸ ì¸ì¦ ì—¬ë¶€ë¥¼ í™•ì¸í•  ìˆ˜ ìžˆë„ë¡ key ê°’ 
+ì²˜ëŸ¼ ì‚¬ìš©í•  ìˆ˜ ìžˆëŠ” JSESSIONID ê°’ì„ í´ë¼ì´ì–¸íŠ¸ë¡œ ë‚´ë ¤ì¤Œìœ¼ë¡œì¨ ì´ë¥¼ ì´ìš©í•˜ì—¬ ë¡œê·¸ì¸ ì²˜ë¦¬ë¥¼ í•  ìˆ˜ ìžˆëŠ” ê²ƒì´ë‹¤.
 */
 //************************************************************************************************************
 %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- ³×ºñ¹Ù css -->
+  <!-- ë„¤ë¹„ë°” css -->
   <link rel="stylesheet" type="text/css" href="./css/nav.css" />
-  <!-- Ã¤ÆÃ¹æ ¸®½ºÆ® css -->
+  <!-- ì±„íŒ…ë°© css -->
   <link rel="stylesheet" type="text/css" href="./css/chatlist.css" />
-  <!-- È¸¿ø°¡ÀÔ css -->
+
+  <!-- íšŒì›ê°€ìž… css -->
   <link rel="stylesheet" type="text/css" href="./css/register.css" />
   
-  <title>·Î±×ÀÎ</title>
+  <title>ë¡œê·¸ì¸</title>
 
-  <!-- ³×ºñ¹Ù -->
+  <!-- ë„¤ë¹„ë°” -->
   <div class="topnav" id="myTopnav">
 
-    <abbr title="ºñÈ¸¿ø Ã¤ÆÃ">
+    <abbr title="ë¹„íšŒì› ì±„íŒ…">
       <a href="anonymous.jsp" >
     <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chat-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2.5a2 2 0 0 1 1.6.8L8 14.333 9.9 11.8a2 2 0 0 1 1.6-.8H14a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
@@ -55,7 +56,7 @@ if((cookies != null) && (cookies.length > 0))	{	// cookies == null ÀÌ¸é ÄíÅ°°¡ Á
     </a>
     </abbr>
 
-    <abbr title="È¸¿ø°¡ÀÔ" >
+    <abbr title="íšŒì›ê°€ìž…" >
       <a href="register.jsp" style="float: right;" >
         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
@@ -63,7 +64,7 @@ if((cookies != null) && (cookies.length > 0))	{	// cookies == null ÀÌ¸é ÄíÅ°°¡ Á
       </a>
       </abbr>
   
-      <abbr title="·Î±×ÀÎ" >
+      <abbr title="ë¡œê·¸ì¸" >
       <a href="login.jsp" style="float: right;" class="active">
         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-lock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M11.5 8h-7a1 1 0 0 0-1 1v5a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1zm-7-1a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-7zm0-3a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
@@ -74,33 +75,33 @@ if((cookies != null) && (cookies.length > 0))	{	// cookies == null ÀÌ¸é ÄíÅ°°¡ Á
 </head>
 <body>
   <div class="container">
-  <!-- ¿ÞÂÊ °ø¹é -->
+  <!-- ì™¼ìª½ ê³µë°± -->
   <div class="leftem" style="width:25%; height: 94%; float: left; background-color: white;">
   </div>
-  <!-- ·Î±×ÀÎÃ¢ -->
+  <!-- ë¡œê·¸ì¸ì°½ -->
   <div class="centerlo" style="width:50%; height: 100%; float: left; ">
     <form action="login" method="post">
       <div class="container">
-        <h1>·Î±×ÀÎ</h1>
+        <h1>ë¡œê·¸ì¸</h1>
         <hr>
-        <label for="id"><b>¾ÆÀÌµð</b></label>
-        <input type="text" placeholder="ÀÌ¸ÞÀÏÀ» ÀÔ·ÂÇØÁÖ¼¼¿ä" value="<%= cookie %>" name="id" id="id" required>
+        <label for="id"><b>ì•„ì´ë””</b></label>
+        <input type="text" placeholder="ì´ë©”ì¼ì„ ìž…ë ¥í•´ì£¼ì„¸ìš”" value="<%= cookie %>" name="id" id="id" required>
     
-        <label for="password"><b>ºñ¹Ð¹øÈ£</b></label>
-        <input type="password" placeholder="ºñ¹Ð¹øÈ£¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä" name="password" id="password" required>
+        <label for="password"><b>ë¹„ë°€ë²ˆí˜¸</b></label>
+        <input type="password" placeholder="ë¹„ë°€ë²ˆí˜¸ë¥¼ ìž…ë ¥í•´ì£¼ì„¸ìš”" name="password" id="password" required>
         <hr>
 
-        <input type="checkbox" name="rememberid">¾ÆÀÌµð ÀúÀå
-        <input type="checkbox" name="rememberlogin">ÀÚµ¿ ·Î±×ÀÎ
+        <input type="checkbox" name="rememberid">ì•„ì´ë”” ì €ìž¥
+        <input type="checkbox" name="rememberlogin">ìžë™ ë¡œê·¸ì¸
 
-        <button type="submit" class="registerbtn">·Î±×ÀÎ</button>
+        <button type="submit" class="registerbtn">ë¡œê·¸ì¸</button>
       </div>
       
       <div class="container signin">
-        <p> <a href="#">¾ÆÀÌµð Ã£±â</a> / <a href="#">ºñ¹Ð¹øÈ£ Ã£±â</a></p>
+        <p> <a href="#">ì•„ì´ë”” ì°¾ê¸°</a> / <a href="#">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</a></p>
       </div>
       <br/>
-        <center>¾ÆÀÌµð°¡ ¾øÀ¸½Å°¡¿ä? <a href="register.jsp">È¸¿ø°¡ÀÔ</a></center>
+        <center>ì•„ì´ë””ê°€ ì—†ìœ¼ì‹ ê°€ìš”? <a href="register.jsp">íšŒì›ê°€ìž…</a></center>
     </form>
 </div>
 

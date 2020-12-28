@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="DB.DBManager" %>
 <%@ page import="file.*" %>
+<%@ include file="./exclude/topnav.jsp" %>
+<%@ include file="./exclude/chat.jsp" %>
 <%
 	String myID = null;
 	if (session.getAttribute("id") != null) {
@@ -18,13 +20,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 상단 네비바 css -->
-  <link rel="stylesheet" type="text/css" href="./css/nav.css" />
-
-  <!-- 채팅방 리스트 css -->
-  <link rel="stylesheet" type="text/css" href="./css/chatlist.css" />
   
   <!-- 채팅창 css -->
   <link rel="stylesheet" type="text/css" href="./css/chat.css" />

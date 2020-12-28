@@ -9,11 +9,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
+<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- 네비바 css -->
   <link rel="stylesheet" type="text/css" href="./css/nav.css" />
   <!-- 채팅방 리스트 css -->
+
   <link rel="stylesheet" type="text/css" href="./css/chatlist.css" />
   <!-- 회원가입 css -->
   <link rel="stylesheet" type="text/css" href="./css/register.css" />

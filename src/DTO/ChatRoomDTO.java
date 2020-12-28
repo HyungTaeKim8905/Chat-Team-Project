@@ -129,7 +129,7 @@ public class ChatRoomDTO extends DBManager {
 	public int FileSubmit(String sessionID, ArrayList<String> content, String roomid) {
 		String sql = "";
 		String lastNo = ""; 
-		try {
+		try { 
 			DBOpen();
 			for (int i = 0; i < content.size(); i++) {
 				sql = "insert into chatcontent(roomid, id, content, time, filecheck) values(?,?,?,now(),?)";

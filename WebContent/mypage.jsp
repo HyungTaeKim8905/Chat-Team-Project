@@ -1,38 +1,35 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="./exclude/topnav.jsp" %>
 <%@ page import="DB.*"%>
 <%@ page import="VO.*"%>
 <%
 	String sessionID = (String)session.getAttribute("id");
 	if(sessionID == null)	{
-		%><script> alert("±ÇÇÑÀÌ ¾ø½À´Ï´Ù."); location.href="Main.jsp"; </script><%	
+		%><script> alert("ê¶Œí•œì´ ì—†ìŠµë‹ˆë‹¤."); location.href="Main.jsp"; </script><%	
 	}
 	UserVO vo = (UserVO)request.getAttribute("vo");
 	if(vo == null){
-		System.out.println("mypage.jsp => vo°¡ nullÀÔ´Ï´Ù.");
+		System.out.println("mypage.jsp => voê°€ nullì…ë‹ˆë‹¤.");
 		return;
 	}
 %>
 <!DOCTPYE html lang="ko">
 <html>
 	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!-- ³×ºñ¹Ù css -->
-		<link rel="stylesheet" type="text/css" href="./css/nav.css" />
-		<!-- ¸¶ÀÌÆäÀÌÁö css -->
+		<!-- ë§ˆì´í˜ì´ì§€ css -->
 		<link rel="stylesheet" type="text/css" href="./css/mypage.css" />
 		<!-- jQuery -->
 		<script src="./js/jquery-3.5.1.min.js"></script>
-		<!-- ¸¶ÀÌÆäÀÌÁö js -->
+		<!-- ë§ˆì´í˜ì´ì§€ js -->
 		<script src="./js/mypage.js"></script>
-		<title>¸¶ÀÌ ÆäÀÌÁö</title>
+		<title>ë§ˆì´ í˜ì´ì§€</title>
 	</head>
 	<body>
-		<!-- »ó´Ü ³×ºñ¹Ù -->
+		<!-- ìƒë‹¨ ë„¤ë¹„ë°” -->
   <div class="topnav" id="myTopnav">
     <%if((String)session.getAttribute("id")!=null){ %>
-    <abbr title="È¸¿ø Ã¤ÆÃ">
+    <abbr title="íšŒì› ì±„íŒ…">
       <a href="chatlist.jsp">
         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chat-left-text" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v11.586l2-2A2 2 0 0 1 4.414 11H14a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
@@ -41,7 +38,7 @@
     </a>
     </abbr>
 <%} %>
-    <abbr title="ºñÈ¸¿ø Ã¤ÆÃ">
+    <abbr title="ë¹„íšŒì› ì±„íŒ…">
       <a href="anonymous.jsp" >
     <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chat-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h2.5a2 2 0 0 1 1.6.8L8 14.333 9.9 11.8a2 2 0 0 1 1.6-.8H14a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2.5a1 1 0 0 1 .8.4l1.9 2.533a1 1 0 0 0 1.6 0l1.9-2.533a1 1 0 0 1 .8-.4H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
@@ -49,16 +46,16 @@
     </a>
     </abbr>
   
-  <!-- ·Î±×ÀÎ »óÅÂ¸é ¶ç¿ì´Â È­¸é -->
+  <!-- ë¡œê·¸ì¸ ìƒíƒœë©´ ë„ìš°ëŠ” í™”ë©´ -->
   <%if((String)session.getAttribute("id")!=null){ %>
-      <abbr title="·Î±×¾Æ¿ô">
+      <abbr title="ë¡œê·¸ì•„ì›ƒ">
       <a href="logout.jsp" style="float: right;">
         <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-unlock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M9.655 8H2.333c-.264 0-.398.068-.471.121a.73.73 0 0 0-.224.296 1.626 1.626 0 0 0-.138.59V14c0 .342.076.531.14.635.064.106.151.18.256.237a1.122 1.122 0 0 0 .436.127l.013.001h7.322c.264 0 .398-.068.471-.121a.73.73 0 0 0 .224-.296 1.627 1.627 0 0 0 .138-.59V9c0-.342-.076-.531-.14-.635a.658.658 0 0 0-.255-.237A1.122 1.122 0 0 0 9.655 8zm.012-1H2.333C.5 7 .5 9 .5 9v5c0 2 1.833 2 1.833 2h7.334c1.833 0 1.833-2 1.833-2V9c0-2-1.833-2-1.833-2zM8.5 4a3.5 3.5 0 1 1 7 0v3h-1V4a2.5 2.5 0 0 0-5 0v3h-1V4z"/>
         </svg>
       </a>
       </abbr>
-      <abbr title="¸¶ÀÌÆäÀÌÁö">
+      <abbr title="ë§ˆì´í˜ì´ì§€">
         <a href="mypage.jsp" style="float: right;" class="active">
           <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-info-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path fill-rule="evenodd" d="M14 1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
@@ -71,21 +68,21 @@
   <%} %>
   </div>
 		
-		<!-- ¸¶ÀÌÆäÀÌÁö -->
+		<!-- ë§ˆì´í˜ì´ì§€ -->
 		<div class="container">
 			<form id="form" name="form" action="Mypage" method="post" enctype="multipart/form-data">
 			<div id="imgfile">
 					<img src="<%= vo.getPictureRealName() %>">
 				</div>
 				<div class="filebox">
-					<label for="file">»çÁø º¯°æ</label>
+					<label for="file">ì‚¬ì§„ ë³€ê²½</label>
 					<input type="file" id="file" name="file" accept=".gif, .jpg, .png" onchange="readInputFile(event.target)">
 				</div>
 				
-			<label for="nick">´Ğ³×ÀÓ</label>
-			<input type="text" id="nick" name="nick" placeholder="È«±æµ¿" value="<%= vo.getNick() %>">
+			<label for="nick">ë‹‰ë„¤ì„</label>
+			<input type="text" id="nick" name="nick" placeholder="í™ê¸¸ë™" value="<%= vo.getNick() %>">
 			
-			<label for="country">¾ğ¾î</label>
+			<label for="country">ì–¸ì–´</label>
 			<select id="country" name="country">
 			  <option value="australia">Australia</option>
 			  <option value="canada">Canada</option>
@@ -93,12 +90,12 @@
 			  <option value="Korea">Korea</option>
 			</select>
 	
-			<label for="statusmessage">»óÅÂ ¸Ş¼¼Áö</label>
+			<label for="statusmessage">ìƒíƒœ ë©”ì„¸ì§€</label>
 			<div id="StatusMessage_d">
-			<input type="text" id="statusmessage" name="statusmessage" value="<%= vo.getStatusmessage() %>" placeholder="»óÅÂ ¸Ş¼¼Áö ÀÔ·Â..">
+			<input type="text" id="statusmessage" name="statusmessage" value="<%= vo.getStatusmessage() %>" placeholder="ìƒíƒœ ë©”ì„¸ì§€ ì…ë ¥..">
 			</div>
 			<input type="hidden" id="id" name="id" value="<%= sessionID %>">
-			<button type="button" onclick="Modify()">ÀúÀå</button><button type="button" class="PasswordChange" onclick="PasswordChange()"> ºñ¹Ğ¹øÈ£ º¯°æ</button><button type="button" onclick="Withdrawal()">È¸¿øÅ»Åğ</button>
+			<button type="button" onclick="Modify()">ì €ì¥</button><button type="button" class="PasswordChange" onclick="PasswordChange()"> ë¹„ë°€ë²ˆí˜¸ ë³€ê²½</button><button type="button" onclick="Withdrawal()">íšŒì›íƒˆí‡´</button>
 		  </form>
 		</div>
 	</body>
