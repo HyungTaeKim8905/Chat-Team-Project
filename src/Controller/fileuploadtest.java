@@ -19,7 +19,7 @@ import DTO.ChatRoomDTO;
  * Servlet implementation class fileuploadtest
  */
 @WebServlet("/fileuploadtest")
-@MultipartConfig(fileSizeThreshold=0, location="D:\\JAVA\\Chat-Team-Project\\WebContent\\upload")
+@MultipartConfig(fileSizeThreshold=0, location="D:\\LNS\\java\\Chatpro\\WebContent\\upload")
 public class fileuploadtest extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -61,7 +61,7 @@ public class fileuploadtest extends HttpServlet {
 				list.add(uploadFileName);
 				part.write(uploadFileName);	//Part객체의 파일을 인자로 지정된 파일 이름으로 디스크 상에 출력한다.
 			}
-		}
+		} 
 		ChatRoomDTO dto = new ChatRoomDTO();
 		HttpSession session = request.getSession();
 		String sessionID = (String)session.getAttribute("id");

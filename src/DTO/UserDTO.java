@@ -135,7 +135,7 @@ public class UserDTO extends DBManager {
 		String sql = "";
 		ArrayList<UserVO> list = new ArrayList<UserVO>(); 
 		// 즉 친구목록에 있는 친구들과 로그인한 사람의 아이디를 뺀 나머지 친구목록을 가져옴
-		sql = "select * from user where id not in (select friendid from friend where friendid like '%" + text + "%') and id != '" + sessionID + "' and id like '%" + text + "%'";
+		sql = "select * from user where id not in (select friendid from friend where friendid like '%" + text + "%' and id = '"+sessionID+"') and id != '" + sessionID + "' and id like '%" + text + "%'";
 		try {
 			DBOpen();
 			OpenQuery(sql);
