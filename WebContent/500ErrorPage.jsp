@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 상단 네비바 css -->
-<link rel="stylesheet" type="text/css" href="./css/nav.css" />
 <title>서비스 에러가 발생하였습니다.</title>
 </head>
 <body>

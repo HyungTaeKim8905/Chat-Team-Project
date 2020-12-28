@@ -5,8 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<!-- 상단 네비바 css -->
-<link rel="stylesheet" type="text/css" href="./css/nav.css" />
 <title>요청하신 페이지는 존재하지 않습니다</title>
 </head>
 <body>
