@@ -30,17 +30,13 @@ function fileCheck()	{
 		filesize = file.files[0].size;
 	}
 	
-	alert("파일 사이즈 : " + filesize);
 	
 	if(maxsize < filesize)	{
 		alert("파일 용량을 초과하였습니다.....(제한 용량 : " + maxsize + "바이트)");
 		return false;
 	}
-	alert("브라우저 종류 : " + browser);
-	alert(fileName);
 	if(fileName != "")	{
 		var num = fileName.slice(fileName.lastIndexOf(".") + 1).toLowerCase();
-		alert("필터링 한 이미지 확장자 네임 ::::::" + num);
 		if(num != "gif" && num != "jpg" && num != "png")	{
 			alert("이미지파일 (.jpg, .png, .gif)만 업로드 가능합니다.");
 			return false;
@@ -60,10 +56,8 @@ function PasswordChange()	{
 function Withdrawal()	{
 	var check = confirm("정말 회원탈퇴를 하시겠습니까?");
 	if(check == true)	{
-		alert("확인 버튼 눌렀다.");
 	}
 	else	{
-		alert("취소 버튼 눌렀다.");	
 		return;
 	}
 	$.ajax({
@@ -92,11 +86,9 @@ function Modify()	{
 	//찍어보자
 	var check = confirm("수정하시겟습니까?");
 	if(check == true)	{
-		alert("확인 버튼 눌렀다.");
 	}
 	
 	if(check == false)	{
-		alert("취소 버튼 눌렀다.");
 		return false;
 	}
 	var data = new FormData(form);	//ajax로 파일 전송시 FormData객체 생성 후 form을 넣어줘야한다.
@@ -110,7 +102,6 @@ function Modify()	{
 		success:function(result)	{
 			var json = JSON.parse(result);
 			if(json.length == 0)	{
-				alert("받아온 제이슨 데이터가 0입니다.");
 			}
 		}
 	});

@@ -29,7 +29,6 @@ function friendfn() {
 //친구 검색을 하면 실행되는 메서드
 function FindTest()	{
 	var ID = $("#friendid").val();
-	alert(ID);
 	$.ajax({ 
 		url:"FindFriend",
 		type:"POST",
@@ -78,11 +77,9 @@ function AddFriend(AddID, i)	{
 							//전역변수로 i값을 설정하면 아래있는 div가 삭제된다.
 	var check = confirm(AddID + "님을 친구추가 하시겠습니까?");
 	if(check == true)	{
-		alert("확인 버튼 눌렀다.");
 	}
 	
 	if(check == false)	{
-		alert("취소 버튼 눌렀다.");
 		return false;
 	}
 	
@@ -134,14 +131,11 @@ function FriendList(Nick, ID, pictureRealName, statusmessage, i)	{
 
 // 친구 끊기 버튼 누르면 실행되는 함수.
 function DeleteFriend(DeleteID, i)	{
-	alert("i:::::" + i);
 	var check = confirm(DeleteID + "님을 삭제 하시겠습니까?");
 	if(check == true)	{
-		alert("확인 버튼 눌렀다.");
 	}
 	
 	if(check == false)	{
-		alert("취소 버튼 눌렀다.");
 		return false;
 	}
 	$("#divDn_" + i).remove();
@@ -155,7 +149,7 @@ function DeleteFriend(DeleteID, i)	{
 				alert("삭제하였습니다.");
 			}
 			else if(json[0]["Num"] == -1)	{
-				alert("삭제를 못헀다.");
+				alert("삭제 실패.");
 			}
 		}
 	});

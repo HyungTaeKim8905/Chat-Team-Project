@@ -59,10 +59,8 @@
 			data:"id="+id,
 			success:function(result)	{
 				var json = JSON.parse(result);
-				alert(json[0]["result"]);
 				if(json[0]["result"] == true)	{
 					IDKimCheck = true;
-					alert(IDKimCheck);
 					alert("사용 가능한 아이디입니다.");
 				}
 				if(json[0]["result"] == false)	{
@@ -97,7 +95,6 @@
 			success:function(result)	{
 				var json = JSON.parse(result);
 				var data = "";
-				alert(json[0]["numStr"]);
 				var output = "";
 				output += "<input type='text' id='output' name='output'>";
 				output += "<button type='button' style='width:200px;' class='registerbtn' onclick='Good(" + json[0]["numStr"] + ")'>인증</button>";
@@ -112,7 +109,6 @@
 		 if(output == num)	{
 			 check = true;
 			 alert("메일 인증이 확인되었습니다.");
-			 alert(check);
 			 $("#div1").html("메일 인증이 완료되었습니다.");
 		 }
 		 else	{
