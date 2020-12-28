@@ -219,7 +219,7 @@ public class UserDTO extends DBManager {
 	//친구 삭제해주는 함수
 	public int DeleteFriend(String nick, String sessionID)	{
 		String sql = "";
-		sql = "delete from friend where friendid = (select id from user where nick = ?) and id = ?";
+		sql = "delete from friend where friendid = ? and id = ?";
 		try	{  
 			DBOpen();
 			OpenQuery(sql);
