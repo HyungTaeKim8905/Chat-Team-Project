@@ -132,9 +132,6 @@ function FriendList(Nick, ID, pictureRealName, statusmessage, i)	{
 // 친구 끊기 버튼 누르면 실행되는 함수.
 function DeleteFriend(DeleteID, i)	{
 	var check = confirm(DeleteID + "님을 삭제 하시겠습니까?");
-	if(check == true)	{
-	}
-	
 	if(check == false)	{
 		return false;
 	}
