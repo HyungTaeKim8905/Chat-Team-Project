@@ -18,7 +18,6 @@
         </svg>
     </a>
     </abbr>
-
     <abbr title="비회원 채팅">
       <a href="anonymous.jsp" <%if(URI.contains("anonymous")==true) {%>class="active"<%} %>>
       <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-chat-square" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -26,12 +25,9 @@
       </svg>
     </a>
     </abbr>
-
 <%
 	if(sessionID != null)	{
 %> 
-   
-
     <abbr title="로그아웃">
     <a href="logout.jsp" style="float: right;" <%if(URI.contains("logout")==true) {%>class="active"<%} %>>
       <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-unlock" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="./exclude/topnav.jsp" %>
-<%@ include file="./exclude/chat.jsp" %>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <!-- 채팅창 css -->
   <link rel="stylesheet" type="text/css" href="./css/chat.css" />
+  <!-- 채팅방 리스트 css -->
+  <link rel="stylesheet" type="text/css" href="./css/chatlist.css" />
   <!-- 제이쿼리 -->
   <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
   <!-- 자바스크립트 -->

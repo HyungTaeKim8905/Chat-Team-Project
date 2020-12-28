@@ -3,7 +3,6 @@
 <%@ page import="DB.DBManager" %>
 <%@ page import="file.*" %>
 <%@ include file="./exclude/topnav.jsp" %>
-<%@ include file="./exclude/chat.jsp" %>
 <%
 	if(sessionID == null)	{
 		%><script>alert("로그인 후 이용해주세요."); location.href="login.jsp";</script><%
@@ -15,6 +14,9 @@
   
   <!-- 채팅창 css -->
   <link rel="stylesheet" type="text/css" href="./css/chat.css" />
+  
+  <!-- 채팅방 리스트 css -->
+  <link rel="stylesheet" type="text/css" href="./css/chatlist.css" />
   
   <!-- 아이콘바 css -->
   <link rel="stylesheet" type="text/css" href="./css/iconbar.css" />
@@ -88,7 +90,6 @@
     	</div>
     	<hr>
     	<div id="div2">
-    		
     	</div>
     </div>
     </div>
