@@ -39,14 +39,6 @@
 				
 			<label for="nick">닉네임</label>
 			<input type="text" id="nick" name="nick" placeholder="홍길동" value="<%= vo.getNick() %>">
-			
-			<label for="country">언어</label>
-			<select id="country" name="country">
-			  <option value="australia">Australia</option>
-			  <option value="canada">Canada</option>
-			  <option value="usa">USA</option>
-			  <option value="Korea">Korea</option>
-			</select>
 	
 			<label for="statusmessage">상태 메세지</label>
 			<div id="StatusMessage_d">
