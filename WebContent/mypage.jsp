@@ -13,7 +13,8 @@
 		return;
 	}
 %>
-<!DOCTPYE html lang="ko">
+<!DOCTYPE html>
+<html lang="ko">
 <html>
 	<head>
 		<!-- 마이페이지 css -->
