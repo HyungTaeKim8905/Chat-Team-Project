@@ -13,9 +13,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- 네비바 css -->
   <link rel="stylesheet" type="text/css" href="./css/nav.css" />
-  <!-- 채팅방 리스트 css -->
-
-  <link rel="stylesheet" type="text/css" href="./css/chatlist.css" />
   <!-- 회원가입 css -->
   <link rel="stylesheet" type="text/css" href="./css/register.css" />
   
@@ -91,7 +88,7 @@
         <button type="submit" class="registerbtn">회원가입</button>
       </div>
       
-      <div class="container signin">
+      <div class="container signin" style="height:50px;">
         <p> 아이디가 이미 있으신가요? <a href="login.jsp">로그인</a></p>
       </div>
     </form>

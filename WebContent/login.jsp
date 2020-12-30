@@ -37,8 +37,6 @@ if((cookies != null) && (cookies.length > 0))	{	// cookies == null 이면 쿠키
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- 네비바 css -->
   <link rel="stylesheet" type="text/css" href="./css/nav.css" />
-  <!-- 채팅방 css -->
-  <link rel="stylesheet" type="text/css" href="./css/chatlist.css" />
 
   <!-- 회원가입 css -->
   <link rel="stylesheet" type="text/css" href="./css/register.css" />
@@ -70,7 +68,7 @@ if((cookies != null) && (cookies.length > 0))	{	// cookies == null 이면 쿠키
         <button type="submit" class="registerbtn">로그인</button>
       </div>
       
-      <div class="container signin">
+      <div class="container signin" style="height:50px;">
         <p> <a href="#">아이디 찾기</a> / <a href="#">비밀번호 찾기</a></p>
       </div>
       <br/>
