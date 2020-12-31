@@ -80,7 +80,7 @@
   xmlhttp.send("chatno="+chatno);
 }
   <!-- 채팅 1초마다 새로고침 -->
-window.onload = setInterval(interval, 2000);
+window.onload = setInterval(interval, 1000);
 
 function interval(){
 	update();

@@ -5,10 +5,10 @@ public class Util {
 		return str.replace("\\", "\\\\")
 				.replace("\"", "\\\"")
 				.replace("\r\n", "\\n")
-				.replace("<", "&lt;")
-				.replace(">", "&gt;")
-				.replace("\n", "<br>")
-				.replace("/", "&#x2f")
-				.replace("&", "&amp");
+				.replace("\n", "<br>");
+	}
+	public static String toFileJS(String str) {
+		return str.replace("<", "&lt;")
+				.replace(">", "&gt;");
 	}
 }

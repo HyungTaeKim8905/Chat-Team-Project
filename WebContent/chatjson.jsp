@@ -48,9 +48,7 @@
 			time = rs.getString(3);
 			filecheck = rs.getString(4);
 			if(!(filecheck.equals("1")))	{
-				content=content.replace("<", "&lt;");
-				content=content.replace(">", "&gt;");
-				content=content.replace("\n", "<br>");
+				Util.toFileJS(content);
 			}
 
 %>
