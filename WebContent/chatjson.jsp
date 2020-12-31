@@ -47,14 +47,17 @@
 			content = rs.getString(2);
 			time = rs.getString(3);
 			filecheck = rs.getString(4);
-			if(!(filecheck.equals("1")))	{
-				Util.toFileJS(content);
+			
+			if(!(filecheck.equals("1"))){
+				content = Util.toJS(content);
+			}else if(filecheck.equals("1")){
+				content = Util.toFileJS(content);
 			}
 
 %>
  	{
 	"id" : "<%=id%>", 
-	"content" : "<%=Util.toJS(content)%>",
+	"content" : "<%= content %>",
 	"time" : "<%= time %>"
 	}
 <%	//마지막 객체 이전에는 쉼표를 찍어서 객체 구분
