@@ -87,7 +87,7 @@
 /* 왼쪽 시간 */
 .time-left {
   float: left;
-  color: rgb(24, 23, 23);
+  color: black;
 }
 
 /* 채팅 입력창 */

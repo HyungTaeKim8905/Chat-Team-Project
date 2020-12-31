@@ -48,15 +48,17 @@ public class mainAction extends HttpServlet {
 		String check = request.getHeader("cookie");
 		Cookie cookies[] = null;
 		if(check != null)	{
-			cookies =request.getCookies();
+			cookies =request.getCookies();		
 		}
-		HttpSession session = request.getSession();
-		if(session.getAttribute("id") != null)	{
-			return;
+		//이 부분 고침요								//******************************************
+		if(cookies == null) {					//로그아웃을 했다면 cookies가  null
+			response.sendRedirect("Main.jsp");	//리다이엑트해줘도 doPost()함수가 실행되기 때문에 return 추가
+			return;								//******************************************
 		}
-		if(!(num.equals("1")))	{	//로그아웃을 하지 않았다면 
+		if(!(num.equals("1")))	{	//로그아웃을 하지 않았다면 num = 1
 			for(int i = 0; i < cookies.length; i++) {
 				if(cookies[i].getName().equals("autologincheckbox")) {
+					HttpSession session = request.getSession();
 					session.setAttribute("id", cookies[i].getValue());
 				}
 			}

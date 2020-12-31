@@ -48,9 +48,6 @@
 			content = rs.getString(2);
 			time = rs.getString(3);
 			
-			content=content.replace("<", "&lt;");
-			content=content.replace(">", "&gt;");
-			content=content.replace("\n", "<br>");
 %>
  	{
 	"id" : "<%=id%>", 

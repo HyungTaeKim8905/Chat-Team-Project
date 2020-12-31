@@ -5,6 +5,10 @@ public class Util {
 		return str.replace("\\", "\\\\")
 				.replace("\"", "\\\"")
 				.replace("\r\n", "\\n")
-				.replace("\n", "\\n");
+				.replace("<", "&lt;")
+				.replace(">", "&gt;")
+				.replace("\n", "<br>")
+				.replace("/", "&#x2f")
+				.replace("&", "&amp");
 	}
 }
